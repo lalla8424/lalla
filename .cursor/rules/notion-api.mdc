@@ -68,7 +68,20 @@ alwaysApply: false
   - "Phone Number" (phone_number 타입)
   - "Program Type" (rich_text 타입)
   - "Schedule" (rich_text 타입)
-  - "Submitted At" (date 타입)
+
+### 트라이얼 스케줄 데이터베이스
+- "Choose Activity" 필드 포함 (title 타입)
+- "Schedule" 필드 포함 (rich_text 타입)
+
+### 트라이얼 폼 데이터베이스
+- 다음 필드를 포함해야 합니다:
+  - "Parent/Guardian Name" (title 타입)
+  - "Child's Name" (rich_text 타입)
+  - "Child's Age" (number 타입)
+  - "Email" (email 타입)
+  - "Phone Number" (phone_number 타입)
+  - "Choose Activity" (rich_text 타입)
+  - "Schedule" (rich_text 타입)
 
 ## 구현 참고사항
 

@@ -72,11 +72,6 @@ export const submitWeeklyForm = async (formData: any) => {
         Schedule: {
           rich_text: [{ text: { content: formData.schedule } }],
         },
-        "Submitted At": {
-          date: {
-            start: new Date().toISOString(),
-          },
-        },
       },
     });
 
