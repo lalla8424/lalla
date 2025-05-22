@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
-import type React from "react"
-
-import Link from "next/link"
+import React, { useState, useEffect, useCallback } from "react";
+import Link from "next/link";
 import {
   Instagram,
   BookOpen,
@@ -15,43 +14,84 @@ import {
   ChevronRight,
   Palette,
   CheckCircle2,
-} from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useState, useEffect, useCallback } from "react"
-import { Checkbox } from "@/components/ui/checkbox"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
+} from "lucide-react";
+import { Button } from "../components/ui/button";
+import { Checkbox } from "../components/ui/checkbox";
+import { RadioGroup, RadioGroupItem } from "../components/ui/radio-group";
+import { Label } from "../components/ui/label";
+import { Input } from "../components/ui/input";
+import {
+  fetchWeeklySchedule,
+  submitWeeklyProgramForm,
+} from "../actions/notion-actions";
 
 export default function Home() {
+  const [mounted, setMounted] = React.useState(false);
+
+  // 클라이언트 사이드 렌더링을 위한 마운트 체크
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // 서버 사이드 렌더링 중에는 최소한의 레이아웃만 표시
+  if (!mounted) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center">
+        <div className="text-lg font-medium">로딩 중...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-50 w-full border-b bg-white">
         <div className="container flex h-16 items-center justify-between px-4 md:px-6 lg:px-10">
           <Link href="/" className="flex items-center gap-2">
-            <span className="text-xl font-bold text-[#FFD700]">Lalla Kids Art</span>
+            <span className="text-xl font-bold text-[#FFD700]">
+              Lalla Kids Art
+            </span>
           </Link>
           <MobileNav />
           <nav className="hidden md:flex gap-6 items-start pt-1 ml-auto mr-6">
-            <Link href="#about" className="text-sm font-medium hover:text-[#FFD700] transition-colors">
+            <Link
+              href="#about"
+              className="text-sm font-medium hover:text-[#FFD700] transition-colors"
+            >
               About Us
             </Link>
-            <Link href="#teacher" className="text-sm font-medium hover:text-[#FFD700] transition-colors">
+            <Link
+              href="#teacher"
+              className="text-sm font-medium hover:text-[#FFD700] transition-colors"
+            >
               Meet Our Creative Team
             </Link>
-            <Link href="#programs" className="text-sm font-medium hover:text-[#FFD700] transition-colors">
+            <Link
+              href="#programs"
+              className="text-sm font-medium hover:text-[#FFD700] transition-colors"
+            >
               Join our program!
             </Link>
-            <Link href="#visit" className="text-sm font-medium hover:text-[#FFD700] transition-colors">
+            <Link
+              href="#visit"
+              className="text-sm font-medium hover:text-[#FFD700] transition-colors"
+            >
               Visit Us
             </Link>
           </nav>
           <div className="hidden md:flex items-center gap-4 ml-6">
-            <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+            <Link
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Instagram className="h-5 w-5 text-gray-600 hover:text-[#FFD700]" />
               <span className="sr-only">Instagram</span>
             </Link>
-            <Link href="https://blog.com" target="_blank" rel="noopener noreferrer">
+            <Link
+              href="https://blog.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <BookOpen className="h-5 w-5 text-gray-600 hover:text-[#FFD700]" />
               <span className="sr-only">Blog</span>
             </Link>
@@ -67,15 +107,20 @@ export default function Home() {
       </main>
       <Footer />
     </div>
-  )
+  );
 }
 
 function MobileNav() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="md:hidden">
-      <Button variant="ghost" size="icon" onClick={() => setIsOpen(true)} className="text-black">
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={() => setIsOpen(true)}
+        className="text-black"
+      >
         <Menu className="h-6 w-6" />
         <span className="sr-only">Open menu</span>
       </Button>
@@ -83,9 +128,16 @@ function MobileNav() {
         <div className="fixed inset-0 z-50 bg-white">
           <div className="container flex h-16 items-center justify-between px-4">
             <Link href="/" className="flex items-center gap-2">
-              <span className="text-xl font-bold text-[#FFD700]">Lalla Kids Art</span>
+              <span className="text-xl font-bold text-[#FFD700]">
+                Lalla Kids Art
+              </span>
             </Link>
-            <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="text-black">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsOpen(false)}
+              className="text-black"
+            >
               <X className="h-6 w-6" />
               <span className="sr-only">Close menu</span>
             </Button>
@@ -120,11 +172,19 @@ function MobileNav() {
               Visit Us
             </Link>
             <div className="flex items-center gap-4 pt-4">
-              <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Instagram className="h-5 w-5 text-gray-600 hover:text-[#FFD700]" />
                 <span className="sr-only">Instagram</span>
               </Link>
-              <Link href="https://blog.com" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://blog.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <BookOpen className="h-5 w-5 text-gray-600 hover:text-[#FFD700]" />
                 <span className="sr-only">Blog</span>
               </Link>
@@ -133,7 +193,7 @@ function MobileNav() {
         </div>
       )}
     </div>
-  )
+  );
 }
 
 function HeroSection() {
@@ -189,11 +249,14 @@ function HeroSection() {
           preserveAspectRatio="none"
           className="w-full h-auto"
         >
-          <path d="M0,0 C240,80 480,80 720,40 C960,0 1200,0 1440,80 L1440,80 L0,80 Z" fill="white" />
+          <path
+            d="M0,0 C240,80 480,80 720,40 C960,0 1200,0 1440,80 L1440,80 L0,80 Z"
+            fill="white"
+          />
         </svg>
       </div>
     </section>
-  )
+  );
 }
 
 function AboutSection() {
@@ -205,11 +268,14 @@ function AboutSection() {
             <div className="inline-block rounded-full bg-[#FFD700] px-3 py-1 text-sm font-medium text-white">
               About Us
             </div>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Our Philosophy</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+              Our Philosophy
+            </h2>
             <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              At Lalla Kids Art, we believe in nurturing creativity and self-expression in children through art. Our
-              programs are designed to provide a safe and inspiring environment where kids can explore their artistic
-              potential while developing essential life skills.
+              At Lalla Kids Art, we believe in nurturing creativity and
+              self-expression in children through art. Our programs are designed
+              to provide a safe and inspiring environment where kids can explore
+              their artistic potential while developing essential life skills.
             </p>
           </div>
         </div>
@@ -220,7 +286,8 @@ function AboutSection() {
             </div>
             <h3 className="text-xl font-bold">Creative Freedom</h3>
             <p className="text-sm text-gray-500 mt-2">
-              We encourage children to express themselves freely without constraints.
+              We encourage children to express themselves freely without
+              constraints.
             </p>
           </div>
           <div className="rounded-full bg-[#FFD700]/10 p-8 text-center flex flex-col items-center justify-center aspect-square">
@@ -229,7 +296,8 @@ function AboutSection() {
             </div>
             <h3 className="text-xl font-bold">Global Perspective</h3>
             <p className="text-sm text-gray-500 mt-2">
-              Our multicultural environment helps children develop a global mindset.
+              Our multicultural environment helps children develop a global
+              mindset.
             </p>
           </div>
           <div className="rounded-full bg-[#FFD700]/10 p-8 text-center flex flex-col items-center justify-center aspect-square">
@@ -238,27 +306,34 @@ function AboutSection() {
             </div>
             <h3 className="text-xl font-bold">Skill Development</h3>
             <p className="text-sm text-gray-500 mt-2">
-              Beyond art, we focus on building confidence, patience, and problem-solving skills.
+              Beyond art, we focus on building confidence, patience, and
+              problem-solving skills.
             </p>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 function TeacherSection() {
   return (
-    <section id="teacher" className="bg-[#FFD700]/5 py-12 md:py-24 lg:py-32 relative">
+    <section
+      id="teacher"
+      className="bg-[#FFD700]/5 py-12 md:py-24 lg:py-32 relative"
+    >
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
           <div className="space-y-2">
             <div className="inline-block rounded-full bg-[#FFD700] px-3 py-1 text-sm font-medium text-white">
               Meet Our Creative Team
             </div>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Our Art Specialists</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+              Our Art Specialists
+            </h2>
             <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Our team of experienced educators is passionate about nurturing creativity in children.
+              Our team of experienced educators is passionate about nurturing
+              creativity in children.
             </p>
           </div>
         </div>
@@ -269,7 +344,9 @@ function TeacherSection() {
                 <div className="w-28 h-28 rounded-full bg-white p-2 shadow-lg flex-shrink-0">
                   <div className="w-full h-full rounded-full bg-[#FFD700]/20 flex items-center justify-center overflow-hidden">
                     <div className="text-center">
-                      <div className="text-sm font-bold text-[#FFD700]">Teacher</div>
+                      <div className="text-sm font-bold text-[#FFD700]">
+                        Teacher
+                      </div>
                       <div className="text-xs">Photo</div>
                     </div>
                   </div>
@@ -278,8 +355,9 @@ function TeacherSection() {
                   <p className="font-medium">Ms. Sarah</p>
                   <p className="text-sm text-gray-500">Art Director</p>
                   <p className="mt-2 text-sm">
-                    With over 10 years of experience in early childhood art education, I'm passionate about helping
-                    children discover their creative potential.
+                    With over 10 years of experience in early childhood art
+                    education, I'm passionate about helping children discover
+                    their creative potential.
                   </p>
                 </div>
               </div>
@@ -288,7 +366,9 @@ function TeacherSection() {
                 <div className="w-28 h-28 rounded-full bg-white p-2 shadow-lg flex-shrink-0">
                   <div className="w-full h-full rounded-full bg-[#FFD700]/20 flex items-center justify-center overflow-hidden">
                     <div className="text-center">
-                      <div className="text-sm font-bold text-[#FFD700]">Teacher</div>
+                      <div className="text-sm font-bold text-[#FFD700]">
+                        Teacher
+                      </div>
                       <div className="text-xs">Photo</div>
                     </div>
                   </div>
@@ -297,8 +377,9 @@ function TeacherSection() {
                   <p className="font-medium">Mr. David</p>
                   <p className="text-sm text-gray-500">Sculpture Specialist</p>
                   <p className="mt-2 text-sm">
-                    Specializing in 3D art forms, I help children explore spatial concepts and develop fine motor skills
-                    through hands-on sculpture projects.
+                    Specializing in 3D art forms, I help children explore
+                    spatial concepts and develop fine motor skills through
+                    hands-on sculpture projects.
                   </p>
                 </div>
               </div>
@@ -309,7 +390,9 @@ function TeacherSection() {
                 <div className="w-28 h-28 rounded-full bg-white p-2 shadow-lg flex-shrink-0">
                   <div className="w-full h-full rounded-full bg-[#FFD700]/20 flex items-center justify-center overflow-hidden">
                     <div className="text-center">
-                      <div className="text-sm font-bold text-[#FFD700]">Teacher</div>
+                      <div className="text-sm font-bold text-[#FFD700]">
+                        Teacher
+                      </div>
                       <div className="text-xs">Photo</div>
                     </div>
                   </div>
@@ -318,8 +401,9 @@ function TeacherSection() {
                   <p className="font-medium">Ms. Mina</p>
                   <p className="text-sm text-gray-500">Painting Instructor</p>
                   <p className="mt-2 text-sm">
-                    I love introducing children to the world of colors and textures. My classes focus on creative
-                    expression through various painting techniques.
+                    I love introducing children to the world of colors and
+                    textures. My classes focus on creative expression through
+                    various painting techniques.
                   </p>
                 </div>
               </div>
@@ -328,7 +412,9 @@ function TeacherSection() {
                 <div className="w-28 h-28 rounded-full bg-white p-2 shadow-lg flex-shrink-0">
                   <div className="w-full h-full rounded-full bg-[#FFD700]/20 flex items-center justify-center overflow-hidden">
                     <div className="text-center">
-                      <div className="text-sm font-bold text-[#FFD700]">Teacher</div>
+                      <div className="text-sm font-bold text-[#FFD700]">
+                        Teacher
+                      </div>
                       <div className="text-xs">Photo</div>
                     </div>
                   </div>
@@ -337,8 +423,9 @@ function TeacherSection() {
                   <p className="font-medium">Mr. Jun</p>
                   <p className="text-sm text-gray-500">Craft Specialist</p>
                   <p className="mt-2 text-sm">
-                    With a background in traditional Korean crafts, I enjoy teaching children how to create beautiful
-                    objects using both traditional and modern techniques.
+                    With a background in traditional Korean crafts, I enjoy
+                    teaching children how to create beautiful objects using both
+                    traditional and modern techniques.
                   </p>
                 </div>
               </div>
@@ -354,16 +441,19 @@ function TeacherSection() {
           preserveAspectRatio="none"
           className="w-full h-auto"
         >
-          <path d="M0,80 C240,0 480,0 720,40 C960,80 1200,80 1440,0 L1440,80 L0,80 Z" fill="white" />
+          <path
+            d="M0,80 C240,0 480,0 720,40 C960,80 1200,80 1440,0 L1440,80 L0,80 Z"
+            fill="white"
+          />
         </svg>
       </div>
     </section>
-  )
+  );
 }
 
 function ProgramsSection() {
   // Image slider state and data
-  const [currentSlide, setCurrentSlide] = useState(0)
+  const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [
     {
       image: "/placeholder.svg?height=400&width=800",
@@ -385,23 +475,23 @@ function ProgramsSection() {
       image: "/placeholder.svg?height=400&width=800",
       caption: "Special workshop with visiting artist",
     },
-  ]
+  ];
 
   const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1))
-  }, [slides.length])
+    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+  }, [slides.length]);
 
   const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1))
-  }, [slides.length])
+    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  }, [slides.length]);
 
   // Auto-advance slides
   useEffect(() => {
     const interval = setInterval(() => {
-      nextSlide()
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [nextSlide])
+      nextSlide();
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [nextSlide]);
 
   // Form state
   const [weeklyFormData, setWeeklyFormData] = useState({
@@ -413,7 +503,7 @@ function ProgramsSection() {
     programType: "",
     schedule: "",
     agreeTerms: false,
-  })
+  });
 
   const [trialFormData, setTrialFormData] = useState({
     parentName: "",
@@ -424,21 +514,136 @@ function ProgramsSection() {
     activity: "",
     schedule: "",
     agreeTerms: false,
-  })
+  });
 
-  const handleWeeklySubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Weekly Program Form Submitted:", weeklyFormData)
-    // Here you would typically send the data to your backend
-    alert("Thank you for signing up for our Weekly Art Program! We'll contact you shortly.")
-  }
+  // 노션 데이터 관련 상태 추가
+  const [scheduleOptions, setScheduleOptions] = useState<
+    { id: string; schedule: string }[]
+  >([]);
+  const [programTypeOptions, setProgramTypeOptions] = useState<
+    { id: string; programType: string }[]
+  >([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [submitStatus, setSubmitStatus] = useState<{
+    loading: boolean;
+    success: boolean | null;
+    message: string;
+  }>({
+    loading: false,
+    success: null,
+    message: "",
+  });
+
+  // 노션에서 스케줄 데이터 가져오기
+  useEffect(() => {
+    async function loadScheduleData() {
+      try {
+        setIsLoading(true);
+
+        // API 호출 대신 직접 Server Action 호출
+        const response = await fetchWeeklySchedule();
+
+        if (response.success) {
+          setScheduleOptions(response.schedules || []);
+          setProgramTypeOptions(response.programTypes || []);
+        } else {
+          console.error("데이터 로딩 오류:", response.error);
+        }
+      } catch (error) {
+        console.error("스케줄 데이터 로딩 실패:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    loadScheduleData();
+  }, []);
+
+  // 폼 제출 핸들러 수정
+  const handleWeeklySubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // 폼 유효성 검사
+    if (
+      !weeklyFormData.parentName ||
+      !weeklyFormData.childName ||
+      !weeklyFormData.childAge ||
+      !weeklyFormData.email ||
+      !weeklyFormData.phone ||
+      !weeklyFormData.programType ||
+      !weeklyFormData.schedule ||
+      !weeklyFormData.agreeTerms
+    ) {
+      setSubmitStatus({
+        loading: false,
+        success: false,
+        message: "모든 필드를 입력해주세요.",
+      });
+      return;
+    }
+
+    try {
+      setSubmitStatus({
+        loading: true,
+        success: null,
+        message: "제출 중...",
+      });
+
+      // 직접 Server Action 호출
+      const formData = new FormData();
+      formData.append("parentName", weeklyFormData.parentName);
+      formData.append("childName", weeklyFormData.childName);
+      formData.append("childAge", weeklyFormData.childAge);
+      formData.append("email", weeklyFormData.email);
+      formData.append("phone", weeklyFormData.phone);
+      formData.append("programType", weeklyFormData.programType);
+      formData.append("schedule", weeklyFormData.schedule);
+
+      const result = await submitWeeklyProgramForm(formData);
+
+      if (result.success) {
+        setSubmitStatus({
+          loading: false,
+          success: true,
+          message: "프로그램 신청이 완료되었습니다!",
+        });
+
+        // 폼 초기화
+        setWeeklyFormData({
+          parentName: "",
+          childName: "",
+          childAge: "",
+          email: "",
+          phone: "",
+          programType: "",
+          schedule: "",
+          agreeTerms: false,
+        });
+      } else {
+        setSubmitStatus({
+          loading: false,
+          success: false,
+          message: result.error || "신청 처리 중 오류가 발생했습니다.",
+        });
+      }
+    } catch (error) {
+      console.error("폼 제출 실패:", error);
+      setSubmitStatus({
+        loading: false,
+        success: false,
+        message: "신청 처리 중 오류가 발생했습니다.",
+      });
+    }
+  };
 
   const handleTrialSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Trial Class Form Submitted:", trialFormData)
+    e.preventDefault();
+    console.log("Trial Class Form Submitted:", trialFormData);
     // Here you would typically send the data to your backend
-    alert("Thank you for reserving a Trial Class! We'll contact you shortly to confirm your booking.")
-  }
+    alert(
+      "Thank you for reserving a Trial Class! We'll contact you shortly to confirm your booking.",
+    );
+  };
 
   return (
     <section id="programs" className="py-12 md:py-24 lg:py-32">
@@ -448,9 +653,12 @@ function ProgramsSection() {
             <div className="inline-block rounded-full bg-[#FFD700] px-3 py-1 text-sm font-medium text-white">
               Join our program!
             </div>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Our Art Classes</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+              Our Art Classes
+            </h2>
             <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Discover our range of age-appropriate art programs designed to inspire creativity and joy.
+              Discover our range of age-appropriate art programs designed to
+              inspire creativity and joy.
             </p>
           </div>
         </div>
@@ -462,7 +670,9 @@ function ProgramsSection() {
               <div
                 key={index}
                 className={`absolute inset-0 transition-opacity duration-1000 ${
-                  index === currentSlide ? "opacity-100" : "opacity-0 pointer-events-none"
+                  index === currentSlide
+                    ? "opacity-100"
+                    : "opacity-0 pointer-events-none"
                 }`}
               >
                 <img
@@ -519,22 +729,28 @@ function ProgramsSection() {
               </div>
               <div className="border-l-4 border-[#FFD700]/30 pl-4 mb-6">
                 <p className="text-sm text-gray-600 mb-2">
-                  Our Weekly Art Program is designed to spark your child's creativity through hands-on art experiences.
+                  Our Weekly Art Program is designed to spark your child's
+                  creativity through hands-on art experiences.
                 </p>
                 <p className="text-sm text-gray-600 mb-2">
-                  Children explore drawing, painting, sculpture, and mixed media guided by professional educators.
+                  Children explore drawing, painting, sculpture, and mixed media
+                  guided by professional educators.
                 </p>
                 <p className="text-sm text-gray-600 mb-2">
-                  Each week introduces a new theme, technique, or artist, keeping kids inspired and engaged.
+                  Each week introduces a new theme, technique, or artist,
+                  keeping kids inspired and engaged.
                 </p>
                 <p className="text-sm text-gray-600 mb-2">
-                  Classes are small-group based for personalized attention and joyful interaction.
+                  Classes are small-group based for personalized attention and
+                  joyful interaction.
                 </p>
                 <p className="text-sm text-gray-600 mb-2">
-                  You can choose from a 4-week or 8-week course, depending on your schedule.
+                  You can choose from a 4-week or 8-week course, depending on
+                  your schedule.
                 </p>
                 <p className="text-sm text-gray-600">
-                  Let your child's imagination shine in a fun and safe environment!
+                  Let your child's imagination shine in a fun and safe
+                  environment!
                 </p>
               </div>
 
@@ -545,12 +761,19 @@ function ProgramsSection() {
                 </div>
                 <form onSubmit={handleWeeklySubmit} className="space-y-4">
                   <div>
-                    <Label htmlFor="weekly-parent-name">Parent/Guardian Name</Label>
+                    <Label htmlFor="weekly-parent-name">
+                      Parent/Guardian Name
+                    </Label>
                     <Input
                       id="weekly-parent-name"
                       placeholder="Enter your full name"
                       value={weeklyFormData.parentName}
-                      onChange={(e) => setWeeklyFormData({ ...weeklyFormData, parentName: e.target.value })}
+                      onChange={(e) =>
+                        setWeeklyFormData({
+                          ...weeklyFormData,
+                          parentName: e.target.value,
+                        })
+                      }
                       required
                     />
                   </div>
@@ -560,7 +783,12 @@ function ProgramsSection() {
                       id="weekly-child-name"
                       placeholder="Enter your child's name"
                       value={weeklyFormData.childName}
-                      onChange={(e) => setWeeklyFormData({ ...weeklyFormData, childName: e.target.value })}
+                      onChange={(e) =>
+                        setWeeklyFormData({
+                          ...weeklyFormData,
+                          childName: e.target.value,
+                        })
+                      }
                       required
                     />
                   </div>
@@ -570,7 +798,12 @@ function ProgramsSection() {
                       id="weekly-child-age"
                       placeholder="Enter your child's age (e.g., 5 years old)"
                       value={weeklyFormData.childAge}
-                      onChange={(e) => setWeeklyFormData({ ...weeklyFormData, childAge: e.target.value })}
+                      onChange={(e) =>
+                        setWeeklyFormData({
+                          ...weeklyFormData,
+                          childAge: e.target.value,
+                        })
+                      }
                       required
                     />
                   </div>
@@ -581,7 +814,12 @@ function ProgramsSection() {
                       type="email"
                       placeholder="Enter your email"
                       value={weeklyFormData.email}
-                      onChange={(e) => setWeeklyFormData({ ...weeklyFormData, email: e.target.value })}
+                      onChange={(e) =>
+                        setWeeklyFormData({
+                          ...weeklyFormData,
+                          email: e.target.value,
+                        })
+                      }
                       required
                     />
                   </div>
@@ -591,7 +829,12 @@ function ProgramsSection() {
                       id="weekly-phone"
                       placeholder="Enter your phone number"
                       value={weeklyFormData.phone}
-                      onChange={(e) => setWeeklyFormData({ ...weeklyFormData, phone: e.target.value })}
+                      onChange={(e) =>
+                        setWeeklyFormData({
+                          ...weeklyFormData,
+                          phone: e.target.value,
+                        })
+                      }
                       required
                     />
                   </div>
@@ -599,38 +842,76 @@ function ProgramsSection() {
                     <Label>Program Type</Label>
                     <RadioGroup
                       value={weeklyFormData.programType}
-                      onValueChange={(value) => setWeeklyFormData({ ...weeklyFormData, programType: value })}
+                      onValueChange={(value) =>
+                        setWeeklyFormData({
+                          ...weeklyFormData,
+                          programType: value,
+                        })
+                      }
                       className="mt-2"
                     >
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="4-week" id="weekly-4-week" />
-                        <Label htmlFor="weekly-4-week">4-week program</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="8-week" id="weekly-8-week" />
-                        <Label htmlFor="weekly-8-week">8-week program</Label>
-                      </div>
+                      {isLoading ? (
+                        <div className="py-2 text-sm text-gray-500">
+                          프로그램 정보를 불러오는 중...
+                        </div>
+                      ) : programTypeOptions.length > 0 ? (
+                        programTypeOptions.map((option) => (
+                          <div
+                            key={option.id}
+                            className="flex items-center space-x-2"
+                          >
+                            <RadioGroupItem
+                              value={option.programType}
+                              id={`program-${option.id}`}
+                            />
+                            <Label htmlFor={`program-${option.id}`}>
+                              {option.programType}
+                            </Label>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="py-2 text-sm text-gray-500">
+                          사용 가능한 프로그램이 없습니다
+                        </div>
+                      )}
                     </RadioGroup>
                   </div>
                   <div>
                     <Label>Schedule</Label>
                     <RadioGroup
                       value={weeklyFormData.schedule}
-                      onValueChange={(value) => setWeeklyFormData({ ...weeklyFormData, schedule: value })}
+                      onValueChange={(value) =>
+                        setWeeklyFormData({
+                          ...weeklyFormData,
+                          schedule: value,
+                        })
+                      }
                       className="mt-2"
                     >
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="tuesday" id="weekly-tuesday" />
-                        <Label htmlFor="weekly-tuesday">Tuesday 3:00–4:10 PM</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="thursday" id="weekly-thursday" />
-                        <Label htmlFor="weekly-thursday">Thursday 2:00–3:10 PM</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="saturday" id="weekly-saturday" />
-                        <Label htmlFor="weekly-saturday">Saturday 11:00–12:10 PM</Label>
-                      </div>
+                      {isLoading ? (
+                        <div className="py-2 text-sm text-gray-500">
+                          스케줄 정보를 불러오는 중...
+                        </div>
+                      ) : scheduleOptions.length > 0 ? (
+                        scheduleOptions.map((option) => (
+                          <div
+                            key={option.id}
+                            className="flex items-center space-x-2"
+                          >
+                            <RadioGroupItem
+                              value={option.schedule}
+                              id={`weekly-${option.id}`}
+                            />
+                            <Label htmlFor={`weekly-${option.id}`}>
+                              {option.schedule}
+                            </Label>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="py-2 text-sm text-gray-500">
+                          사용 가능한 스케줄이 없습니다
+                        </div>
+                      )}
                     </RadioGroup>
                   </div>
                   <div className="flex items-center space-x-2">
@@ -638,7 +919,10 @@ function ProgramsSection() {
                       id="weekly-terms"
                       checked={weeklyFormData.agreeTerms}
                       onCheckedChange={(checked) =>
-                        setWeeklyFormData({ ...weeklyFormData, agreeTerms: checked as boolean })
+                        setWeeklyFormData({
+                          ...weeklyFormData,
+                          agreeTerms: checked as boolean,
+                        })
                       }
                       required
                     />
@@ -649,8 +933,53 @@ function ProgramsSection() {
                       I agree to the terms and conditions
                     </label>
                   </div>
-                  <Button type="submit" className="w-full bg-[#FFD700] hover:bg-[#FFD700]/90 text-white">
-                    <span className="mr-2">👉</span> Book Now
+                  {submitStatus.message && (
+                    <div
+                      className={`p-2 rounded text-sm ${
+                        submitStatus.success === true
+                          ? "bg-green-100 text-green-800"
+                          : submitStatus.success === false
+                          ? "bg-red-100 text-red-800"
+                          : "bg-blue-100 text-blue-800"
+                      }`}
+                    >
+                      {submitStatus.message}
+                    </div>
+                  )}
+                  <Button
+                    type="submit"
+                    className="w-full bg-[#FFD700] hover:bg-[#FFD700]/90 text-white"
+                    disabled={submitStatus.loading}
+                  >
+                    {submitStatus.loading ? (
+                      <span className="flex items-center">
+                        <svg
+                          className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          ></circle>
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          ></path>
+                        </svg>
+                        제출 중...
+                      </span>
+                    ) : (
+                      <>
+                        <span className="mr-2">👉</span> Book Now
+                      </>
+                    )}
                   </Button>
                 </form>
               </div>
@@ -665,20 +994,28 @@ function ProgramsSection() {
                 <h3 className="text-xl font-bold">Trial Art Class</h3>
               </div>
               <div className="border-l-4 border-[#FFD700]/30 pl-4 mb-6">
-                <p className="text-sm text-gray-600 mb-2">Curious about our art classes? Try one before you commit!</p>
                 <p className="text-sm text-gray-600 mb-2">
-                  Our trial class is a one-time session where your child can experience the joy of art-making.
+                  Curious about our art classes? Try one before you commit!
                 </p>
                 <p className="text-sm text-gray-600 mb-2">
-                  Choose from activities like painting, clay art, light art, or eco-craft using recycled materials.
+                  Our trial class is a one-time session where your child can
+                  experience the joy of art-making.
                 </p>
                 <p className="text-sm text-gray-600 mb-2">
-                  This class is perfect for first-timers who want to explore our studio.
+                  Choose from activities like painting, clay art, light art, or
+                  eco-craft using recycled materials.
                 </p>
                 <p className="text-sm text-gray-600 mb-2">
-                  All materials are provided, and classes are led by friendly, experienced teachers.
+                  This class is perfect for first-timers who want to explore our
+                  studio.
                 </p>
-                <p className="text-sm text-gray-600">We can't wait to welcome your little artist!</p>
+                <p className="text-sm text-gray-600 mb-2">
+                  All materials are provided, and classes are led by friendly,
+                  experienced teachers.
+                </p>
+                <p className="text-sm text-gray-600">
+                  We can't wait to welcome your little artist!
+                </p>
               </div>
 
               <div className="mt-6">
@@ -688,12 +1025,19 @@ function ProgramsSection() {
                 </div>
                 <form onSubmit={handleTrialSubmit} className="space-y-4">
                   <div>
-                    <Label htmlFor="trial-parent-name">Parent/Guardian Name</Label>
+                    <Label htmlFor="trial-parent-name">
+                      Parent/Guardian Name
+                    </Label>
                     <Input
                       id="trial-parent-name"
                       placeholder="Enter your full name"
                       value={trialFormData.parentName}
-                      onChange={(e) => setTrialFormData({ ...trialFormData, parentName: e.target.value })}
+                      onChange={(e) =>
+                        setTrialFormData({
+                          ...trialFormData,
+                          parentName: e.target.value,
+                        })
+                      }
                       required
                     />
                   </div>
@@ -703,7 +1047,12 @@ function ProgramsSection() {
                       id="trial-child-name"
                       placeholder="Enter your child's name"
                       value={trialFormData.childName}
-                      onChange={(e) => setTrialFormData({ ...trialFormData, childName: e.target.value })}
+                      onChange={(e) =>
+                        setTrialFormData({
+                          ...trialFormData,
+                          childName: e.target.value,
+                        })
+                      }
                       required
                     />
                   </div>
@@ -713,7 +1062,12 @@ function ProgramsSection() {
                       id="trial-child-age"
                       placeholder="Enter your child's age (e.g., 6 years old)"
                       value={trialFormData.childAge}
-                      onChange={(e) => setTrialFormData({ ...trialFormData, childAge: e.target.value })}
+                      onChange={(e) =>
+                        setTrialFormData({
+                          ...trialFormData,
+                          childAge: e.target.value,
+                        })
+                      }
                       required
                     />
                   </div>
@@ -724,7 +1078,12 @@ function ProgramsSection() {
                       type="email"
                       placeholder="Enter your email"
                       value={trialFormData.email}
-                      onChange={(e) => setTrialFormData({ ...trialFormData, email: e.target.value })}
+                      onChange={(e) =>
+                        setTrialFormData({
+                          ...trialFormData,
+                          email: e.target.value,
+                        })
+                      }
                       required
                     />
                   </div>
@@ -734,7 +1093,12 @@ function ProgramsSection() {
                       id="trial-phone"
                       placeholder="Enter your phone number"
                       value={trialFormData.phone}
-                      onChange={(e) => setTrialFormData({ ...trialFormData, phone: e.target.value })}
+                      onChange={(e) =>
+                        setTrialFormData({
+                          ...trialFormData,
+                          phone: e.target.value,
+                        })
+                      }
                       required
                     />
                   </div>
@@ -742,7 +1106,9 @@ function ProgramsSection() {
                     <Label>Choose Activity</Label>
                     <RadioGroup
                       value={trialFormData.activity}
-                      onValueChange={(value) => setTrialFormData({ ...trialFormData, activity: value })}
+                      onValueChange={(value) =>
+                        setTrialFormData({ ...trialFormData, activity: value })
+                      }
                       className="mt-2"
                     >
                       <div className="flex items-center space-x-2">
@@ -754,7 +1120,10 @@ function ProgramsSection() {
                         <Label htmlFor="trial-clay-art">Clay Art</Label>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="light-art" id="trial-light-art" />
+                        <RadioGroupItem
+                          value="light-art"
+                          id="trial-light-art"
+                        />
                         <Label htmlFor="trial-light-art">Light Art</Label>
                       </div>
                       <div className="flex items-center space-x-2">
@@ -767,16 +1136,22 @@ function ProgramsSection() {
                     <Label>Schedule</Label>
                     <RadioGroup
                       value={trialFormData.schedule}
-                      onValueChange={(value) => setTrialFormData({ ...trialFormData, schedule: value })}
+                      onValueChange={(value) =>
+                        setTrialFormData({ ...trialFormData, schedule: value })
+                      }
                       className="mt-2"
                     >
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="tuesday" id="trial-tuesday" />
-                        <Label htmlFor="trial-tuesday">Tuesday 3:00–4:10 PM</Label>
+                        <Label htmlFor="trial-tuesday">
+                          Tuesday 3:00–4:10 PM
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="saturday" id="trial-saturday" />
-                        <Label htmlFor="trial-saturday">Saturday 1:00–2:10 PM</Label>
+                        <Label htmlFor="trial-saturday">
+                          Saturday 1:00–2:10 PM
+                        </Label>
                       </div>
                     </RadioGroup>
                   </div>
@@ -785,7 +1160,10 @@ function ProgramsSection() {
                       id="trial-terms"
                       checked={trialFormData.agreeTerms}
                       onCheckedChange={(checked) =>
-                        setTrialFormData({ ...trialFormData, agreeTerms: checked as boolean })
+                        setTrialFormData({
+                          ...trialFormData,
+                          agreeTerms: checked as boolean,
+                        })
                       }
                       required
                     />
@@ -796,7 +1174,10 @@ function ProgramsSection() {
                       I agree to the terms and conditions
                     </label>
                   </div>
-                  <Button type="submit" className="w-full bg-[#FFD700] hover:bg-[#FFD700]/90 text-white">
+                  <Button
+                    type="submit"
+                    className="w-full bg-[#FFD700] hover:bg-[#FFD700]/90 text-white"
+                  >
                     <span className="mr-2">👉</span> Reserve Trial Class
                   </Button>
                 </form>
@@ -806,21 +1187,27 @@ function ProgramsSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 function VisitSection() {
   return (
-    <section id="visit" className="bg-[#FFD700]/5 py-12 md:py-24 lg:py-32 relative">
+    <section
+      id="visit"
+      className="bg-[#FFD700]/5 py-12 md:py-24 lg:py-32 relative"
+    >
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
           <div className="space-y-2">
             <div className="inline-block rounded-full bg-[#FFD700] px-3 py-1 text-sm font-medium text-white">
               Visit Us
             </div>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Our Location</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+              Our Location
+            </h2>
             <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Come visit our art studio in the heart of Seoul. We'd love to show you around!
+              Come visit our art studio in the heart of Seoul. We'd love to show
+              you around!
             </p>
           </div>
         </div>
@@ -858,15 +1245,23 @@ function VisitSection() {
                 <ul className="space-y-2 text-gray-500">
                   <li className="flex items-start gap-2">
                     <span className="font-medium">Subway:</span>
-                    <span>Itaewon Station (Line 6), Exit 3. 5-minute walk.</span>
+                    <span>
+                      Itaewon Station (Line 6), Exit 3. 5-minute walk.
+                    </span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="font-medium">Bus:</span>
-                    <span>Routes 110, 421, 740 stop directly in front of the building.</span>
+                    <span>
+                      Routes 110, 421, 740 stop directly in front of the
+                      building.
+                    </span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="font-medium">Parking:</span>
-                    <span>Limited parking available on-site. Please call ahead to reserve a spot.</span>
+                    <span>
+                      Limited parking available on-site. Please call ahead to
+                      reserve a spot.
+                    </span>
                   </li>
                 </ul>
               </div>
@@ -878,7 +1273,9 @@ function VisitSection() {
               <div className="text-center">
                 <MapPin className="h-12 w-12 text-[#FFD700] mx-auto mb-2" />
                 <p className="text-gray-500">Interactive Map</p>
-                <p className="text-sm text-gray-400">Google Maps integration would be here</p>
+                <p className="text-sm text-gray-400">
+                  Google Maps integration would be here
+                </p>
               </div>
             </div>
           </div>
@@ -892,11 +1289,14 @@ function VisitSection() {
           preserveAspectRatio="none"
           className="w-full h-auto"
         >
-          <path d="M0,80 C240,0 480,0 720,40 C960,80 1200,80 1440,0 L1440,80 L0,80 Z" fill="white" />
+          <path
+            d="M0,80 C240,0 480,0 720,40 C960,80 1200,80 1440,0 L1440,80 L0,80 Z"
+            fill="white"
+          />
         </svg>
       </div>
     </section>
-  )
+  );
 }
 
 function Footer() {
@@ -906,15 +1306,27 @@ function Footer() {
         <div className="grid gap-8 lg:grid-cols-3">
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2">
-              <span className="text-xl font-bold text-[#FFD700]">Lalla Kids Art</span>
+              <span className="text-xl font-bold text-[#FFD700]">
+                Lalla Kids Art
+              </span>
             </Link>
-            <p className="text-sm text-gray-500">Creative art programs for young explorers living in Korea.</p>
+            <p className="text-sm text-gray-500">
+              Creative art programs for young explorers living in Korea.
+            </p>
             <div className="flex items-center gap-4">
-              <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Instagram className="h-5 w-5 text-gray-600 hover:text-[#FFD700]" />
                 <span className="sr-only">Instagram</span>
               </Link>
-              <Link href="https://blog.com" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://blog.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <BookOpen className="h-5 w-5 text-gray-600 hover:text-[#FFD700]" />
                 <span className="sr-only">Blog</span>
               </Link>
@@ -923,16 +1335,28 @@ function Footer() {
           <div className="space-y-4">
             <h3 className="text-lg font-medium">Quick Links</h3>
             <nav className="flex flex-col gap-2">
-              <Link href="#about" className="text-sm text-gray-500 hover:text-[#FFD700]">
+              <Link
+                href="#about"
+                className="text-sm text-gray-500 hover:text-[#FFD700]"
+              >
                 About Us
               </Link>
-              <Link href="#teacher" className="text-sm text-gray-500 hover:text-[#FFD700]">
+              <Link
+                href="#teacher"
+                className="text-sm text-gray-500 hover:text-[#FFD700]"
+              >
                 Meet Our Creative Team
               </Link>
-              <Link href="#programs" className="text-sm text-gray-500 hover:text-[#FFD700]">
+              <Link
+                href="#programs"
+                className="text-sm text-gray-500 hover:text-[#FFD700]"
+              >
                 Join our program!
               </Link>
-              <Link href="#visit" className="text-sm text-gray-500 hover:text-[#FFD700]">
+              <Link
+                href="#visit"
+                className="text-sm text-gray-500 hover:text-[#FFD700]"
+              >
                 Visit Us
               </Link>
             </nav>
@@ -949,10 +1373,11 @@ function Footer() {
         </div>
         <div className="mt-8 border-t pt-8 text-center">
           <p className="text-xs text-gray-500">
-            &copy; {new Date().getFullYear()} Lalla Kids Art. All rights reserved.
+            &copy; {new Date().getFullYear()} Lalla Kids Art. All rights
+            reserved.
           </p>
         </div>
       </div>
     </footer>
-  )
+  );
 }

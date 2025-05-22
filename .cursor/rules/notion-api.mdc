@@ -1,0 +1,77 @@
+---
+description: "Lalla Kids Art 웹사이트의 노션 API 통합 가이드"
+globs:
+alwaysApply: false
+---
+
+# 노션 API 통합 가이드
+
+이 문서는 Lalla Kids Art 웹사이트에서 노션 API 통합이 어떻게 작동하는지 설명합니다.
+
+## 개요
+
+이 웹사이트는 다음과 같이 노션 데이터베이스와 통합됩니다:
+1. "위클리 스케줄" 데이터베이스에서 프로그램 유형 및 일정 정보 가져오기
+2. "위클리 폼" 데이터베이스에 폼 데이터 제출하기
+3. (계획) "트라이얼 클래스" 폼에 대해서도 유사한 통합 구현 예정
+
+## 트라이얼 클래스 구현 계획
+
+트라이얼 클래스 구현 시 유의사항:
+- 트라이얼 클래스는 위클리 프로그램과 데이터 타입 및 속성이 다릅니다
+- 트라이얼 클래스의 정확한 필드와 데이터 타입은 유저에게 별도로 입력받아야 합니다
+- 사진 업로드 기능도 구현 가능합니다 (예: 어린이 작품 사진 또는 학부모 신분증 등)
+- 트라이얼 구현 시에도 Server Actions 패턴을 동일하게 적용해야 합니다
+
+## 주요 파일
+
+### API 클라이언트 설정
+
+노션 API 클라이언트는 [lib/notion.ts](mdc:lib/notion.ts)에서 초기화됩니다.
+
+이 파일에는 다음이 포함되어 있습니다:
+- API 키를 사용한 클라이언트 초기화
+- `getWeeklySchedule()` 함수로 일정 데이터 가져오기
+- `submitWeeklyForm()` 함수로 폼 데이터 제출하기
+
+### 서버 액션
+
+데이터 가져오기 및 제출을 처리하는 서버 액션은 [actions/notion-actions.ts](mdc:actions/notion-actions.ts)에 있습니다.
+
+이 파일에는 다음이 포함되어 있습니다:
+- `fetchWeeklySchedule()` 서버 액션으로 데이터 검색 및 처리
+- `submitWeeklyProgramForm()` 서버 액션으로 폼 제출 처리
+
+### 폼 구현
+
+폼 통합은 [app/page.tsx](mdc:app/page.tsx)의 `ProgramsSection` 컴포넌트 내에 구현되어 있습니다.
+
+## 환경 변수
+
+필요한 환경 변수:
+- `NOTION_API_KEY`: 노션 API 키
+- `NOTION_DATABASE_WEEKLY_SCHEDULE_ID`: 일정 데이터베이스 ID (원본 데이터)
+- `NOTION_DATABASE_WEEKLY_FORM_ID`: 폼 데이터베이스 ID (제출 데이터 저장소)
+
+## 데이터 구조 요구사항
+
+### 위클리 스케줄 데이터베이스
+- "Program Type" 필드 포함 (title 타입)
+- "Schedule" 필드 포함 (rich_text 타입)
+
+### 위클리 폼 데이터베이스
+- 다음 필드를 포함해야 합니다:
+  - "Parent/Guardian Name" (title 타입)
+  - "Child's Name" (rich_text 타입)
+  - "Child's Age" (number 타입)
+  - "Email" (email 타입)
+  - "Phone Number" (phone_number 타입)
+  - "Program Type" (rich_text 타입)
+  - "Schedule" (rich_text 타입)
+  - "Submitted At" (date 타입)
+
+## 구현 참고사항
+
+- React 상태를 사용하여 로딩 상태 및 폼 제출 상태 관리
+- API 요청에 대한 오류 처리 구현
+- mounted 상태 확인을 통한 하이드레이션 이슈 해결 방법 포함
