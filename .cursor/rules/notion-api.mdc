@@ -1,5 +1,5 @@
 ---
-description: "Lalla Kids Art 웹사이트의 노션 API 통합 가이드"
+description: 노션 API를 사용해야한다면 이 룰을 꼭 참고할 것
 globs:
 alwaysApply: false
 ---
@@ -20,7 +20,6 @@ alwaysApply: false
 트라이얼 클래스 구현 시 유의사항:
 - 트라이얼 클래스는 위클리 프로그램과 데이터 타입 및 속성이 다릅니다
 - 트라이얼 클래스의 정확한 필드와 데이터 타입은 유저에게 별도로 입력받아야 합니다
-- 사진 업로드 기능도 구현 가능합니다 (예: 어린이 작품 사진 또는 학부모 신분증 등)
 - 트라이얼 구현 시에도 Server Actions 패턴을 동일하게 적용해야 합니다
 
 ## 주요 파일
@@ -52,6 +51,8 @@ alwaysApply: false
 - `NOTION_API_KEY`: 노션 API 키
 - `NOTION_DATABASE_WEEKLY_SCHEDULE_ID`: 일정 데이터베이스 ID (원본 데이터)
 - `NOTION_DATABASE_WEEKLY_FORM_ID`: 폼 데이터베이스 ID (제출 데이터 저장소)
+- `NOTION_DATABASE_TRIAL_SCHEDULE_ID`: 트라이얼 스케줄 데이터베이스 ID
+- `NOTION_DATABASE_TRIAL_FORM_ID`: 트라이얼 폼 ID
 
 ## 데이터 구조 요구사항
 
