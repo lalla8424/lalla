@@ -23,6 +23,8 @@ import { Input } from "../components/ui/input";
 import {
   fetchWeeklySchedule,
   submitWeeklyProgramForm,
+  fetchTrialSchedule,
+  submitTrialClassForm,
 } from "../actions/notion-actions";
 
 export default function Home() {
@@ -501,7 +503,7 @@ function ProgramsSection() {
     email: "",
     phone: "",
     programType: "",
-    schedule: "",
+    schedule: [] as string[],
     agreeTerms: false,
   });
 
@@ -512,7 +514,7 @@ function ProgramsSection() {
     email: "",
     phone: "",
     activity: "",
-    schedule: "",
+    schedule: [] as string[],
     agreeTerms: false,
   });
 
@@ -523,8 +525,28 @@ function ProgramsSection() {
   const [programTypeOptions, setProgramTypeOptions] = useState<
     { id: string; programType: string }[]
   >([]);
+
+  // 트라이얼 클래스용 상태 추가
+  const [trialScheduleOptions, setTrialScheduleOptions] = useState<
+    { id: string; schedule: string }[]
+  >([]);
+  const [trialActivityOptions, setTrialActivityOptions] = useState<
+    { id: string; chooseActivity: string }[]
+  >([]);
+
   const [isLoading, setIsLoading] = useState(true);
   const [submitStatus, setSubmitStatus] = useState<{
+    loading: boolean;
+    success: boolean | null;
+    message: string;
+  }>({
+    loading: false,
+    success: null,
+    message: "",
+  });
+
+  // 트라이얼 클래스용 제출 상태
+  const [trialSubmitStatus, setTrialSubmitStatus] = useState<{
     loading: boolean;
     success: boolean | null;
     message: string;
@@ -540,14 +562,79 @@ function ProgramsSection() {
       try {
         setIsLoading(true);
 
-        // API 호출 대신 직접 Server Action 호출
-        const response = await fetchWeeklySchedule();
+        // 위클리 프로그램 데이터 로드
+        const weeklyResponse = await fetchWeeklySchedule();
+        if (weeklyResponse.success) {
+          // 콤마로 구분된 스케줄을 개별 항목으로 분리
+          const flattenedSchedules: { id: string; schedule: string }[] = [];
+          weeklyResponse.schedules?.forEach((item) => {
+            if (item.schedule.includes(",")) {
+              // 콤마로 구분된 경우 분리
+              const individualSchedules = item.schedule
+                .split(",")
+                .map((s) => s.trim());
+              individualSchedules.forEach((schedule, index) => {
+                flattenedSchedules.push({
+                  id: `${item.id}-${index}`,
+                  schedule,
+                });
+              });
+            } else {
+              flattenedSchedules.push(item);
+            }
+          });
 
-        if (response.success) {
-          setScheduleOptions(response.schedules || []);
-          setProgramTypeOptions(response.programTypes || []);
+          // 중복 제거
+          const uniqueSchedules = flattenedSchedules.filter(
+            (item, index, self) =>
+              index === self.findIndex((t) => t.schedule === item.schedule),
+          );
+
+          setScheduleOptions(uniqueSchedules);
+          setProgramTypeOptions(weeklyResponse.programTypes || []);
         } else {
-          console.error("데이터 로딩 오류:", response.error);
+          console.error(
+            "위클리 프로그램 데이터 로딩 오류:",
+            weeklyResponse.error,
+          );
+        }
+
+        // 트라이얼 클래스 데이터 로드
+        const trialResponse = await fetchTrialSchedule();
+        if (trialResponse.success) {
+          // 콤마로 구분된 스케줄을 개별 항목으로 분리
+          const flattenedTrialSchedules: { id: string; schedule: string }[] =
+            [];
+          trialResponse.schedules?.forEach((item) => {
+            if (item.schedule.includes(",")) {
+              // 콤마로 구분된 경우 분리
+              const individualSchedules = item.schedule
+                .split(",")
+                .map((s) => s.trim());
+              individualSchedules.forEach((schedule, index) => {
+                flattenedTrialSchedules.push({
+                  id: `${item.id}-${index}`,
+                  schedule,
+                });
+              });
+            } else {
+              flattenedTrialSchedules.push(item);
+            }
+          });
+
+          // 중복 제거
+          const uniqueTrialSchedules = flattenedTrialSchedules.filter(
+            (item, index, self) =>
+              index === self.findIndex((t) => t.schedule === item.schedule),
+          );
+
+          setTrialScheduleOptions(uniqueTrialSchedules);
+          setTrialActivityOptions(trialResponse.activities || []);
+        } else {
+          console.error(
+            "트라이얼 클래스 데이터 로딩 오류:",
+            trialResponse.error,
+          );
         }
       } catch (error) {
         console.error("스케줄 데이터 로딩 실패:", error);
@@ -571,7 +658,7 @@ function ProgramsSection() {
       !weeklyFormData.email ||
       !weeklyFormData.phone ||
       !weeklyFormData.programType ||
-      !weeklyFormData.schedule ||
+      weeklyFormData.schedule.length === 0 ||
       !weeklyFormData.agreeTerms
     ) {
       setSubmitStatus({
@@ -597,7 +684,7 @@ function ProgramsSection() {
       formData.append("email", weeklyFormData.email);
       formData.append("phone", weeklyFormData.phone);
       formData.append("programType", weeklyFormData.programType);
-      formData.append("schedule", weeklyFormData.schedule);
+      formData.append("schedule", weeklyFormData.schedule.join(", "));
 
       const result = await submitWeeklyProgramForm(formData);
 
@@ -616,7 +703,7 @@ function ProgramsSection() {
           email: "",
           phone: "",
           programType: "",
-          schedule: "",
+          schedule: [],
           agreeTerms: false,
         });
       } else {
@@ -636,13 +723,80 @@ function ProgramsSection() {
     }
   };
 
-  const handleTrialSubmit = (e: React.FormEvent) => {
+  const handleTrialSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Trial Class Form Submitted:", trialFormData);
-    // Here you would typically send the data to your backend
-    alert(
-      "Thank you for reserving a Trial Class! We'll contact you shortly to confirm your booking.",
-    );
+
+    // 폼 유효성 검사
+    if (
+      !trialFormData.parentName ||
+      !trialFormData.childName ||
+      !trialFormData.childAge ||
+      !trialFormData.email ||
+      !trialFormData.phone ||
+      !trialFormData.activity ||
+      trialFormData.schedule.length === 0 ||
+      !trialFormData.agreeTerms
+    ) {
+      setTrialSubmitStatus({
+        loading: false,
+        success: false,
+        message: "모든 필드를 입력해주세요.",
+      });
+      return;
+    }
+
+    try {
+      setTrialSubmitStatus({
+        loading: true,
+        success: null,
+        message: "제출 중...",
+      });
+
+      // 직접 Server Action 호출
+      const formData = new FormData();
+      formData.append("parentName", trialFormData.parentName);
+      formData.append("childName", trialFormData.childName);
+      formData.append("childAge", trialFormData.childAge);
+      formData.append("email", trialFormData.email);
+      formData.append("phone", trialFormData.phone);
+      formData.append("chooseActivity", trialFormData.activity);
+      formData.append("schedule", trialFormData.schedule.join(", "));
+
+      const result = await submitTrialClassForm(formData);
+
+      if (result.success) {
+        setTrialSubmitStatus({
+          loading: false,
+          success: true,
+          message: "트라이얼 클래스 예약이 완료되었습니다!",
+        });
+
+        // 폼 초기화
+        setTrialFormData({
+          parentName: "",
+          childName: "",
+          childAge: "",
+          email: "",
+          phone: "",
+          activity: "",
+          schedule: [],
+          agreeTerms: false,
+        });
+      } else {
+        setTrialSubmitStatus({
+          loading: false,
+          success: false,
+          message: result.error || "예약 처리 중 오류가 발생했습니다.",
+        });
+      }
+    } catch (error) {
+      console.error("트라이얼 폼 제출 실패:", error);
+      setTrialSubmitStatus({
+        loading: false,
+        success: false,
+        message: "예약 처리 중 오류가 발생했습니다.",
+      });
+    }
   };
 
   return (
@@ -877,17 +1031,8 @@ function ProgramsSection() {
                     </RadioGroup>
                   </div>
                   <div>
-                    <Label>Schedule</Label>
-                    <RadioGroup
-                      value={weeklyFormData.schedule}
-                      onValueChange={(value) =>
-                        setWeeklyFormData({
-                          ...weeklyFormData,
-                          schedule: value,
-                        })
-                      }
-                      className="mt-2"
-                    >
+                    <Label>Schedule (다중 선택 가능)</Label>
+                    <div className="mt-2 space-y-2">
                       {isLoading ? (
                         <div className="py-2 text-sm text-gray-500">
                           스케줄 정보를 불러오는 중...
@@ -898,9 +1043,29 @@ function ProgramsSection() {
                             key={option.id}
                             className="flex items-center space-x-2"
                           >
-                            <RadioGroupItem
-                              value={option.schedule}
+                            <Checkbox
                               id={`weekly-${option.id}`}
+                              checked={weeklyFormData.schedule.includes(
+                                option.schedule,
+                              )}
+                              onCheckedChange={(checked) => {
+                                if (checked) {
+                                  setWeeklyFormData({
+                                    ...weeklyFormData,
+                                    schedule: [
+                                      ...weeklyFormData.schedule,
+                                      option.schedule,
+                                    ],
+                                  });
+                                } else {
+                                  setWeeklyFormData({
+                                    ...weeklyFormData,
+                                    schedule: weeklyFormData.schedule.filter(
+                                      (s) => s !== option.schedule,
+                                    ),
+                                  });
+                                }
+                              }}
                             />
                             <Label htmlFor={`weekly-${option.id}`}>
                               {option.schedule}
@@ -912,7 +1077,7 @@ function ProgramsSection() {
                           사용 가능한 스케줄이 없습니다
                         </div>
                       )}
-                    </RadioGroup>
+                    </div>
                   </div>
                   <div className="flex items-center space-x-2">
                     <Checkbox
@@ -1111,49 +1276,164 @@ function ProgramsSection() {
                       }
                       className="mt-2"
                     >
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="drawing" id="trial-drawing" />
-                        <Label htmlFor="trial-drawing">Drawing</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="clay-art" id="trial-clay-art" />
-                        <Label htmlFor="trial-clay-art">Clay Art</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem
-                          value="light-art"
-                          id="trial-light-art"
-                        />
-                        <Label htmlFor="trial-light-art">Light Art</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="eco-art" id="trial-eco-art" />
-                        <Label htmlFor="trial-eco-art">Eco Art</Label>
-                      </div>
+                      {isLoading ? (
+                        <div className="text-sm text-gray-500">
+                          Loading activities...
+                        </div>
+                      ) : trialActivityOptions.length > 0 ? (
+                        trialActivityOptions.map((activity) => (
+                          <div
+                            key={activity.id}
+                            className="flex items-center space-x-2"
+                          >
+                            <RadioGroupItem
+                              value={activity.chooseActivity}
+                              id={`trial-activity-${activity.id}`}
+                            />
+                            <Label htmlFor={`trial-activity-${activity.id}`}>
+                              {activity.chooseActivity}
+                            </Label>
+                          </div>
+                        ))
+                      ) : (
+                        <>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem
+                              value="drawing"
+                              id="trial-drawing"
+                            />
+                            <Label htmlFor="trial-drawing">Drawing</Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem
+                              value="clay-art"
+                              id="trial-clay-art"
+                            />
+                            <Label htmlFor="trial-clay-art">Clay Art</Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem
+                              value="light-art"
+                              id="trial-light-art"
+                            />
+                            <Label htmlFor="trial-light-art">Light Art</Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem
+                              value="eco-art"
+                              id="trial-eco-art"
+                            />
+                            <Label htmlFor="trial-eco-art">Eco Art</Label>
+                          </div>
+                        </>
+                      )}
                     </RadioGroup>
                   </div>
                   <div>
-                    <Label>Schedule</Label>
-                    <RadioGroup
-                      value={trialFormData.schedule}
-                      onValueChange={(value) =>
-                        setTrialFormData({ ...trialFormData, schedule: value })
-                      }
-                      className="mt-2"
-                    >
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="tuesday" id="trial-tuesday" />
-                        <Label htmlFor="trial-tuesday">
-                          Tuesday 3:00–4:10 PM
-                        </Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="saturday" id="trial-saturday" />
-                        <Label htmlFor="trial-saturday">
-                          Saturday 1:00–2:10 PM
-                        </Label>
-                      </div>
-                    </RadioGroup>
+                    <Label>Schedule (다중 선택 가능)</Label>
+                    <div className="mt-2 space-y-2">
+                      {isLoading ? (
+                        <div className="text-sm text-gray-500">
+                          Loading schedules...
+                        </div>
+                      ) : trialScheduleOptions.length > 0 ? (
+                        trialScheduleOptions.map((schedule) => (
+                          <div
+                            key={schedule.id}
+                            className="flex items-center space-x-2"
+                          >
+                            <Checkbox
+                              id={`trial-schedule-${schedule.id}`}
+                              checked={trialFormData.schedule.includes(
+                                schedule.schedule,
+                              )}
+                              onCheckedChange={(checked) => {
+                                if (checked) {
+                                  setTrialFormData({
+                                    ...trialFormData,
+                                    schedule: [
+                                      ...trialFormData.schedule,
+                                      schedule.schedule,
+                                    ],
+                                  });
+                                } else {
+                                  setTrialFormData({
+                                    ...trialFormData,
+                                    schedule: trialFormData.schedule.filter(
+                                      (s) => s !== schedule.schedule,
+                                    ),
+                                  });
+                                }
+                              }}
+                            />
+                            <Label htmlFor={`trial-schedule-${schedule.id}`}>
+                              {schedule.schedule}
+                            </Label>
+                          </div>
+                        ))
+                      ) : (
+                        <>
+                          <div className="flex items-center space-x-2">
+                            <Checkbox
+                              id="trial-tuesday"
+                              checked={trialFormData.schedule.includes(
+                                "Tuesday 3:00–4:10 PM",
+                              )}
+                              onCheckedChange={(checked) => {
+                                if (checked) {
+                                  setTrialFormData({
+                                    ...trialFormData,
+                                    schedule: [
+                                      ...trialFormData.schedule,
+                                      "Tuesday 3:00–4:10 PM",
+                                    ],
+                                  });
+                                } else {
+                                  setTrialFormData({
+                                    ...trialFormData,
+                                    schedule: trialFormData.schedule.filter(
+                                      (s) => s !== "Tuesday 3:00–4:10 PM",
+                                    ),
+                                  });
+                                }
+                              }}
+                            />
+                            <Label htmlFor="trial-tuesday">
+                              Tuesday 3:00–4:10 PM
+                            </Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <Checkbox
+                              id="trial-saturday"
+                              checked={trialFormData.schedule.includes(
+                                "Saturday 1:00–2:10 PM",
+                              )}
+                              onCheckedChange={(checked) => {
+                                if (checked) {
+                                  setTrialFormData({
+                                    ...trialFormData,
+                                    schedule: [
+                                      ...trialFormData.schedule,
+                                      "Saturday 1:00–2:10 PM",
+                                    ],
+                                  });
+                                } else {
+                                  setTrialFormData({
+                                    ...trialFormData,
+                                    schedule: trialFormData.schedule.filter(
+                                      (s) => s !== "Saturday 1:00–2:10 PM",
+                                    ),
+                                  });
+                                }
+                              }}
+                            />
+                            <Label htmlFor="trial-saturday">
+                              Saturday 1:00–2:10 PM
+                            </Label>
+                          </div>
+                        </>
+                      )}
+                    </div>
                   </div>
                   <div className="flex items-center space-x-2">
                     <Checkbox
@@ -1174,11 +1454,33 @@ function ProgramsSection() {
                       I agree to the terms and conditions
                     </label>
                   </div>
+                  {trialSubmitStatus.message && (
+                    <div
+                      className={`p-2 rounded text-sm ${
+                        trialSubmitStatus.success === true
+                          ? "bg-green-100 text-green-800"
+                          : trialSubmitStatus.success === false
+                          ? "bg-red-100 text-red-800"
+                          : "bg-blue-100 text-blue-800"
+                      }`}
+                    >
+                      {trialSubmitStatus.message}
+                    </div>
+                  )}
                   <Button
                     type="submit"
                     className="w-full bg-[#FFD700] hover:bg-[#FFD700]/90 text-white"
+                    disabled={trialSubmitStatus.loading}
                   >
-                    <span className="mr-2">👉</span> Reserve Trial Class
+                    {trialSubmitStatus.loading ? (
+                      <>
+                        <span className="mr-2">⏳</span> Processing...
+                      </>
+                    ) : (
+                      <>
+                        <span className="mr-2">👉</span> Reserve Trial Class
+                      </>
+                    )}
                   </Button>
                 </form>
               </div>
