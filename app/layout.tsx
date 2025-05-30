@@ -1,6 +1,8 @@
 import React from "react";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Header } from "../components/header";
+import { Footer } from "../components/footer";
 
 export const metadata = {
   title: "Lalla Kids Art - Creative Art Programs for Kids in Seoul",
@@ -23,7 +25,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
         </ThemeProvider>
       </body>
     </html>

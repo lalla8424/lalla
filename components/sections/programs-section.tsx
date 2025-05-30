@@ -1,0 +1,177 @@
+import React, { useState, useEffect } from "react";
+import { ImageSlider } from "../ui/image-slider";
+import { WeeklyProgramForm } from "../forms/weekly-program-form";
+import { TrialClassForm } from "../forms/trial-class-form";
+import {
+  fetchWeeklySchedule,
+  fetchTrialSchedule,
+} from "../../actions/notion-actions";
+
+// Slide data
+const slides = [
+  {
+    image: "/placeholder.svg?height=400&width=800",
+    caption: "Children exploring colors in our Little Explorers class",
+  },
+  {
+    image: "/placeholder.svg?height=400&width=800",
+    caption: "Creative Kids working on a collaborative art project",
+  },
+  {
+    image: "/placeholder.svg?height=400&width=800",
+    caption: "Young Artists developing their painting techniques",
+  },
+  {
+    image: "/placeholder.svg?height=400&width=800",
+    caption: "Art exhibition showcasing our students' work",
+  },
+  {
+    image: "/placeholder.svg?height=400&width=800",
+    caption: "Special workshop with visiting artist",
+  },
+];
+
+export function ProgramsSection() {
+  // Notion data states
+  const [scheduleOptions, setScheduleOptions] = useState<
+    { id: string; schedule: string }[]
+  >([]);
+  const [programTypeOptions, setProgramTypeOptions] = useState<
+    { id: string; programType: string }[]
+  >([]);
+  const [trialScheduleOptions, setTrialScheduleOptions] = useState<
+    { id: string; schedule: string }[]
+  >([]);
+  const [trialActivityOptions, setTrialActivityOptions] = useState<
+    { id: string; chooseActivity: string }[]
+  >([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Load Notion data
+  useEffect(() => {
+    async function loadScheduleData() {
+      try {
+        setIsLoading(true);
+
+        // Load weekly program data
+        const weeklyResponse = await fetchWeeklySchedule();
+        if (weeklyResponse.success) {
+          // Split comma-separated schedules into individual items
+          const flattenedSchedules: { id: string; schedule: string }[] = [];
+          weeklyResponse.schedules?.forEach((item) => {
+            if (item.schedule.includes(",")) {
+              // Split comma-separated schedules
+              const individualSchedules = item.schedule
+                .split(",")
+                .map((s) => s.trim());
+              individualSchedules.forEach((schedule, index) => {
+                flattenedSchedules.push({
+                  id: `${item.id}-${index}`,
+                  schedule,
+                });
+              });
+            } else {
+              flattenedSchedules.push(item);
+            }
+          });
+
+          // Remove duplicates
+          const uniqueSchedules = flattenedSchedules.filter(
+            (item, index, self) =>
+              index === self.findIndex((t) => t.schedule === item.schedule),
+          );
+
+          setScheduleOptions(uniqueSchedules);
+          setProgramTypeOptions(weeklyResponse.programTypes || []);
+        } else {
+          console.error(
+            "Weekly program data loading error:",
+            weeklyResponse.error,
+          );
+        }
+
+        // Load trial class data
+        const trialResponse = await fetchTrialSchedule();
+        if (trialResponse.success) {
+          // Split comma-separated schedules into individual items
+          const flattenedTrialSchedules: { id: string; schedule: string }[] =
+            [];
+          trialResponse.schedules?.forEach((item) => {
+            if (item.schedule.includes(",")) {
+              // Split comma-separated schedules
+              const individualSchedules = item.schedule
+                .split(",")
+                .map((s) => s.trim());
+              individualSchedules.forEach((schedule, index) => {
+                flattenedTrialSchedules.push({
+                  id: `${item.id}-${index}`,
+                  schedule,
+                });
+              });
+            } else {
+              flattenedTrialSchedules.push(item);
+            }
+          });
+
+          // Remove duplicates
+          const uniqueTrialSchedules = flattenedTrialSchedules.filter(
+            (item, index, self) =>
+              index === self.findIndex((t) => t.schedule === item.schedule),
+          );
+
+          setTrialScheduleOptions(uniqueTrialSchedules);
+          setTrialActivityOptions(trialResponse.activities || []);
+        } else {
+          console.error("Trial class data loading error:", trialResponse.error);
+        }
+      } catch (error) {
+        console.error("Schedule data loading failed:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    loadScheduleData();
+  }, []);
+
+  return (
+    <section id="programs" className="py-12 md:py-24 lg:py-32">
+      <div className="container px-4 md:px-6">
+        <div className="flex flex-col items-center justify-center space-y-4 text-center">
+          <div className="space-y-2">
+            <div className="inline-block rounded-full bg-[#FFD700] px-3 py-1 text-sm font-medium text-white">
+              Join our program!
+            </div>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+              Our Art Classes
+            </h2>
+            <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              Discover our range of age-appropriate art programs designed to
+              inspire creativity and joy.
+            </p>
+          </div>
+        </div>
+
+        {/* Image Slider */}
+        <ImageSlider slides={slides} />
+
+        {/* Program Forms */}
+        <div className="mx-auto max-w-5xl py-8 grid gap-8 md:grid-cols-2">
+          {/* Weekly Art Program */}
+          <WeeklyProgramForm
+            scheduleOptions={scheduleOptions}
+            programTypeOptions={programTypeOptions}
+            isLoading={isLoading}
+          />
+
+          {/* Trial Art Class */}
+          <TrialClassForm
+            scheduleOptions={trialScheduleOptions}
+            activityOptions={trialActivityOptions}
+            isLoading={isLoading}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}

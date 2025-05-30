@@ -3,7 +3,6 @@ description: 노션 API를 사용해야한다면 이 룰을 꼭 참고할 것
 globs:
 alwaysApply: false
 ---
-
 # 노션 API 통합 가이드
 
 이 문서는 Lalla Kids Art 웹사이트에서 노션 API 통합이 어떻게 작동하는지 설명합니다.
@@ -13,14 +12,21 @@ alwaysApply: false
 이 웹사이트는 다음과 같이 노션 데이터베이스와 통합됩니다:
 1. "위클리 스케줄" 데이터베이스에서 프로그램 유형 및 일정 정보 가져오기
 2. "위클리 폼" 데이터베이스에 폼 데이터 제출하기
-3. (계획) "트라이얼 클래스" 폼에 대해서도 유사한 통합 구현 예정
+3. "트라이얼 스케줄" 데이터베이스에서 활동 및 일정 정보 가져오기
+4. "트라이얼 폼" 데이터베이스에 트라이얼 클래스 신청 데이터 제출하기
 
-## 트라이얼 클래스 구현 계획
+## 주요 기능
 
-트라이얼 클래스 구현 시 유의사항:
-- 트라이얼 클래스는 위클리 프로그램과 데이터 타입 및 속성이 다릅니다
-- 트라이얼 클래스의 정확한 필드와 데이터 타입은 유저에게 별도로 입력받아야 합니다
-- 트라이얼 구현 시에도 Server Actions 패턴을 동일하게 적용해야 합니다
+### 스케줄 다중 선택
+- 위클리 프로그램과 트라이얼 클래스 모두 체크박스를 통한 다중 스케줄 선택 지원
+- 원본 데이터베이스(Schedule)에서는 multi_select 타입으로 관리
+- 폼 제출 시에는 rich_text 타입으로 쉼표로 구분된 문자열로 저장
+- 중복 옵션 자동 제거 및 동적 옵션 생성
+
+### 데이터 처리 로직
+- multi_select 배열을 읽어와 쉼표로 구분된 문자열로 변환
+- 체크박스 선택값을 배열로 관리하여 사용자 경험 향상
+- 폼 제출 시 배열을 다시 쉼표로 구분된 문자열로 변환하여 저장
 
 ## 주요 파일
 
@@ -30,37 +36,48 @@ alwaysApply: false
 
 이 파일에는 다음이 포함되어 있습니다:
 - API 키를 사용한 클라이언트 초기화
-- `getWeeklySchedule()` 함수로 일정 데이터 가져오기
-- `submitWeeklyForm()` 함수로 폼 데이터 제출하기
+- `getWeeklySchedule()` 함수로 위클리 일정 데이터 가져오기
+- `submitWeeklyForm()` 함수로 위클리 폼 데이터 제출하기
+- `getTrialSchedule()` 함수로 트라이얼 일정 데이터 가져오기
+- `submitTrialForm()` 함수로 트라이얼 폼 데이터 제출하기
 
 ### 서버 액션
 
 데이터 가져오기 및 제출을 처리하는 서버 액션은 [actions/notion-actions.ts](mdc:actions/notion-actions.ts)에 있습니다.
 
 이 파일에는 다음이 포함되어 있습니다:
-- `fetchWeeklySchedule()` 서버 액션으로 데이터 검색 및 처리
-- `submitWeeklyProgramForm()` 서버 액션으로 폼 제출 처리
+- `fetchWeeklySchedule()` 서버 액션으로 위클리 데이터 검색 및 처리
+- `submitWeeklyProgramForm()` 서버 액션으로 위클리 폼 제출 처리
+- `fetchTrialSchedule()` 서버 액션으로 트라이얼 데이터 검색 및 처리
+- `submitTrialClassForm()` 서버 액션으로 트라이얼 폼 제출 처리
+- multi_select 데이터 처리 및 중복 제거 로직
 
 ### 폼 구현
 
 폼 통합은 [app/page.tsx](mdc:app/page.tsx)의 `ProgramsSection` 컴포넌트 내에 구현되어 있습니다.
 
+주요 구현 특징:
+- 위클리 프로그램과 트라이얼 클래스 모두 노션 연동 완료
+- 체크박스를 통한 다중 스케줄 선택 지원
+- 실시간 데이터 로딩 및 상태 관리
+- 폼 유효성 검사 및 제출 상태 피드백
+
 ## 환경 변수
 
 필요한 환경 변수:
 - `NOTION_API_KEY`: 노션 API 키
-- `NOTION_DATABASE_WEEKLY_SCHEDULE_ID`: 일정 데이터베이스 ID (원본 데이터)
-- `NOTION_DATABASE_WEEKLY_FORM_ID`: 폼 데이터베이스 ID (제출 데이터 저장소)
-- `NOTION_DATABASE_TRIAL_SCHEDULE_ID`: 트라이얼 스케줄 데이터베이스 ID
-- `NOTION_DATABASE_TRIAL_FORM_ID`: 트라이얼 폼 ID
+- `NOTION_DATABASE_WEEKLY_SCHEDULE_ID`: 위클리 스케줄 데이터베이스 ID (원본 데이터)
+- `NOTION_DATABASE_WEEKLY_FORM_ID`: 위클리 폼 데이터베이스 ID (제출 데이터 저장소)
+- `NOTION_DATABASE_TRIAL_SCHEDULE_ID`: 트라이얼 스케줄 데이터베이스 ID (원본 데이터)
+- `NOTION_DATABASE_TRIAL_FORM_ID`: 트라이얼 폼 데이터베이스 ID (제출 데이터 저장소)
 
 ## 데이터 구조 요구사항
 
-### 위클리 스케줄 데이터베이스
+### 위클리 스케줄 데이터베이스 (원본 데이터)
 - "Program Type" 필드 포함 (title 타입)
-- "Schedule" 필드 포함 (rich_text 타입)
+- "Schedule" 필드 포함 (multi_select 타입)
 
-### 위클리 폼 데이터베이스
+### 위클리 폼 데이터베이스 (제출 데이터)
 - 다음 필드를 포함해야 합니다:
   - "Parent/Guardian Name" (title 타입)
   - "Child's Name" (rich_text 타입)
@@ -70,11 +87,11 @@ alwaysApply: false
   - "Program Type" (rich_text 타입)
   - "Schedule" (rich_text 타입)
 
-### 트라이얼 스케줄 데이터베이스
+### 트라이얼 스케줄 데이터베이스 (원본 데이터)
 - "Choose Activity" 필드 포함 (title 타입)
-- "Schedule" 필드 포함 (rich_text 타입)
+- "Schedule" 필드 포함 (multi_select 타입)
 
-### 트라이얼 폼 데이터베이스
+### 트라이얼 폼 데이터베이스 (제출 데이터)
 - 다음 필드를 포함해야 합니다:
   - "Parent/Guardian Name" (title 타입)
   - "Child's Name" (rich_text 타입)
@@ -86,6 +103,28 @@ alwaysApply: false
 
 ## 구현 참고사항
 
+### 스케줄 데이터 처리
+- 원본 데이터베이스: Schedule 필드가 multi_select 타입으로 배열 데이터 보관
+- 폼 표시: 배열을 쉼표로 구분하여 개별 체크박스 옵션으로 생성
+- 폼 제출: 선택된 체크박스들을 쉼표로 구분된 문자열로 변환하여 rich_text로 저장
+
+### 상태 관리
 - React 상태를 사용하여 로딩 상태 및 폼 제출 상태 관리
+- 체크박스 선택값을 배열 형태로 관리하여 다중 선택 지원
 - API 요청에 대한 오류 처리 구현
-- mounted 상태 확인을 통한 하이드레이션 이슈 해결 방법 포함
+
+### 기술적 고려사항
+- mounted 상태 확인을 통한 하이드레이션 이슈 해결
+- 중복 옵션 제거 로직 구현
+- 환경 변수 검증 및 오류 처리
+- Server Actions 패턴을 통한 안전한 서버 사이드 처리
+
+## 문제 해결 이력
+
+### Schedule 필드 타입 불일치 해결
+- 문제: Schedule 필드가 multi_select로 변경되었으나 폼 제출 시 rich_text 타입으로 처리 필요
+- 해결: 데이터 읽기 시 multi_select 배열을 문자열로 변환, 폼 제출 시 rich_text로 처리하는 로직 구현
+
+### 다중 선택 UI 구현
+- 기존: 라디오 버튼을 통한 단일 선택
+- 개선: 체크박스를 통한 다중 선택으로 변경하여 사용자 편의성 향상
