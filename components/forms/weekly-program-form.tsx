@@ -140,8 +140,8 @@ export function WeeklyProgramForm({
   };
 
   return (
-    <div className="border rounded-lg overflow-hidden shadow-md">
-      <div className="p-6">
+    <div className="border rounded-lg overflow-hidden shadow-md h-full flex flex-col">
+      <div className="p-6 flex-1 flex flex-col">
         <div className="flex items-center gap-2 mb-4">
           <Palette className="h-6 w-6 text-[#FFD700]" />
           <h3 className="text-xl font-bold">Weekly Art Program</h3>
@@ -172,12 +172,13 @@ export function WeeklyProgramForm({
           </p>
         </div>
 
-        <div className="mt-6">
+        <div className="mt-6 flex-1 flex flex-col">
           <div className="flex items-center gap-2 mb-4">
             <span className="text-[#FFD700] font-bold">✏️</span>
             <h4 className="font-semibold">Sign Up for Weekly Program</h4>
           </div>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4 flex-1 flex flex-col">
+            <div className="flex-1 space-y-4">
             <div>
               <Label htmlFor="weekly-parent-name">Parent/Guardian Name</Label>
               <Input
@@ -336,6 +337,9 @@ export function WeeklyProgramForm({
                 I agree to the terms and conditions
               </label>
             </div>
+            </div>
+            
+            <div className="mt-auto pt-4 space-y-4">
             {submitStatus.message && (
               <div
                 className={`p-2 rounded text-sm ${
@@ -384,6 +388,7 @@ export function WeeklyProgramForm({
                 </>
               )}
             </Button>
+            </div>
           </form>
         </div>
       </div>

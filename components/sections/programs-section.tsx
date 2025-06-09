@@ -156,7 +156,7 @@ export function ProgramsSection() {
         <ImageSlider slides={slides} />
 
         {/* Program Forms */}
-        <div className="mx-auto max-w-5xl py-8 grid gap-8 md:grid-cols-2">
+        <div className="mx-auto max-w-5xl py-8 grid gap-8 md:grid-cols-2 md:items-stretch">
           {/* Weekly Art Program */}
           <WeeklyProgramForm
             scheduleOptions={scheduleOptions}

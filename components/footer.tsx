@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Instagram, BookOpen } from "lucide-react";
 
 export function Footer() {
@@ -8,8 +9,15 @@ export function Footer() {
       <div className="container px-4 md:px-6">
         <div className="grid gap-8 lg:grid-cols-3">
           <div className="space-y-4">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="text-xl font-bold text-[#FFD700]">
+            <Link href="/" className="flex items-center gap-3">
+              <Image
+                src="/logo_png.png"
+                alt="Lalla Kids Art"
+                width={160}
+                height={53}
+                className="h-12 w-auto"
+              />
+              <span className="text-2xl font-bold text-[#FFD700] uppercase tracking-wide" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
                 Lalla Kids Art
               </span>
             </Link>
