@@ -4,7 +4,7 @@ import Image from "next/image";
 export function HeroSection() {
   return (
     <section
-      className="relative bg-cover bg-top h-96 sm:h-[450px] md:h-[600px] lg:h-[800px] w-full"
+      className="relative bg-contain bg-top bg-no-repeat h-96 sm:h-[450px] md:h-[600px] lg:h-[800px] w-full"
       style={{
         backgroundImage: `url('/bg_lalla_.png?v=${Date.now()}')`,
       }}

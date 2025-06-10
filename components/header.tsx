@@ -8,7 +8,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[#FFD700]" style={{ backgroundColor: '#FFD700' }}>
       <div className="container flex h-16 items-center justify-between px-4 md:px-6 lg:px-10">
-        <Link href="/" className="flex items-center gap-0">
+        <Link href="/" className="flex items-center gap-0 md:ml-[-50px]">
           <Image
             src="/logo_png.png"
             alt="Lalla Kids Art"
