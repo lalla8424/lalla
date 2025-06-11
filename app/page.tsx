@@ -4,6 +4,7 @@ import React from "react";
 import { PageLoadingSpinner } from "../components/ui/loading-spinner";
 import { HeroSection } from "../components/sections/hero-section";
 import { AboutSection } from "../components/sections/about-section";
+import { GallerySection } from "../components/sections/gallery-section";
 import { TeacherSection } from "../components/sections/teacher-section";
 import { ProgramsSection } from "../components/sections/programs-section";
 import { VisitSection } from "../components/sections/visit-section";
@@ -25,6 +26,7 @@ export default function Home() {
     <>
       <HeroSection />
       <AboutSection />
+      <GallerySection />
       <TeacherSection />
       <ProgramsSection />
       <VisitSection />
