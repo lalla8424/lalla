@@ -34,7 +34,7 @@ export function VisitSection() {
               <div className="inline-block rounded-full bg-[#FFD700] px-3 py-1 text-sm font-medium text-white">
                 Visit Us
               </div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+              <h2 className="text-3xl font-bold tracking-normal sm:text-5xl">
                 Our Location
               </h2>
               <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">

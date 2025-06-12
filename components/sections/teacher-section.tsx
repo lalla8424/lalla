@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 export function TeacherSection() {
   return (
@@ -12,42 +13,40 @@ export function TeacherSection() {
             <div className="inline-block rounded-full bg-[#FFD700] px-3 py-1 text-sm font-medium text-white">
               Meet Our Creative Team
             </div>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-              Our Art Specialists
+            <h2 className="text-3xl font-bold tracking-normal sm:text-5xl">
+              Loving what we do – and who we do it for.
             </h2>
             <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Our team of experienced educators is passionate about nurturing
-              creativity in children.
+              We're passionate art lovers and educators who enjoy making creativity fun and meaningful for kids every day.
             </p>
           </div>
         </div>
         <div className="flex flex-col gap-12">
           <div className="flex flex-col gap-8">
             <div className="flex flex-col md:flex-row gap-8">
-              <div className="flex items-center gap-6 w-full md:w-1/2">
-                <div className="w-28 h-28 rounded-full bg-white p-2 shadow-lg flex-shrink-0">
-                  <div className="w-full h-full rounded-full bg-[#FFD700]/20 flex items-center justify-center overflow-hidden">
-                    <div className="text-center">
-                      <div className="text-sm font-bold text-[#FFD700]">
-                        Teacher
-                      </div>
-                      <div className="text-xs">Photo</div>
-                    </div>
+              <div className="flex items-center gap-10 w-full md:w-1/2">
+                <div className="w-36 h-36 rounded-full bg-white p-2 shadow-lg flex-shrink-0">
+                  <div className="w-full h-full rounded-full overflow-hidden">
+                    <Image
+                      src="/IMG_8763.JPG"
+                      alt="Ms. Sarah - Art Director"
+                      width={144}
+                      height={144}
+                      className="w-full h-full object-cover rounded-full"
+                    />
                   </div>
                 </div>
                 <div>
-                  <p className="font-medium">Ms. Sarah</p>
-                  <p className="text-sm text-gray-500">Art Director</p>
+                  <p className="font-medium">Sono Kim</p>
+                  <p className="text-sm text-gray-500">Director</p>
                   <p className="mt-2 text-sm">
-                    With over 10 years of experience in early childhood art
-                    education, I'm passionate about helping children discover
-                    their creative potential.
+                    With 15 years of experience as an art director and communication designer, Sono studied Fine Art and Communication Design in New Zealand and Australia. She specializes in painting, advertising design, and holds children's art education certifications.
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-6 w-full md:w-1/2">
-                <div className="w-28 h-28 rounded-full bg-white p-2 shadow-lg flex-shrink-0">
+              <div className="flex items-center gap-10 w-full md:w-1/2">
+                <div className="w-36 h-36 rounded-full bg-white p-2 shadow-lg flex-shrink-0">
                   <div className="w-full h-full rounded-full bg-[#FFD700]/20 flex items-center justify-center overflow-hidden">
                     <div className="text-center">
                       <div className="text-sm font-bold text-[#FFD700]">
@@ -70,30 +69,29 @@ export function TeacherSection() {
             </div>
 
             <div className="flex flex-col md:flex-row gap-8">
-              <div className="flex items-center gap-6 w-full md:w-1/2">
-                <div className="w-28 h-28 rounded-full bg-white p-2 shadow-lg flex-shrink-0">
-                  <div className="w-full h-full rounded-full bg-[#FFD700]/20 flex items-center justify-center overflow-hidden">
-                    <div className="text-center">
-                      <div className="text-sm font-bold text-[#FFD700]">
-                        Teacher
-                      </div>
-                      <div className="text-xs">Photo</div>
-                    </div>
+              <div className="flex items-center gap-10 w-full md:w-1/2">
+                <div className="w-36 h-36 rounded-full bg-white p-2 shadow-lg flex-shrink-0">
+                  <div className="w-full h-full rounded-full overflow-hidden">
+                    <Image
+                      src="/alice.jpeg?v=2"
+                      alt="Alice hyun-kyung Choi - Art Instructor"
+                      width={144}
+                      height={144}
+                      className="w-full h-full object-cover rounded-full scale-110 object-center"
+                    />
                   </div>
                 </div>
                 <div>
-                  <p className="font-medium">Ms. Mina</p>
-                  <p className="text-sm text-gray-500">Painting Instructor</p>
+                  <p className="font-medium">Alice hyun-kyung Choi</p>
+                  <p className="text-sm text-gray-500">Instructor</p>
                   <p className="mt-2 text-sm">
-                    I love introducing children to the world of colors and
-                    textures. My classes focus on creative expression through
-                    various painting techniques.
+                    She graduated from the Department of Sculpture at Seoul National University. Curious about cultures and new experiences, she once worked as a flight attendant. Now a florist and artist, she enjoys working with natural materials, loves flowers and finds joy in creating with kids.
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-6 w-full md:w-1/2">
-                <div className="w-28 h-28 rounded-full bg-white p-2 shadow-lg flex-shrink-0">
+              <div className="flex items-center gap-10 w-full md:w-1/2">
+                <div className="w-36 h-36 rounded-full bg-white p-2 shadow-lg flex-shrink-0">
                   <div className="w-full h-full rounded-full bg-[#FFD700]/20 flex items-center justify-center overflow-hidden">
                     <div className="text-center">
                       <div className="text-sm font-bold text-[#FFD700]">

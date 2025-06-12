@@ -142,12 +142,11 @@ export function ProgramsSection() {
             <div className="inline-block rounded-full bg-[#FFD700] px-3 py-1 text-sm font-medium text-white">
               Join our program!
             </div>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+            <h2 className="text-3xl font-bold tracking-normal sm:text-5xl">
               Our Art Classes
             </h2>
             <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Discover our range of age-appropriate art programs designed to
-              inspire creativity and joy.
+              From playful painting to cultural storytelling, our classes are designed to grow with your child – building skills, confidence, and creativity in a warm, encouraging space.
             </p>
           </div>
         </div>
