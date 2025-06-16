@@ -9,26 +9,20 @@ import {
 
 // Slide data
 const slides = [
-  {
-    image: "/placeholder.svg?height=400&width=800",
-    caption: "Children exploring colors in our Little Explorers class",
-  },
-  {
-    image: "/placeholder.svg?height=400&width=800",
-    caption: "Creative Kids working on a collaborative art project",
-  },
-  {
-    image: "/placeholder.svg?height=400&width=800",
-    caption: "Young Artists developing their painting techniques",
-  },
-  {
-    image: "/placeholder.svg?height=400&width=800",
-    caption: "Art exhibition showcasing our students' work",
-  },
-  {
-    image: "/placeholder.svg?height=400&width=800",
-    caption: "Special workshop with visiting artist",
-  },
+  { image: "/art.jpg?v=2" },
+  { image: "/art3.jpg" },
+  { image: "/art4.JPG" },
+  { image: "/art5.jpg" },
+  { image: "/art6.JPG" },
+  { image: "/art7.JPG" },
+  { image: "/art9.jpg" },
+  { image: "/art10.JPG" },
+  { image: "/art11.JPG" },
+  { image: "/art12.JPG" },
+  { image: "/art13.jpg" },
+  { image: "/art15.JPG" },
+  { image: "/art16.JPG" },
+  { image: "/art17.JPG" }
 ];
 
 export function ProgramsSection() {

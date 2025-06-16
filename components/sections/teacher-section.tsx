@@ -40,29 +40,28 @@ export function TeacherSection() {
                   <p className="font-medium">Sono Kim</p>
                   <p className="text-sm text-gray-500">Director</p>
                   <p className="mt-2 text-sm">
-                    With 15 years of experience as an art director and communication designer, Sono studied Fine Art and Communication Design in New Zealand and Australia. She specializes in painting, advertising design, and holds children's art education certifications.
+                    With 15 years of experience as an art director and communication designer, Sono studied Fine Art and Communication Design in New Zealand and Australia. She specializes in painting, advertising design, and holds children's art education certifications. She loves discovering new and exciting ways to engage with children through creative activities.
                   </p>
                 </div>
               </div>
 
               <div className="flex items-center gap-10 w-full md:w-1/2">
                 <div className="w-36 h-36 rounded-full bg-white p-2 shadow-lg flex-shrink-0">
-                  <div className="w-full h-full rounded-full bg-[#FFD700]/20 flex items-center justify-center overflow-hidden">
-                    <div className="text-center">
-                      <div className="text-sm font-bold text-[#FFD700]">
-                        Teacher
-                      </div>
-                      <div className="text-xs">Photo</div>
-                    </div>
+                  <div className="w-full h-full rounded-full overflow-hidden">
+                    <Image
+                      src="/yura.jpg?v=2"
+                      alt="Yura - Teacher"
+                      width={144}
+                      height={144}
+                      className="w-full h-full object-cover rounded-full object-center"
+                    />
                   </div>
                 </div>
                 <div>
-                  <p className="font-medium">Mr. David</p>
-                  <p className="text-sm text-gray-500">Sculpture Specialist</p>
+                  <p className="font-medium">Yura Kim</p>
+                  <p className="text-sm text-gray-500">Instructor</p>
                   <p className="mt-2 text-sm">
-                    Specializing in 3D art forms, I help children explore
-                    spatial concepts and develop fine motor skills through
-                    hands-on sculpture projects.
+                    Graduated from the Department of Ceramic Arts at Seoul Women's University and is highly skilled in hands-on creative work. She enjoys beauty modeling as a hobby. With a genuine passion for fashion, animals and children, she brings a warm, artistic sensibility to everything she does!
                   </p>
                 </div>
               </div>
@@ -92,22 +91,21 @@ export function TeacherSection() {
 
               <div className="flex items-center gap-10 w-full md:w-1/2">
                 <div className="w-36 h-36 rounded-full bg-white p-2 shadow-lg flex-shrink-0">
-                  <div className="w-full h-full rounded-full bg-[#FFD700]/20 flex items-center justify-center overflow-hidden">
-                    <div className="text-center">
-                      <div className="text-sm font-bold text-[#FFD700]">
-                        Teacher
-                      </div>
-                      <div className="text-xs">Photo</div>
-                    </div>
+                  <div className="w-full h-full rounded-full overflow-hidden">
+                    <Image
+                      src="/emilie_l.jpg?v=2"
+                      alt="Emilie Lavaud - Art Mentor"
+                      width={144}
+                      height={144}
+                      className="w-full h-full object-cover rounded-full object-center"
+                    />
                   </div>
                 </div>
                 <div>
-                  <p className="font-medium">Mr. Jun</p>
-                  <p className="text-sm text-gray-500">Craft Specialist</p>
+                  <p className="font-medium">Emilie Lavaud</p>
+                  <p className="text-sm text-gray-500">Art Mentor</p>
                   <p className="mt-2 text-sm">
-                    With a background in traditional Korean crafts, I enjoy
-                    teaching children how to create beautiful objects using both
-                    traditional and modern techniques.
+                    Emilie holds dual master's degrees in Fine Art and Education from Sorbonne Université and INSPÉ de l'académie de Paris. With over 10 years of experience, she currently teaches 19 art classes for students aged 11–16 at Jean Moulin High School near Paris. She also supports Lalla by mentoring and providing feedback on children's art programs and activities.
                   </p>
                 </div>
               </div>

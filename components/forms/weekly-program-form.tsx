@@ -147,29 +147,32 @@ export function WeeklyProgramForm({
           <h3 className="text-xl font-bold">Weekly Art Program</h3>
         </div>
         <div className="border-l-4 border-[#FFD700]/30 pl-4 mb-6">
-          <p className="text-sm text-gray-600 mb-2">
-            Our Weekly Art Program is designed to spark your child's creativity
-            through hands-on art experiences.
+          <p className="text-base font-semibold text-gray-800 mb-1">
+            Creative Kids Art Adventure
+            <br />
+            <span className="text-xs font-normal text-gray-500">(Kindy ~ Lower Primary / 70 mins)</span>
           </p>
           <p className="text-sm text-gray-600 mb-2">
-            Children explore drawing, painting, sculpture, and mixed media
-            guided by professional educators.
+            A fun, hands-on art program designed to spark your child's imagination and creativity!<br />
+            Kids explore art through picture books, storytelling, basic drawing, sculpture, installation art, beam projection murals, and eco-friendly materials.
           </p>
-          <p className="text-sm text-gray-600 mb-2">
-            Each week introduces a new theme, technique, or artist, keeping kids
-            inspired and engaged.
-          </p>
-          <p className="text-sm text-gray-600 mb-2">
-            Classes are small-group based for personalized attention and joyful
-            interaction.
-          </p>
-          <p className="text-sm text-gray-600 mb-2">
-            You can choose from a 4-week or 8-week course, depending on your
-            schedule.
-          </p>
-          <p className="text-sm text-gray-600">
-            Let your child's imagination shine in a fun and safe environment!
-          </p>
+          <div className="mb-2">
+            <span className="block text-sm font-semibold text-gray-700 mb-1">[ What We Do ]</span>
+            <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
+              <li><b>Lytart-mural painting</b> – Create media murals using beam projection</li>
+              <li><b>Drawing Skills</b> – Build foundational drawing skills through fun games and activities</li>
+              <li><b>Making & Construction</b> – Explore form, installation, and turn their artwork into real-life products</li>
+              <li><b>Canvas Layer Art</b> – Combine action painting, collage and drawing to make unique layered canvases</li>
+              <li>♻️ Eco-friendly materials & storybook-inspired activities</li>
+            </ul>
+          </div>
+          <div>
+            <span className="block text-sm font-semibold text-gray-700 mb-1">[ Program Cost ]</span>
+            <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
+              <li>4-week program (1 class per week / total of 4 sessions): <b>190,000 KRW</b> (includes all materials)</li>
+              <li>Optional Art Photobook: <b>40,000 KRW</b> (includes photos from 10 sessions, professionally designed)</li>
+            </ul>
+          </div>
         </div>
 
         <div className="mt-6 flex-1 flex flex-col">

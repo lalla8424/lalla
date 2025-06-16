@@ -31,6 +31,15 @@ const featureSlides = [
     type: "video",
     videoId: "tS9Wmmx4jfE",
     alt: "Eco Art Practice demonstration video"
+  },
+  {
+    id: 4,
+    number: "04",
+    title: "Eco Art Practice",
+    description: "We minimise waste and rethink materials—using our own safe, natural clay recipes and eco paints from Natural Earth Paint. From design to curriculum, sustainability shapes everything we do.",
+    type: "video",
+    videoId: "Bskd29NV-qk",
+    alt: "Eco Art Practice additional video"
   }
 ];
 
@@ -117,6 +126,7 @@ export function AboutSection() {
                   // YouTube Video Embed
                   <div className="relative w-full h-full">
                     <iframe
+                      key={currentSlide.videoId}
                       className="absolute inset-0 w-full h-full"
                       src={`https://www.youtube.com/embed/${currentSlide.videoId}?autoplay=1&mute=1&loop=1&playlist=${currentSlide.videoId}&controls=1&showinfo=0&rel=0`}
                       title={currentSlide.alt}
@@ -199,7 +209,11 @@ export function AboutSection() {
                 {slide.type === "video" ? (
                   // Video thumbnail
                   <Image
-                    src={`https://img.youtube.com/vi/${slide.videoId}/maxresdefault.jpg`}
+                    src={
+                      slide.videoId === "Bskd29NV-qk"
+                        ? "/4.JPG"
+                        : `https://img.youtube.com/vi/${slide.videoId}/maxresdefault.jpg`
+                    }
                     alt={slide.alt}
                     fill
                     className="object-cover"
