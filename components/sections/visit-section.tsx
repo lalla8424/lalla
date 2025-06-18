@@ -8,19 +8,9 @@ export function VisitSection() {
       <section className="bg-white py-16 px-4">
         <div className="container mx-auto text-center max-w-4xl">
           {/* Main Title */}
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-2" style={{ fontFamily: 'Oleo Script, cursive' }}>
+          {/* <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-2" style={{ fontFamily: 'Oleo Script, cursive' }}>
             Lalla art lab for kids
-          </h1>
-          
-          {/* Subtitle */}
-          <h2 className="text-lg md:text-xl lg:text-2xl text-black mb-6" style={{ fontFamily: 'Raleway, sans-serif', fontWeight: '400' }}>
-            – Where Every Child is a Creator
-          </h2>
-          
-          {/* Description */}
-          <p className="text-lg md:text-xl lg:text-2xl text-gray-700 italic font-light leading-relaxed">
-            Discover our creative art lab designed to inspire, nurture, and engage young artists from all backgrounds.
-          </p>
+          </h1> */}
         </div>
       </section>
 
@@ -50,9 +40,10 @@ export function VisitSection() {
                 <div>
                   <h3 className="text-xl font-bold">Studio Address</h3>
                   <p className="text-gray-500 mt-1">
-                    123 Itaewon-ro, Yongsan-gu
-                    <br />
-                    Seoul, South Korea
+                    2F, 7 Dongho-ro 10-gil, Jung-gu<br />
+                    Seoul, South Korea<br />
+                    (Korean: 서울 중구 동호로10길 7 2층)<br />
+                    100m from Exit 4 of Yaksu Station (Line 3 / Line 6)
                   </p>
                 </div>
               </div>
@@ -61,11 +52,11 @@ export function VisitSection() {
                 <div>
                   <h3 className="text-xl font-bold mb-2">Opening Hours</h3>
                   <div className="grid grid-cols-2 gap-2 text-gray-500">
-                    <div>Monday - Friday</div>
-                    <div>9:00 AM - 6:00 PM</div>
+                    <div>Tuesday – Friday</div>
+                    <div>10:00 AM – 6:00 PM</div>
                     <div>Saturday</div>
-                    <div>10:00 AM - 4:00 PM</div>
-                    <div>Sunday</div>
+                    <div>10:00 AM – 7:00 PM</div>
+                    <div>Monday, Sunday, Public holiday</div>
                     <div>Closed</div>
                   </div>
                 </div>
@@ -77,23 +68,11 @@ export function VisitSection() {
                   <ul className="space-y-2 text-gray-500">
                     <li className="flex items-start gap-2">
                       <span className="font-medium">Subway:</span>
-                      <span>
-                        Itaewon Station (Line 6), Exit 3. 5-minute walk.
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="font-medium">Bus:</span>
-                      <span>
-                        Routes 110, 421, 740 stop directly in front of the
-                        building.
-                      </span>
+                      <span>Yaksu Station (Line 3 – Orange, Line 6 – Brown), Exit 4. 2-minute walk.</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="font-medium">Parking:</span>
-                      <span>
-                        Limited parking available on-site. Please call ahead to
-                        reserve a spot.
-                      </span>
+                      <span>No on-site parking. We recommend using public transport.</span>
                     </li>
                   </ul>
                 </div>
