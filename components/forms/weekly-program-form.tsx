@@ -177,7 +177,6 @@ export function WeeklyProgramForm({
 
         <div className="mt-6 flex-1 flex flex-col">
           <div className="flex items-center gap-2 mb-4">
-            <span className="text-[#FFD700] font-bold">✏️</span>
             <h4 className="font-semibold">Sign Up for Weekly Program</h4>
           </div>
           <form onSubmit={handleSubmit} className="space-y-4 flex-1 flex flex-col">

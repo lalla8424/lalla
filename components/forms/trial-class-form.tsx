@@ -154,7 +154,7 @@ export function TrialClassForm({
             Curious about our art classes? Give it a go with a fun one-off session!
           </p>
           <p className="text-sm text-gray-600 mb-2">
-            Kids can explore painting, clay, light art or eco-crafts with recycled materials.
+            Kids can explore painting, clay, Lytart or eco-crafts with recycled materials.
           </p>
           <p className="text-sm text-gray-600 mb-2">
             Perfect for first-timers keen to try our studio.
@@ -166,7 +166,6 @@ export function TrialClassForm({
 
         <div className="mt-6 flex-1 flex flex-col">
           <div className="flex items-center gap-2 mb-4">
-            <span className="text-[#FFD700] font-bold">✨</span>
             <h4 className="font-semibold">Reserve Your Trial Class</h4>
           </div>
           <form onSubmit={handleSubmit} className="space-y-4 flex-1 flex flex-col">

@@ -75,10 +75,11 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="text-lg font-medium">Contact Us</h3>
             <div className="text-sm text-gray-500">
-              <p>123 Itaewon-ro, Yongsan-gu</p>
+              <p>2F, 7 Dongho-ro 10-gil, Jung-gu</p>
               <p>Seoul, South Korea</p>
-              <p>Email: hello@lallakidsart.com</p>
-              <p>Phone: +82 10-1234-5678</p>
+              <p>(Korean: 서울 중구 동호로10길 7 2층)</p>
+              <p>Email: lallartlab@gmail.com</p>
+              <p>Phone: 010.2397.8424</p>
             </div>
           </div>
         </div>
