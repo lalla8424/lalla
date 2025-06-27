@@ -41,16 +41,10 @@ export async function fetchWeeklySchedule() {
         return "";
       };
 
-      // Schedule은 multi_select 타입
+      // Schedule은 select 타입 (단일 선택)
       const getSchedule = () => {
-        if (
-          props["Schedule"]?.multi_select &&
-          props["Schedule"].multi_select.length > 0
-        ) {
-          // multi_select의 첫 번째 옵션을 반환하거나, 모든 옵션을 조합할 수도 있음
-          return props["Schedule"].multi_select
-            .map((option: any) => option.name)
-            .join(", ");
+        if (props["Schedule"]?.select && props["Schedule"].select.name) {
+          return props["Schedule"].select.name;
         }
         return "";
       };
@@ -150,16 +144,10 @@ export async function fetchTrialSchedule() {
         return "";
       };
 
-      // Schedule은 multi_select 타입
+      // Schedule은 select 타입 (단일 선택)
       const getSchedule = () => {
-        if (
-          props["Schedule"]?.multi_select &&
-          props["Schedule"].multi_select.length > 0
-        ) {
-          // multi_select의 모든 옵션을 조합하여 반환
-          return props["Schedule"].multi_select
-            .map((option: any) => option.name)
-            .join(", ");
+        if (props["Schedule"]?.select && props["Schedule"].select.name) {
+          return props["Schedule"].select.name;
         }
         return "";
       };
