@@ -29,8 +29,8 @@ export function VisitSection() {
                 Our Location
               </h2>
               <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Come visit our art studio in the heart of Seoul. We'd love to show
-                you around!
+                Come visit our art studio in the heart of Seoul. We'd love to
+                show you around!
               </p>
             </div>
           </div>
@@ -57,13 +57,21 @@ export function VisitSection() {
                 <div>
                   <h3 className="text-xl font-bold">Studio Address</h3>
                   <p className="text-gray-500 mt-1">
-                    2F, 7 Dongho-ro 10-gil, Jung-gu<br />
-                    Seoul, South Korea<br />
-                    (Korean: 서울 중구 동호로10길 7 2층)<br />
+                    2F, 7 Dongho-ro 10-gil, Jung-gu
+                    <br />
+                    Seoul, South Korea
+                    <br />
+                    (Korean: 서울 중구 동호로10길 7 2층)
+                    <br />
                     100m from Exit 4 of Yaksu Station (Line 3 / Line 6)
                   </p>
                   <div className="mt-2 mb-1">
-                    <span className="text-xs font-bold" style={{ color: '#FF9800' }}>For any inquiry, feel free to contact us!</span>
+                    <span
+                      className="text-xs font-bold"
+                      style={{ color: "#FF9800" }}
+                    >
+                      For any inquiry, feel free to contact us!
+                    </span>
                   </div>
                   <div className="flex gap-3 mt-1">
                     <a
@@ -73,22 +81,58 @@ export function VisitSection() {
                       className="flex items-center gap-1 px-2 py-1 rounded bg-[#FFD700] text-white text-xs font-medium shadow hover:bg-[#FFD700]/90 transition-colors min-w-[80px] justify-center"
                       aria-label="WhatsApp"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 13.487c-.263-.131-1.558-.77-1.799-.858-.241-.088-.417-.131-.593.132-.175.263-.676.858-.828 1.033-.151.175-.304.197-.567.066-.263-.132-1.111-.409-2.117-1.304-.782-.696-1.31-1.556-1.464-1.819-.151-.263-.016-.405.115-.536.118-.117.263-.304.395-.456.132-.151.175-.263.263-.438.088-.175.044-.329-.022-.462-.066-.132-.593-1.433-.813-1.963-.214-.514-.432-.444-.593-.452l-.504-.009c-.175 0-.462.066-.705.329-.241.263-.926.905-.926 2.205 0 1.3.948 2.557 1.08 2.732.132.175 1.868 2.857 4.533 3.89.634.218 1.127.348 1.513.446.636.162 1.215.139 1.673.084.511-.06 1.558-.637 1.779-1.253.22-.616.22-1.144.154-1.253-.066-.109-.241-.175-.504-.307z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 16.654A9.718 9.718 0 0023 12.012C23 6.486 18.523 2 12.998 2 7.477 2 3 6.486 3 12.012c0 1.77.464 3.428 1.274 4.866L2.25 22l5.252-2.007a9.956 9.956 0 004.496 1.019h.004c5.523 0 9.998-4.486 9.998-10.012 0-.34-.018-.678-.048-1.012z" />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-4 h-4"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M16.862 13.487c-.263-.131-1.558-.77-1.799-.858-.241-.088-.417-.131-.593.132-.175.263-.676.858-.828 1.033-.151.175-.304.197-.567.066-.263-.132-1.111-.409-2.117-1.304-.782-.696-1.31-1.556-1.464-1.819-.151-.263-.016-.405.115-.536.118-.117.263-.304.395-.456.132-.151.175-.263.263-.438.088-.175.044-.329-.022-.462-.066-.132-.593-1.433-.813-1.963-.214-.514-.432-.444-.593-.452l-.504-.009c-.175 0-.462.066-.705.329-.241.263-.926.905-.926 2.205 0 1.3.948 2.557 1.08 2.732.132.175 1.868 2.857 4.533 3.89.634.218 1.127.348 1.513.446.636.162 1.215.139 1.673.084.511-.06 1.558-.637 1.779-1.253.22-.616.22-1.144.154-1.253-.066-.109-.241-.175-.504-.307z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M21.752 16.654A9.718 9.718 0 0023 12.012C23 6.486 18.523 2 12.998 2 7.477 2 3 6.486 3 12.012c0 1.77.464 3.428 1.274 4.866L2.25 22l5.252-2.007a9.956 9.956 0 004.496 1.019h.004c5.523 0 9.998-4.486 9.998-10.012 0-.34-.018-.678-.048-1.012z"
+                        />
                       </svg>
                       WhatsApp
                     </a>
                     <a
-                      href="https://instagram.com/lallakidsart"
+                      href="https://www.instagram.com/lalla_kids_art/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-1 px-2 py-1 rounded bg-[#FFD700] text-white text-xs font-medium shadow hover:bg-[#FFD700]/90 transition-colors min-w-[80px] justify-center"
                       aria-label="Instagram"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                        <rect width="18" height="18" x="3" y="3" rx="4" stroke="currentColor" strokeWidth="1.5" />
-                        <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.5" />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-4 h-4"
+                      >
+                        <rect
+                          width="18"
+                          height="18"
+                          x="3"
+                          y="3"
+                          rx="4"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                        />
+                        <circle
+                          cx="12"
+                          cy="12"
+                          r="4"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                        />
                         <circle cx="17" cy="7" r="1" fill="currentColor" />
                       </svg>
                       Instagram
@@ -98,9 +142,28 @@ export function VisitSection() {
                       className="flex items-center gap-1 px-2 py-1 rounded bg-[#FFD700] text-white text-xs font-medium shadow hover:bg-[#FFD700]/90 transition-colors min-w-[80px] justify-center"
                       aria-label="Email"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                        <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.5" />
-                        <path d="M3 7l9 6 9-6" stroke="currentColor" strokeWidth="1.5" />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-4 h-4"
+                      >
+                        <rect
+                          x="3"
+                          y="5"
+                          width="18"
+                          height="14"
+                          rx="2"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                        />
+                        <path
+                          d="M3 7l9 6 9-6"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                        />
                       </svg>
                       Email
                     </a>
@@ -128,11 +191,16 @@ export function VisitSection() {
                   <ul className="space-y-2 text-gray-500">
                     <li className="flex items-start gap-2">
                       <span className="font-medium">Subway:</span>
-                      <span>Yaksu Station (Line 3 – Orange, Line 6 – Brown), Exit 4. 2-minute walk.</span>
+                      <span>
+                        Yaksu Station (Line 3 – Orange, Line 6 – Brown), Exit 4.
+                        2-minute walk.
+                      </span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="font-medium">Parking:</span>
-                      <span>No on-site parking. We recommend using public transport.</span>
+                      <span>
+                        No on-site parking. We recommend using public transport.
+                      </span>
                     </li>
                   </ul>
                 </div>
