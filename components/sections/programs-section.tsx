@@ -6,6 +6,7 @@ import {
   fetchWeeklySchedule,
   fetchTrialSchedule,
 } from "../../actions/notion-actions";
+import { sortSchedules } from "../../lib/utils";
 
 // Slide data
 const slides = [
@@ -97,7 +98,10 @@ export function ProgramsSection() {
             }
           }
 
-          setScheduleOptions(uniqueSchedules);
+          // 스케줄을 요일별, 시간별로 정렬
+          const sortedSchedules = sortSchedules(uniqueSchedules);
+
+          setScheduleOptions(sortedSchedules);
           setProgramTypeOptions(weeklyResponse.programTypes || []);
         } else {
           console.error(
@@ -135,7 +139,10 @@ export function ProgramsSection() {
               index === self.findIndex((t) => t.schedule === item.schedule),
           );
 
-          setTrialScheduleOptions(uniqueTrialSchedules);
+          // 스케줄을 요일별, 시간별로 정렬
+          const sortedTrialSchedules = sortSchedules(uniqueTrialSchedules);
+
+          setTrialScheduleOptions(sortedTrialSchedules);
           setTrialActivityOptions(trialResponse.activities || []);
         } else {
           console.error("Trial class data loading error:", trialResponse.error);
