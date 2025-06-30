@@ -75,6 +75,28 @@ export function ProgramsSection() {
               index === self.findIndex((t) => t.schedule === item.schedule),
           );
 
+          // Add Thursday 2:00–3:10 PM before Thursday 5:00–6:10 PM
+          const targetSchedule = "Thursday 5:00–6:10 PM";
+          const newSchedule = {
+            id: "thursday-2:00–3:10-pm",
+            schedule: "Thursday 2:00–3:10 PM"
+          };
+          
+          const targetIndex = uniqueSchedules.findIndex(item => item.schedule === targetSchedule);
+          if (targetIndex !== -1) {
+            // Check if the new schedule doesn't already exist
+            const exists = uniqueSchedules.some(item => item.schedule === newSchedule.schedule);
+            if (!exists) {
+              uniqueSchedules.splice(targetIndex, 0, newSchedule);
+            }
+          } else {
+            // If target schedule not found, just add to the end
+            const exists = uniqueSchedules.some(item => item.schedule === newSchedule.schedule);
+            if (!exists) {
+              uniqueSchedules.push(newSchedule);
+            }
+          }
+
           setScheduleOptions(uniqueSchedules);
           setProgramTypeOptions(weeklyResponse.programTypes || []);
         } else {
