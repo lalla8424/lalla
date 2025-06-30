@@ -54,11 +54,11 @@ export function Header() {
         </nav>
         <div className="hidden md:flex items-center gap-4 ml-6">
           <Link
-            href="https://instagram.com"
+            href="https://www.instagram.com/lalla_kids_art/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Instagram className="h-5 w-5 text-black hover:text-gray-600" />
+            <Instagram className="h-5 w-5 text-gray-600 hover:text-[#FFD700] transition-colors" />
             <span className="sr-only">Instagram</span>
           </Link>
           <Link
