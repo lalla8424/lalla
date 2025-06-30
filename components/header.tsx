@@ -58,7 +58,7 @@ export function Header() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Instagram className="h-5 w-5 text-gray-600 hover:text-[#FFD700] transition-colors" />
+            <Instagram className="h-5 w-5 text-gray-600 hover:text-black transition-colors" />
             <span className="sr-only">Instagram</span>
           </Link>
           <Link
@@ -66,7 +66,7 @@ export function Header() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <BookOpen className="h-5 w-5 text-gray-600 hover:text-[#FFD700] transition-colors" />
+            <BookOpen className="h-5 w-5 text-gray-600 hover:text-black transition-colors" />
             <span className="sr-only">Blog</span>
           </Link>
           <Link

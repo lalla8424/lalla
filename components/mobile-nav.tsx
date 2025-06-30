@@ -71,7 +71,7 @@ export function MobileNav() {
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
               >
-                <Instagram className="h-6 w-6 text-gray-600 hover:text-[#FFD700] transition-colors" />
+                <Instagram className="h-6 w-6 text-gray-600 hover:text-black transition-colors" />
                 <span className="sr-only">Instagram</span>
               </Link>
               <Link
@@ -80,7 +80,7 @@ export function MobileNav() {
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
               >
-                <BookOpen className="h-6 w-6 text-gray-600 hover:text-[#FFD700] transition-colors" />
+                <BookOpen className="h-6 w-6 text-gray-600 hover:text-black transition-colors" />
                 <span className="sr-only">Blog</span>
               </Link>
               <Link
