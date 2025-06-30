@@ -75,7 +75,7 @@ export function VisitSection() {
                   </div>
                   <div className="flex gap-3 mt-1">
                     <a
-                      href="https://wa.me/821012345678"
+                      href="https://wa.me/821023978424"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-1 px-2 py-1 rounded bg-[#FFD700] text-white text-xs font-medium shadow hover:bg-[#FFD700]/90 transition-colors min-w-[80px] justify-center"
