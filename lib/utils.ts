@@ -10,65 +10,44 @@ export function cn(...inputs: ClassValue[]) {
  * 예: "Thursday 2:00–3:10 PM" 형태의 스케줄을 정렬
  */
 export function sortSchedules(schedules: { id: string; schedule: string }[]) {
-  console.log('🔄 정렬 전 스케줄:', schedules.map(s => s.schedule));
-  
-  const dayOrder = [
-    'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'
-  ];
+  const dayOrder = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
-  const sorted = schedules.sort((a, b) => {
-    // 스케줄 문자열에서 요일과 시간 추출
-    const parseSchedule = (schedule: string) => {
-      const parts = schedule.split(' ');
-      const day = parts[0]?.toLowerCase() || '';
-      
-      // 시간을 24시간 형식으로 변환
-      const convertTo24Hour = (schedule: string) => {
-        // "Thursday 2:00–3:10 PM" 형태에서 시간 부분 추출
-        const timeMatch = schedule.match(/(\d{1,2}):(\d{2})[–-]\d{1,2}:\d{2}\s*(AM|PM)/i);
-        if (!timeMatch) return 0;
-        
-        const hours = parseInt(timeMatch[1]);
-        const minutes = parseInt(timeMatch[2]);
-        const period = timeMatch[3].toUpperCase();
-        
-        if (isNaN(hours) || isNaN(minutes)) return 0;
-        
-        let hour24 = hours;
-        if (period === 'PM' && hours !== 12) {
-          hour24 += 12;
-        } else if (period === 'AM' && hours === 12) {
-          hour24 = 0;
-        }
-        
-        return hour24 * 60 + minutes; // 분 단위로 변환
-      };
-      
-      return {
-        day,
-        timeMinutes: convertTo24Hour(schedule)
-      };
+  return [...schedules].sort((a, b) => {
+    // 요일 추출 (첫 번째 단어)
+    const getDayIndex = (schedule: string) => {
+      const day = schedule.split(' ')[0]?.toLowerCase() || '';
+      const index = dayOrder.indexOf(day);
+      return index === -1 ? 999 : index; // 찾을 수 없으면 맨 뒤로
     };
 
-    const scheduleA = parseSchedule(a.schedule);
-    const scheduleB = parseSchedule(b.schedule);
+    // 시간 추출 및 24시간 형식으로 변환
+    const getTimeMinutes = (schedule: string) => {
+      const timeMatch = schedule.match(/(\d{1,2}):(\d{2})[–-].*?(AM|PM)/i);
+      if (!timeMatch) return 0;
+      
+      let hours = parseInt(timeMatch[1]);
+      const minutes = parseInt(timeMatch[2]);
+      const period = timeMatch[3].toUpperCase();
+      
+      // 24시간 형식으로 변환
+      if (period === 'PM' && hours !== 12) {
+        hours += 12;
+      } else if (period === 'AM' && hours === 12) {
+        hours = 0;
+      }
+      
+      return hours * 60 + minutes;
+    };
 
-    console.log(`📅 비교: ${a.schedule} (${scheduleA.day}, ${scheduleA.timeMinutes}) vs ${b.schedule} (${scheduleB.day}, ${scheduleB.timeMinutes})`);
-
-    // 먼저 요일별로 정렬
-    const dayIndexA = dayOrder.indexOf(scheduleA.day);
-    const dayIndexB = dayOrder.indexOf(scheduleB.day);
+    const dayA = getDayIndex(a.schedule);
+    const dayB = getDayIndex(b.schedule);
     
-    console.log(`📊 요일 인덱스: ${scheduleA.day}=${dayIndexA}, ${scheduleB.day}=${dayIndexB}`);
-    
-    if (dayIndexA !== dayIndexB) {
-      return dayIndexA - dayIndexB;
+    // 요일이 다르면 요일순으로 정렬
+    if (dayA !== dayB) {
+      return dayA - dayB;
     }
-
-    // 같은 요일이면 시간별로 정렬
-    return scheduleA.timeMinutes - scheduleB.timeMinutes;
+    
+    // 같은 요일이면 시간순으로 정렬
+    return getTimeMinutes(a.schedule) - getTimeMinutes(b.schedule);
   });
-  
-  console.log('✅ 정렬 후 스케줄:', sorted.map(s => s.schedule));
-  return sorted;
 }
