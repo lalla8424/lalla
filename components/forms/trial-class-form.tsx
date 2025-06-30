@@ -148,13 +148,13 @@ export function TrialClassForm({
         </div>
         <div className="border-l-4 border-[#FFD700]/30 pl-4 mb-6">
           <p className="text-sm text-gray-800 font-semibold mb-2">
-            Trial Art Class – $46,000 KRW for 60–70 mins
+            Trial Art Class – $50,000 KRW for 90 mins
           </p>
           <p className="text-sm text-gray-600 mb-2">
             Curious about our art classes? Give it a go with a fun one-off session!
           </p>
           <p className="text-sm text-gray-600 mb-2">
-            Kids can explore painting, clay, Lytart or eco-crafts with recycled materials.
+            Kids can explore eco painting, clay, beam projection mural painting or eco-crafts with recycled materials.
           </p>
           <p className="text-sm text-gray-600 mb-2">
             Perfect for first-timers keen to try our studio.

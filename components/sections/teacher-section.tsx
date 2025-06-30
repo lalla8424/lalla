@@ -105,7 +105,7 @@ export function TeacherSection() {
                   <p className="font-medium">Emilie Lavaud</p>
                   <p className="text-sm text-gray-500">Art Mentor</p>
                   <p className="mt-2 text-sm">
-                    Emilie holds dual master's degrees in Fine Art and Education from Sorbonne Université and INSPÉ de l'académie de Paris. With over 10 years of experience, she currently teaches 19 art classes for students aged 11–16 at Jean Moulin High School near Paris. She also supports Lalla by mentoring and providing feedback on children's art programs and activities.
+                    Emilie holds dual master's degrees in Fine Art and Education from Sorbonne Université and INSPÉ de l'académie de Paris. With over 10 years of experience, she currently teaches 19 art classes for students aged 11–16. She also supports Lalla by mentoring and providing feedback on children's art programs and activities.
                   </p>
                 </div>
               </div>
