@@ -26,7 +26,7 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-4">
               <Link
-                href="https://instagram.com"
+                href="https://www.instagram.com/lalla_kids_art/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -78,8 +78,8 @@ export function Footer() {
               <p>2F, 7 Dongho-ro 10-gil, Jung-gu</p>
               <p>Seoul, South Korea</p>
               <p>(Korean: 서울 중구 동호로10길 7 2층)</p>
-              <p>Email: lallartlab@gmail.com</p>
-              <p>Phone: 010.2397.8424</p>
+              <p>Email: <a href="mailto:lallartlab@gmail.com" className="hover:text-[#FFD700] transition-colors cursor-pointer">lallartlab@gmail.com</a></p>
+              <p>Phone: <a href="tel:+821023978424" className="hover:text-[#FFD700] transition-colors cursor-pointer">010.2397.8424</a></p>
             </div>
           </div>
         </div>
