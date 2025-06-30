@@ -38,7 +38,7 @@ export function VisitSection() {
             <ImageSlider
               slides={[
                 { image: "/l_a.JPG", caption: "Studio View 1" },
-                { image: "/l_i.jpg", caption: "Studio View 2" },
+                { image: "/l_b.JPG", caption: "Studio View 2" },
                 { image: "/l_c.jpeg", caption: "Studio View 3" },
                 { image: "/l_d.jpeg", caption: "Studio View 4" },
                 { image: "/l_e.jpeg", caption: "Studio View 5" },

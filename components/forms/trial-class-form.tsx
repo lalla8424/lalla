@@ -148,7 +148,7 @@ export function TrialClassForm({
         </div>
         <div className="border-l-4 border-[#FFD700]/30 pl-4 mb-6">
           <p className="text-sm text-gray-800 font-semibold mb-2">
-            Trial Art Class – 50,000 KRW for 90 mins
+            Trial Art Class
           </p>
           <p className="text-sm text-gray-600 mb-2">
             Curious about our art classes? Give it a go with a fun one-off session!
@@ -159,9 +159,15 @@ export function TrialClassForm({
           <p className="text-sm text-gray-600 mb-2">
             Perfect for first-timers keen to try our studio.
           </p>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-600 mb-2">
             All materials included.
           </p>
+          <div>
+            <span className="block text-sm font-semibold text-gray-700 mb-1">[ Program Cost ]</span>
+            <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
+              <li><span className="text-xs font-light">50,000 KRW for 90 mins</span></li>
+            </ul>
+          </div>
         </div>
 
         <div className="mt-6 flex-1 flex flex-col">

@@ -150,7 +150,7 @@ export function WeeklyProgramForm({
           <p className="text-base font-semibold text-gray-800 mb-1">
             Creative Kids Art Adventure
             <br />
-            <span className="text-xs font-normal text-gray-500">(Kindy ~ Lower Primary / 70 mins)</span>
+            <span className="text-xs font-normal text-gray-500">(Kindy ~ Lower Primary)</span>
           </p>
           <p className="text-sm text-gray-600 mb-2">
             A fun, hands-on art program designed to spark your child's imagination and creativity!<br />
@@ -169,8 +169,8 @@ export function WeeklyProgramForm({
           <div>
             <span className="block text-sm font-semibold text-gray-700 mb-1">[ Program Cost ]</span>
             <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
-              <li>4-week program (1 class per week / total of 4 sessions): <b>190,000 KRW</b> (includes all materials)</li>
-              <li>Optional Art Photobook: <b>40,000 KRW</b> (includes photos from 10 sessions, professionally designed)</li>
+              <li>4-week program (1 class per week / total of 4 sessions): <span className="text-xs font-light">190,000 KRW for 70mins</span> (includes all materials)</li>
+              <li>Optional Art Photobook: <span className="text-xs font-light">40,000 KRW</span> (includes photos from 10 sessions, professionally designed)</li>
             </ul>
           </div>
         </div>
