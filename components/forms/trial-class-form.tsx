@@ -148,7 +148,7 @@ export function TrialClassForm({
         </div>
         <div className="border-l-4 border-[#FFD700]/30 pl-4 mb-6">
           <p className="text-sm text-gray-800 font-semibold mb-2">
-            Trial Art Class – $50,000 KRW for 90 mins
+            Trial Art Class – 50,000 KRW for 90 mins
           </p>
           <p className="text-sm text-gray-600 mb-2">
             Curious about our art classes? Give it a go with a fun one-off session!
