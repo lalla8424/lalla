@@ -93,7 +93,7 @@ export function TeacherSection() {
                 <div className="w-36 h-36 rounded-full bg-white p-2 shadow-lg flex-shrink-0">
                   <div className="w-full h-full rounded-full overflow-hidden">
                     <Image
-                      src="/emilie_l.jpg?v=2"
+                      src="/em.jpg"
                       alt="Emilie Lavaud - Art Mentor"
                       width={144}
                       height={144}
