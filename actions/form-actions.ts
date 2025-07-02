@@ -6,6 +6,10 @@ import {
   getTrialSchedule,
   submitTrialForm,
 } from "../lib/notion";
+import {
+  submitWeeklyProgramToGoogleSheets,
+  submitTrialClassToGoogleSheets,
+} from "../lib/google-sheets";
 
 type WeeklyScheduleItem = {
   id: string;
@@ -94,7 +98,7 @@ export async function fetchWeeklySchedule() {
 }
 
 /**
- * 위클리 프로그램 폼 데이터를 노션에 제출하는 서버 액션
+ * 위클리 프로그램 폼 데이터를 노션과 Google Sheets에 제출하는 서버 액션
  */
 export async function submitWeeklyProgramForm(formData: FormData) {
   try {
@@ -108,13 +112,20 @@ export async function submitWeeklyProgramForm(formData: FormData) {
       schedule: formData.get("schedule") as string,
     };
 
-    const result = await submitWeeklyForm(data);
+    // 1. Notion DB에 저장
+    await submitWeeklyForm(data);
+
+    // 2. Google Sheets에 저장 (Fire-and-Forget 방식)
+    submitWeeklyProgramToGoogleSheets(data).catch(() => {
+      // 백업용이므로 실패해도 조용히 무시
+    });
+
     return {
       success: true,
       message: "프로그램 신청이 완료되었습니다!",
     };
   } catch (error) {
-    console.error("폼 제출 실패:", error);
+    console.error("❌ 폼 제출 실패:", error);
     return {
       success: false,
       error: "프로그램 신청에 실패했습니다. 다시 시도해주세요.",
@@ -197,7 +208,7 @@ export async function fetchTrialSchedule() {
 }
 
 /**
- * 트라이얼 클래스 폼 데이터를 노션에 제출하는 서버 액션
+ * 트라이얼 클래스 폼 데이터를 노션과 Google Sheets에 제출하는 서버 액션
  */
 export async function submitTrialClassForm(formData: FormData) {
   try {
@@ -211,13 +222,20 @@ export async function submitTrialClassForm(formData: FormData) {
       schedule: formData.get("schedule") as string,
     };
 
-    const result = await submitTrialForm(data);
+    // 1. Notion DB에 저장
+    await submitTrialForm(data);
+
+    // 2. Google Sheets에 저장 (Fire-and-Forget 방식)
+    submitTrialClassToGoogleSheets(data).catch(() => {
+      // 백업용이므로 실패해도 조용히 무시
+    });
+
     return {
       success: true,
       message: "트라이얼 클래스 예약이 완료되었습니다!",
     };
   } catch (error) {
-    console.error("트라이얼 폼 제출 실패:", error);
+    console.error("❌ 트라이얼 폼 제출 실패:", error);
     return {
       success: false,
       error: "트라이얼 클래스 예약에 실패했습니다. 다시 시도해주세요.",

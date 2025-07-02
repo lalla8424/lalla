@@ -6,7 +6,7 @@ import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { LoadingSpinner } from "../ui/loading-spinner";
-import { submitTrialClassForm } from "../../actions/notion-actions";
+import { submitTrialClassForm } from "../../actions/form-actions";
 
 interface TrialFormData {
   parentName: string;
@@ -404,7 +404,7 @@ export function TrialClassForm({
               </label>
             </div>
             </div>
-            
+
             <div className="mt-auto pt-4 space-y-4">
             {submitStatus.message && (
               <div

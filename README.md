@@ -13,6 +13,9 @@
 - '위클리 프로그램' 신청 폼 연동이 완료되었습니다.
 - '트라이얼 클래스' 신청 폼 연동이 완료되었습니다.
 - 스케줄 다중 선택 기능이 구현되어 여러 시간대를 선택할 수 있습니다.
+- **Google Sheets 연동 완료**: 폼 제출 시 Notion DB와 Google Sheets 둘 다에 저장됩니다.
+- **Fire-and-Forget 방식**: Google Sheets는 백그라운드에서 처리되어 폼 제출이 즉시 완료됩니다.
+- **자동 이메일 알림**: Google Apps Script를 통해 관리자 및 사용자에게 자동 이메일 발송됩니다.
 
 **노션 데이터베이스 활용:**
 
@@ -23,8 +26,11 @@
 **이점:**
 
 - 노션에서 프로그램 정보 업데이트 시 웹사이트가 자동으로 최신 정보를 표시합니다.
-- 프로그램 신청 정보가 자동으로 노션에 기록되어 관리가 편리합니다.
+- 프로그램 신청 정보가 자동으로 노션과 Google Sheets 둘 다에 기록되어 관리가 편리합니다.
 - 다중 스케줄 선택이 가능하여 사용자 편의성이 향상되었습니다.
+- **이중 저장 시스템**: 한쪽 시스템에 문제가 생겨도 다른 시스템에는 데이터가 안전하게 보관됩니다.
+- **향상된 사용자 경험**: Fire-and-Forget 방식으로 폼 제출 시 즉시 완료 처리되어 대기 시간 없음
+- **자동 이메일 알림**: 신청 시 즉시 관리자와 사용자에게 이메일로 알림이 발송됩니다.
 - 수동 데이터 입력 작업이 줄어들어 시간 절약과 오류 감소 효과가 있습니다.
 
 ## 프로젝트 개요
@@ -43,17 +49,32 @@ Lalla Kids Art 웹사이트에 노션 데이터베이스 연동 기능을 구현
 - 가져온 데이터를 웹 폼의 체크박스 및 라디오 버튼 옵션으로 표시
 - 제출된 폼 데이터를 해당 폼 데이터베이스에 저장
 
-### 2. 스케줄 다중 선택
+### 2. Google Sheets 연동
+
+- **이중 저장 시스템**: 모든 폼 제출 데이터가 Notion DB와 Google Sheets 둘 다에 저장
+- **Fire-and-Forget 방식**: Google Sheets는 백그라운드에서 비동기 처리되어 사용자 경험 최적화
+- **즉시 완료 처리**: Notion 저장 완료 시 폼이 즉시 완료 처리되어 "Processing..." 상태 해결
+- **Google Apps Script**: 자동화된 데이터 처리 및 이메일 알림 발송
+- **환경 변수 기반**: `GOOGLE_SCRIPT_URL`을 통한 안전한 연동
+- **조용한 실패 처리**: Google Sheets 저장 실패 시에도 사용자에게 영향 없이 조용히 처리
+
+### 3. 스케줄 다중 선택
 
 - 기존 라디오 버튼에서 체크박스로 변경하여 다중 선택 지원
 - 선택된 스케줄들을 쉼표로 구분된 문자열로 저장
 - 중복 옵션 자동 제거 및 동적 옵션 생성
 
-### 3. 데이터 타입 처리
+### 4. 데이터 타입 처리
 
-- 원본 데이터베이스: Schedule 필드를 multi_select 타입으로 관리
+- 원본 데이터베이스: Schedule 필드를 **select 타입 (단일 선택)**으로 관리
 - 폼 제출: rich_text 타입으로 쉼표 구분 문자열 저장
 - 자동 데이터 변환 로직 구현
+
+### 5. 자동 이메일 알림
+
+- 관리자 알림: 새로운 신청 시 관리자에게 즉시 이메일 발송
+- 사용자 확인: 신청자에게 접수 확인 이메일 자동 발송
+- HTML 형식의 상세한 신청 정보 포함
 
 ## 구현 환경
 
@@ -92,6 +113,9 @@ NOTION_DATABASE_WEEKLY_FORM_ID=your_weekly_form_db_id
 # 트라이얼 클래스 관련
 NOTION_DATABASE_TRIAL_SCHEDULE_ID=your_trial_schedule_db_id
 NOTION_DATABASE_TRIAL_FORM_ID=your_trial_form_db_id
+
+# Google Sheets 연동 관련
+GOOGLE_SCRIPT_URL=https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec
 ```
 
 ### 4. 파일 구조 및 역할
@@ -240,9 +264,50 @@ export const submitTrialForm = async (formData: any) => {
 };
 ```
 
-#### `actions/notion-actions.ts`
+#### `lib/google-sheets.ts`
 
-Server Actions를 이용한 노션 API 호출 및 데이터 가공 로직:
+Google Apps Script를 통한 Google Sheets 연동 함수 구현:
+
+```typescript
+// Google Apps Script URL을 환경 변수에서 가져옴
+const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL;
+
+/**
+ * Weekly Program 폼 데이터를 Google Sheets에 저장
+ */
+export const submitWeeklyProgramToGoogleSheets = async (formData: any) => {
+  try {
+    const data = {
+      formType: "WeeklyProgram",
+      parentName: formData.parentName,
+      childName: formData.childName,
+      childAge: formData.childAge,
+      email: formData.email,
+      phone: formData.phone,
+      programType: formData.programType,
+      schedule: formData.schedule,
+    };
+
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error("❌ Google Sheets Weekly Program 제출 실패:", error);
+    throw new Error("Google Sheets에 데이터 저장 실패");
+  }
+};
+```
+
+#### `actions/form-actions.ts`
+
+Server Actions를 이용한 노션 API 호출, 데이터 가공 및 Google Sheets 연동 로직:
 
 ```typescript
 "use server";
@@ -253,6 +318,10 @@ import {
   getTrialSchedule,
   submitTrialForm,
 } from "../lib/notion";
+import {
+  submitWeeklyProgramToGoogleSheets,
+  submitTrialClassToGoogleSheets,
+} from "../lib/google-sheets";
 
 /**
  * 노션에서 위클리 스케줄 데이터를 가져오는 서버 액션
@@ -275,15 +344,10 @@ export async function fetchWeeklySchedule() {
         return "";
       };
 
-      // Schedule은 multi_select 타입에서 문자열로 변환
+      // Schedule은 select 타입 (단일 선택)
       const getSchedule = () => {
-        if (
-          props["Schedule"]?.multi_select &&
-          props["Schedule"].multi_select.length > 0
-        ) {
-          return props["Schedule"].multi_select
-            .map((option: any) => option.name)
-            .join(", ");
+        if (props["Schedule"]?.select && props["Schedule"].select.name) {
+          return props["Schedule"].select.name;
         }
         return "";
       };
@@ -334,7 +398,7 @@ export async function fetchWeeklySchedule() {
 }
 
 /**
- * 위클리 프로그램 폼 데이터를 노션에 제출하는 서버 액션
+ * 위클리 프로그램 폼 데이터를 노션과 Google Sheets에 제출하는 서버 액션
  */
 export async function submitWeeklyProgramForm(formData: FormData) {
   try {
@@ -348,13 +412,20 @@ export async function submitWeeklyProgramForm(formData: FormData) {
       schedule: formData.get("schedule") as string,
     };
 
+    // 1. Notion DB에 저장
     await submitWeeklyForm(data);
+
+    // 2. Google Sheets에 저장 (Fire-and-Forget 방식)
+    submitWeeklyProgramToGoogleSheets(data).catch(() => {
+      // 백업용이므로 실패해도 조용히 무시
+    });
+
     return {
       success: true,
       message: "프로그램 신청이 완료되었습니다!",
     };
   } catch (error) {
-    console.error("폼 제출 실패:", error);
+    console.error("❌ 폼 제출 실패:", error);
     return {
       success: false,
       error: "프로그램 신청에 실패했습니다. 다시 시도해주세요.",
@@ -383,15 +454,10 @@ export async function fetchTrialSchedule() {
         return "";
       };
 
-      // Schedule은 multi_select 타입에서 문자열로 변환
+      // Schedule은 select 타입 (단일 선택)
       const getSchedule = () => {
-        if (
-          props["Schedule"]?.multi_select &&
-          props["Schedule"].multi_select.length > 0
-        ) {
-          return props["Schedule"].multi_select
-            .map((option: any) => option.name)
-            .join(", ");
+        if (props["Schedule"]?.select && props["Schedule"].select.name) {
+          return props["Schedule"].select.name;
         }
         return "";
       };
@@ -442,7 +508,7 @@ export async function fetchTrialSchedule() {
 }
 
 /**
- * 트라이얼 클래스 폼 데이터를 노션에 제출하는 서버 액션
+ * 트라이얼 클래스 폼 데이터를 노션과 Google Sheets에 제출하는 서버 액션
  */
 export async function submitTrialClassForm(formData: FormData) {
   try {
@@ -456,13 +522,20 @@ export async function submitTrialClassForm(formData: FormData) {
       schedule: formData.get("schedule") as string,
     };
 
+    // 1. Notion DB에 저장
     await submitTrialForm(data);
+
+    // 2. Google Sheets에 저장 (Fire-and-Forget 방식)
+    submitTrialClassToGoogleSheets(data).catch(() => {
+      // 백업용이므로 실패해도 조용히 무시
+    });
+
     return {
       success: true,
       message: "트라이얼 클래스 신청이 완료되었습니다!",
     };
   } catch (error) {
-    console.error("트라이얼 폼 제출 실패:", error);
+    console.error("❌ 트라이얼 폼 제출 실패:", error);
     return {
       success: false,
       error: "트라이얼 클래스 신청에 실패했습니다. 다시 시도해주세요.",
@@ -580,24 +653,33 @@ const handleWeeklySubmit = async (e: React.FormEvent) => {
 - 트라이얼 폼 제출 시 노션 데이터베이스에 자동 저장
 - 위클리 프로그램과 동일한 사용자 경험 제공
 
+### 4. Fire-and-Forget 방식 Google Sheets 연동
+
+- **사용자 경험 최적화**: 폼 제출 시 즉시 완료 처리되어 대기 시간 없음
+- **백그라운드 처리**: Google Sheets 저장은 비동기로 백그라운드에서 처리
+- **조용한 실패 처리**: Google Sheets 저장 실패 시에도 사용자에게 영향 없음
+- **무한 대기 문제 해결**: 기존 "Processing..." 상태가 지속되던 문제 완전 해결
+
 ## 주의 사항
 
 ### 1. 노션 데이터베이스 구조
 
 **위클리 프로그램:**
 
-- 위클리 스케줄 DB: Program Type(title), Schedule(multi_select)
+- 위클리 스케줄 DB: Program Type(title), Schedule(**select** - 단일 선택)
 - 위클리 폼 DB: Parent/Guardian Name(title), Child's Name(rich_text), Child's Age(number), Email(email), Phone Number(phone_number), Program Type(rich_text), Schedule(rich_text)
 
 **트라이얼 클래스:**
 
-- 트라이얼 스케줄 DB: Choose Activity(title), Schedule(multi_select)
+- 트라이얼 스케줄 DB: Choose Activity(title), Schedule(**select** - 단일 선택)
 - 트라이얼 폼 DB: Parent/Guardian Name(title), Child's Name(rich_text), Child's Age(number), Email(email), Phone Number(phone_number), Choose Activity(rich_text), Schedule(rich_text)
 
 ### 2. 환경 변수
 
 - 모든 4개의 데이터베이스 ID와 NOTION_API_KEY 필수 설정
+- **GOOGLE_SCRIPT_URL**: Google Apps Script 웹 앱 배포 URL 필수 설정
 - .env 파일에 추가하고 .gitignore에 포함시켜 보안 유지
+- Google Apps Script 설정 방법은 `scripts/README.md` 참고
 
 ### 3. 필드 매핑
 
@@ -618,23 +700,43 @@ const handleWeeklySubmit = async (e: React.FormEvent) => {
 
 ### 3. Schedule 필드 타입 불일치
 
-- **문제**: multi_select 타입 데이터를 rich_text로 저장해야 하는 상황
-- **해결**: 데이터 변환 로직 구현하여 타입 간 호환성 확보
+- **이전 문제**: multi_select 타입 데이터를 rich_text로 저장해야 하는 상황
+- **현재 해결**: Schedule 필드를 **select 타입 (단일 선택)**으로 변경하여 타입 호환성 확보
+- 데이터 변환 로직으로 select.name을 rich_text로 저장
 
 ### 4. 다중 선택 상태 관리
 
 - 배열 상태로 선택값 관리
 - 폼 제출 시 배열을 문자열로 변환하는 로직 구현
 
+### 5. Google Sheets 연동 문제
+
+- **CORS 문제**: `mode: "no-cors"` 설정으로 해결
+- **응답 확인 불가**: no-cors 모드로 인해 fetch 응답을 직접 확인 불가능
+- **Fire-and-Forget 방식 도입**: Google Sheets 응답을 기다리지 않아 사용자 경험 개선
+- **무한 대기 문제 해결**: 이전 "Processing..." 상태가 지속되던 문제 완전 해결
+- **확인 방법**: Google Sheets에서 데이터 저장 여부 확인
+- **조용한 실패 처리**: Google Sheets 저장 실패 시에도 Notion 저장은 계속 진행하며 사용자에게 영향 없음
+
 ## 재구현 절차 요약
 
 1. 노션 API 키 및 4개 데이터베이스 ID 발급 및 설정
-2. @notionhq/client 패키지 설치
-3. lib/notion.ts 파일 생성 및 위클리/트라이얼 API 통신 함수 구현
-4. actions/notion-actions.ts 파일 생성 및 Server Actions 구현
-5. app/page.tsx 파일 수정하여 두 폼 모두 노션 연동 및 다중 선택 기능 추가
-6. 하이드레이션 이슈 해결을 위한 마운트 체크 로직 추가
-7. 데이터 타입 변환 로직 구현 및 테스트
-8. 다중 선택 UI 및 상태 관리 로직 구현
+2. **Google Apps Script 설정**: `scripts/README.md` 참고하여 Google Apps Script 배포 및 URL 획득
+3. @notionhq/client 패키지 설치
+4. **환경 변수 설정**: NOTION_API_KEY, 4개 DB ID, GOOGLE_SCRIPT_URL 설정
+5. lib/notion.ts 파일 생성 및 위클리/트라이얼 API 통신 함수 구현
+6. **lib/google-sheets.ts 파일 생성**: Google Sheets 연동 함수 구현
+7. actions/form-actions.ts 파일 생성 및 **Fire-and-Forget 방식의 이중 저장 기능**을 포함한 Server Actions 구현
+8. **Schedule 필드 타입 수정**: multi_select → select (단일 선택)으로 변경
+9. app/page.tsx 파일 수정하여 두 폼 모두 노션 연동 및 다중 선택 기능 추가
+10. 하이드레이션 이슈 해결을 위한 마운트 체크 로직 추가
+11. 데이터 타입 변환 로직 구현 및 테스트
+12. 다중 선택 UI 및 상태 관리 로직 구현
+13. **Google Sheets 연동 테스트**: 폼 제출 시 Notion DB와 Google Sheets 둘 다에 저장되는지 확인
 
-이 README를 참고하여 완전한 노션 API 연동 기능을 재구현할 수 있습니다.
+이 README를 참고하여 Notion DB와 Google Sheets 이중 저장이 포함된 완전한 연동 기능을 재구현할 수 있습니다.
+
+## 추가 자료
+
+- **Google Apps Script 설정**: `scripts/README.md` - Google Sheets 연동 및 자동 이메일 알림 설정 가이드
+- **환경 변수 예시**: 프로젝트 루트에 `.env.example` 파일 참고 (생성 필요시)

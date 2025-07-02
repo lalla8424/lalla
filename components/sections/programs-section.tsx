@@ -5,12 +5,12 @@ import { TrialClassForm } from "../forms/trial-class-form";
 import {
   fetchWeeklySchedule,
   fetchTrialSchedule,
-} from "../../actions/notion-actions";
+} from "../../actions/form-actions";
 import { sortSchedules } from "../../lib/utils";
 
 // Slide data
-const slides = [
-  { image: "/art.jpg?v=2" },
+const slides: { image: string }[] = [
+  { image: "/art.jpg" },
   { image: "/art3.jpg" },
   { image: "/art4.JPG" },
   { image: "/art5.jpg" },
@@ -23,7 +23,7 @@ const slides = [
   { image: "/art13.jpg" },
   { image: "/art15.JPG" },
   { image: "/art16.JPG" },
-  { image: "/art17.JPG" }
+  { image: "/art17.JPG" },
 ];
 
 export function ProgramsSection() {
@@ -80,19 +80,25 @@ export function ProgramsSection() {
           const targetSchedule = "Thursday 5:00–6:10 PM";
           const newSchedule = {
             id: "thursday-2:00–3:10-pm",
-            schedule: "Thursday 2:00–3:10 PM"
+            schedule: "Thursday 2:00–3:10 PM",
           };
-          
-          const targetIndex = uniqueSchedules.findIndex(item => item.schedule === targetSchedule);
+
+          const targetIndex = uniqueSchedules.findIndex(
+            (item) => item.schedule === targetSchedule,
+          );
           if (targetIndex !== -1) {
             // Check if the new schedule doesn't already exist
-            const exists = uniqueSchedules.some(item => item.schedule === newSchedule.schedule);
+            const exists = uniqueSchedules.some(
+              (item) => item.schedule === newSchedule.schedule,
+            );
             if (!exists) {
               uniqueSchedules.splice(targetIndex, 0, newSchedule);
             }
           } else {
             // If target schedule not found, just add to the end
-            const exists = uniqueSchedules.some(item => item.schedule === newSchedule.schedule);
+            const exists = uniqueSchedules.some(
+              (item) => item.schedule === newSchedule.schedule,
+            );
             if (!exists) {
               uniqueSchedules.push(newSchedule);
             }
@@ -169,7 +175,9 @@ export function ProgramsSection() {
               Our Art Classes
             </h2>
             <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              From playful painting to cultural storytelling, our classes are designed to grow with your child – building skills, confidence, and creativity in a warm, encouraging space.
+              From playful painting to cultural storytelling, our classes are
+              designed to grow with your child – building skills, confidence,
+              and creativity in a warm, encouraging space.
             </p>
           </div>
         </div>

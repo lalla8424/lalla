@@ -43,7 +43,7 @@ alwaysApply: false
 
 ### 서버 액션
 
-데이터 가져오기 및 제출을 처리하는 서버 액션은 [actions/notion-actions.ts](mdc:actions/notion-actions.ts)에 있습니다.
+데이터 가져오기 및 제출을 처리하는 서버 액션은 [form-actions.ts](mdc:actions/form-actions.ts)에 있습니다.
 
 이 파일에는 다음이 포함되어 있습니다:
 - `fetchWeeklySchedule()` 서버 액션으로 위클리 데이터 검색 및 처리
