@@ -35,26 +35,36 @@ export function ImageSlider({
 
   return (
     <div className="relative mx-auto max-w-5xl mt-12 mb-8 overflow-hidden rounded-xl shadow-lg">
-      <div className="relative h-[300px] md:h-[400px] w-full">
-        {slides.map((slide, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentSlide
-                ? "opacity-100"
-                : "opacity-0 pointer-events-none"
-            }`}
-          >
-            <img
-              src={slide.image || "/placeholder.svg"}
-              alt={slide.caption}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 text-white">
-              <p className="text-sm md:text-base">{slide.caption}</p>
+      {/* Fixed container with aspect ratio */}
+      <div className="relative w-full" style={{ aspectRatio: '16/9' }}>
+        <div className="absolute inset-0 bg-gray-100">
+          {slides.map((slide, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentSlide
+                  ? "opacity-100"
+                  : "opacity-0 pointer-events-none"
+              }`}
+            >
+              <img
+                src={slide.image || "/placeholder.svg"}
+                alt={slide.caption}
+                className="w-full h-full object-cover object-center"
+                style={{ 
+                  width: '100%', 
+                  height: '100%', 
+                  objectFit: 'cover',
+                  objectPosition: 'center'
+                }}
+                loading="lazy"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 text-white">
+                <p className="text-sm md:text-base">{slide.caption}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {/* Navigation Buttons */}
