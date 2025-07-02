@@ -81,7 +81,6 @@ export const submitTrialClassToGoogleSheets = async (formData: any) => {
       phone: formData.phone,
       activity: formData.chooseActivity, // Trial Class에서는 chooseActivity 필드 사용
       schedule: formData.schedule, // 배열 또는 문자열
-      agreed: true, // 폼 제출 시 항상 동의한 상태
     };
 
     const response = await fetch(GOOGLE_SCRIPT_URL, {
