@@ -168,22 +168,22 @@ export function WeeklyProgramForm({
             </span>
             <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
               <li>
-                <b>Lytart-mural painting</b> – Create media murals using beam
-                projection
+                <b>Digital Story Walls</b> – Create magical murals with light 
+                projection technology
               </li>
               <li>
-                <b>Drawing Skills</b> – Build foundational drawing skills
-                through fun games and activities
+                <b>Drawing Adventures</b> – Learn to draw through fun games, 
+                activities and creative challenges
               </li>
               <li>
-                <b>Making & Construction</b> – Explore form, installation, and
-                turn their artwork into real-life products
+                <b>Hands-on Making</b> – Build sculptures, create installations, 
+                and bring artwork to life
               </li>
               <li>
-                <b>Canvas Layer Art</b> – Combine action painting, collage and
-                drawing to make unique layered canvases
+                <b>Mixed Media Fun</b> – Combine painting, collage, and drawing 
+                to create amazing layered artworks
               </li>
-              <li>♻️ Eco-friendly materials & storybook-inspired activities</li>
+              <li>♻️ Earth-friendly materials & story-based creative play</li>
             </ul>
           </div>
           <div>
