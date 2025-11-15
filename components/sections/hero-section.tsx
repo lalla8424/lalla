@@ -9,6 +9,35 @@ export function HeroSection() {
         backgroundImage: `url('/bg_lalla_.png?v=${Date.now()}')`,
       }}
     >
+      {/* Overlay content removed; summary moved to Programs section */}
+
+      {/* CTA: Reserve via Email */}
+      <div className="absolute inset-x-0 bottom-6 flex justify-center z-20">
+        <a
+          href={
+            "mailto:lallartlab@gmail.com?subject=" +
+            encodeURIComponent("Booking Inquiry - Lalla Art Lab") +
+            "&body=" +
+            encodeURIComponent(
+              [
+                "Hello Lalla, I’d like to reserve a class.",
+                "",
+                "Parent/Guardian Name:",
+                "Child's Name:",
+                "Child's Age:",
+                "Phone Number:",
+                "Preferred Program/Schedule:",
+                "",
+                "Additional Notes:",
+              ].join("\n")
+            )
+          }
+          className="inline-flex items-center rounded-md bg-[#FFD700] px-5 py-3 text-sm font-semibold text-black shadow hover:bg-[#FFC400] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#FFD700]"
+        >
+          이메일로 예약하기
+        </a>
+      </div>
+
       {/* Floating Art Sticker 1 */}
       <div className="absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2 md:top-2/5 md:left-1/3 lg:top-1/2 lg:left-1/4 z-10 rotate-15 hover:rotate-3 transition-transform duration-300">
         <Image
