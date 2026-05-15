@@ -6,6 +6,7 @@ import { HeroSection } from "../components/sections/hero-section";
 import { AboutSection } from "../components/sections/about-section";
 import { TeacherSection } from "../components/sections/teacher-section";
 import { ProgramsSection } from "../components/sections/programs-section";
+import { TripadvisorSection } from "../components/sections/tripadvisor-section";
 import { VisitSection } from "../components/sections/visit-section";
 
 export default function Home() {
@@ -27,6 +28,7 @@ export default function Home() {
       <AboutSection />
       <TeacherSection />
       <ProgramsSection />
+      <TripadvisorSection />
       <VisitSection />
     </>
   );

@@ -67,28 +67,7 @@ export function TeacherSection() {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row gap-8">
-              <div className="flex items-center gap-10 w-full md:w-1/2">
-                <div className="w-36 h-36 rounded-full bg-white p-2 shadow-lg flex-shrink-0">
-                  <div className="w-full h-full rounded-full overflow-hidden">
-                    <Image
-                      src="/alice.jpeg?v=2"
-                      alt="Alice hyun-kyung Choi - Art Instructor"
-                      width={144}
-                      height={144}
-                      className="w-full h-full object-cover rounded-full scale-110 object-center"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <p className="font-medium">Alice hyun-kyung Choi</p>
-                  <p className="text-sm text-gray-500">Instructor</p>
-                  <p className="mt-2 text-sm">
-                    She graduated from the Department of Sculpture at Seoul National University. Curious about cultures and new experiences, she once worked as a flight attendant. Now a florist and artist, she enjoys working with natural materials, loves flowers and finds joy in creating with kids.
-                  </p>
-                </div>
-              </div>
-
+            <div className="flex flex-col md:flex-row gap-8 justify-center">
               <div className="flex items-center gap-10 w-full md:w-1/2">
                 <div className="w-36 h-36 rounded-full bg-white p-2 shadow-lg flex-shrink-0">
                   <div className="w-full h-full rounded-full overflow-hidden">
