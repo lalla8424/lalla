@@ -24,32 +24,39 @@ export function Header() {
         <MobileNav />
         <nav className="hidden md:flex gap-6 items-start pt-1 ml-auto mr-6">
           <Link
-            href="#about"
+            href="/#experience-preview"
             className="text-xs font-black hover:text-gray-600 transition-colors text-black uppercase"
             style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
           >
-            About Us
+            Experiences
           </Link>
           <Link
-            href="#teacher"
+            href="/#choose-experience"
             className="text-xs font-black hover:text-gray-600 transition-colors text-black uppercase"
             style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
           >
-            Meet Our Creative Team
+            Programs
           </Link>
           <Link
-            href="#programs"
+            href="/#why-families"
             className="text-xs font-black hover:text-gray-600 transition-colors text-black uppercase"
             style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
           >
-            Join our program!
+            Why LALLA
           </Link>
           <Link
-            href="#visit"
+            href="/#teacher"
             className="text-xs font-black hover:text-gray-600 transition-colors text-black uppercase"
             style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
           >
-            Visit Us
+            Our Team
+          </Link>
+          <Link
+            href="/#book-now"
+            className="text-xs font-black hover:text-gray-600 transition-colors text-black uppercase"
+            style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
+          >
+            Book Now
           </Link>
         </nav>
         <div className="hidden md:flex items-center gap-4 ml-6">

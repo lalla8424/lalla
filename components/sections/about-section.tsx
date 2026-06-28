@@ -91,27 +91,29 @@ export function AboutSection() {
         <div className="flex flex-col items-center justify-center space-y-6 text-center mb-16">
           <div className="space-y-4">
             <div className="inline-block rounded-full bg-[#FFD700] px-3 py-1 text-sm font-medium text-white">
-              About Us
+              Why Families Choose LALLA
             </div>
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-normal sm:text-5xl leading-tight max-w-4xl">
-                At Lalla kids art,
-              </h2>
-              <h2 className="text-2xl font-bold tracking-normal sm:text-4xl leading-tight max-w-4xl">
-                art becomes a language<br />
-                for kids to think, feel and express!
+                A Creative Art Studio in Seoul
               </h2>
             </div>
           </div>
           <div className="space-y-6 max-w-4xl">
             <p className="text-gray-500 md:text-lg lg:text-xl leading-relaxed">
-              We're more than just an art class — we're a space where kids are free to explore, express, and enjoy being exactly who they are. Whether they're splashing paint, building with clay, or dreaming up new worlds, our studio is designed to nurture their imagination every step of the way.
+              LALLA is a creative art studio where children explore projection
+              mural art, eco-friendly materials, and cultural traditions through
+              hands-on making.
             </p>
             <p className="text-gray-500 md:text-lg lg:text-xl leading-relaxed">
-              We believe every child is an artist, and every creative moment is a chance to grow — in confidence, in curiosity, and in joy.
+              Our original Lytart program blends beam projection with drawing,
+              collage, and sensory art—turning light into a large-scale canvas
+              for creative discovery.
             </p>
             <p className="text-gray-500 md:text-lg lg:text-xl leading-relaxed">
-              Our programs blend hands-on art with storytelling, music, and culture, creating meaningful experiences that kids remember (and parents love).
+              Designed for international families, every session is
+              English-friendly, intentionally small, and built around immersive
+              experiences—not traditional classroom instruction.
             </p>
           </div>
         </div>

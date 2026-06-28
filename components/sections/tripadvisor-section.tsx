@@ -60,6 +60,9 @@ export function TripadvisorSection() {
             this.loadtrk = true;
           }
         };
+        script.onerror = () => {
+          console.warn("TripAdvisor widget script failed to load.");
+        };
         document.body.appendChild(script);
         scriptLoadedRef.current = true;
       }

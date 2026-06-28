@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, Instagram, BookOpen, MessageCircle } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Menu, Instagram, BookOpen, MessageCircle } from "lucide-react";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);
@@ -21,46 +21,45 @@ export function MobileNav() {
           </button>
         </SheetTrigger>
         <SheetContent side="right" className="w-[280px] bg-white">
+          <SheetHeader className="mb-8 text-left">
+            <SheetTitle className="text-lg font-bold">Menu</SheetTitle>
+          </SheetHeader>
           <div className="flex flex-col h-full">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-lg font-bold">Menu</h2>
-              <button
-                onClick={() => setOpen(false)}
-                className="w-6 h-6 text-gray-600"
-                aria-label="Close menu"
-              >
-                <X className="h-6 w-6" />
-              </button>
-            </div>
-            
             <nav className="flex flex-col gap-6 flex-1">
               <Link
-                href="#about"
+                href="/#experience-preview"
                 onClick={() => setOpen(false)}
                 className="text-base font-semibold hover:text-[#FFD700] transition-colors"
               >
-                About Us
+                Experiences
               </Link>
               <Link
-                href="#teacher"
+                href="/#choose-experience"
                 onClick={() => setOpen(false)}
                 className="text-base font-semibold hover:text-[#FFD700] transition-colors"
               >
-                Meet Our Creative Team
+                Programs
               </Link>
               <Link
-                href="#programs"
+                href="/#why-families"
                 onClick={() => setOpen(false)}
                 className="text-base font-semibold hover:text-[#FFD700] transition-colors"
               >
-                Join our program!
+                Why LALLA
               </Link>
               <Link
-                href="#visit"
+                href="/#teacher"
                 onClick={() => setOpen(false)}
                 className="text-base font-semibold hover:text-[#FFD700] transition-colors"
               >
-                Visit Us
+                Our Team
+              </Link>
+              <Link
+                href="/#book-now"
+                onClick={() => setOpen(false)}
+                className="text-base font-semibold hover:text-[#FFD700] transition-colors"
+              >
+                Book Now
               </Link>
             </nav>
             

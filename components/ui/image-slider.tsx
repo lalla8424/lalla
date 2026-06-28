@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -49,7 +51,7 @@ export function ImageSlider({
             >
               <img
                 src={slide.image || "/placeholder.svg"}
-                alt={slide.caption}
+                alt={slide.caption ?? "Lalla Kids Art"}
                 className="w-full h-full object-cover object-center"
                 style={{
                   width: "100%",
@@ -58,10 +60,18 @@ export function ImageSlider({
                   objectPosition: "center",
                 }}
                 loading="lazy"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (target.dataset.fallbackApplied === "true") return;
+                  target.dataset.fallbackApplied = "true";
+                  target.src = "/placeholder.svg";
+                }}
               />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 text-white">
-                <p className="text-sm md:text-base">{slide.caption}</p>
-              </div>
+              {slide.caption ? (
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 text-white">
+                  <p className="text-sm md:text-base">{slide.caption}</p>
+                </div>
+              ) : null}
             </div>
           ))}
         </div>
@@ -84,7 +94,11 @@ export function ImageSlider({
       </button>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-12 left-0 right-0 flex justify-center gap-2">
+      <div
+        className={`absolute left-0 right-0 flex justify-center gap-2 ${
+          slides.some((s) => s.caption) ? "bottom-12" : "bottom-4"
+        }`}
+      >
         {slides.map((_, index) => (
           <button
             key={index}

@@ -1,85 +1,110 @@
+/**
+ * @file hero-section.tsx
+ * @description Homepage hero — premium first impression for international families in Seoul.
+ *
+ * Communicates art experiences, Seoul location, creative pillars, and booking path
+ * within the first viewport. Copy is brand-owned and must not be rewritten here.
+ *
+ * @dependencies
+ * - next/image: full-bleed background
+ * - @/components/ui/button: primary and secondary CTAs
+ */
+
 import React from "react";
-import Image from "next/image";
+import Link from "next/link";
+import { Globe, Heart } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+const HERO_TRUST_BADGES = [
+  { icon: Heart, label: "Loved by International Families" },
+  { icon: Globe, label: "English-Friendly" },
+] as const;
 
 export function HeroSection() {
   return (
     <section
-      className="relative bg-contain bg-top bg-no-repeat h-96 sm:h-[450px] md:h-[600px] lg:h-[800px] w-full"
-      style={{
-        backgroundImage: `url('/bg_lalla_.png?v=${Date.now()}')`,
-      }}
+      id="hero"
+      className="relative flex min-h-[calc(100svh-4rem)] w-full items-end md:items-center"
+      aria-label="Lalla Kids Art hero"
     >
-      {/* Overlay content removed; summary moved to Programs section */}
-
-      {/* CTA: Reserve via Email */}
-      <div className="absolute inset-x-0 bottom-6 flex justify-center z-20">
-        <a
-          href={
-            "mailto:lallartlab@gmail.com?subject=" +
-            encodeURIComponent("Booking Inquiry - Lalla Art Lab") +
-            "&body=" +
-            encodeURIComponent(
-              [
-                "Hello Lalla, I’d like to reserve a class.",
-                "",
-                "Parent/Guardian Name:",
-                "Child's Name:",
-                "Child's Age:",
-                "Phone Number:",
-                "Preferred Program/Schedule:",
-                "",
-                "Additional Notes:",
-              ].join("\n")
-            )
-          }
-          className="inline-flex items-center rounded-md bg-[#FFD700] px-5 py-3 text-sm font-semibold text-black shadow hover:bg-[#FFC400] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#FFD700]"
-        >
-          이메일로 예약하기
-        </a>
-      </div>
-
-      {/* Floating Art Sticker 1 */}
-      <div className="absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2 md:top-2/5 md:left-1/3 lg:top-1/2 lg:left-1/4 z-10 rotate-15 hover:rotate-3 transition-transform duration-300">
-        <Image
-          src="/sticker1.png"
-          alt="Art Sticker"
-          width={80}
-          height={80}
-          className="w-14 h-14 md:w-18 md:h-18 lg:w-20 lg:h-20 drop-shadow-lg"
+      {/* Background image */}
+      <div className="absolute inset-0 bg-gray-900">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/mural.png"
+          alt="Children creating projection mural art at Lalla Kids Art"
+          className="h-full w-full object-cover object-center"
+          fetchPriority="high"
+          decoding="async"
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/45 to-black/25 md:bg-gradient-to-r md:from-black/70 md:via-black/40 md:to-black/10"
+          aria-hidden="true"
         />
       </div>
 
-      {/* Floating Art Sticker 3 */}
-      <div className="absolute top-1/4 right-1/4 transform translate-x-[calc(50%+40px)] md:top-1/3 md:right-1/5 lg:top-1/4 lg:right-1/3 z-10 rotate-[-8deg] hover:rotate-[-15deg] transition-transform duration-300">
-        <Image
-          src="/sticker3.png"
-          alt="Art Sticker 3"
-          width={60}
-          height={60}
-          className="w-12 h-12 md:w-16 md:h-16 lg:w-18 lg:h-18 drop-shadow-lg"
-        />
-      </div>
+      {/* Content */}
+      <div className="relative z-10 w-full">
+        <div className="container px-5 pb-14 pt-24 md:px-8 md:pb-20 md:pt-28 lg:px-10">
+          <div className="mx-auto max-w-3xl text-center md:mx-0 md:text-left">
+            <h1
+              className="text-[2rem] font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl"
+              style={{ fontFamily: "Raleway, sans-serif" }}
+            >
+              Creative Art Experiences in Seoul
+            </h1>
 
-      {/* Floating Art Sticker 4 - Top Left (Rainbow) - 두 배 크기 */}
-      <div className="absolute top-6 left-6 md:top-8 md:left-8 lg:top-12 lg:left-12 z-10 rotate-[-12deg] hover:rotate-[-5deg] transition-transform duration-300">
-        <Image
-          src="/sticker4.png"
-          alt="Art Sticker 4"
-          width={140}
-          height={140}
-          className="w-24 h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 drop-shadow-lg"
-        />
-      </div>
+            <p
+              className="mt-4 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg md:mt-5 md:text-xl"
+              style={{ fontFamily: "Raleway, sans-serif" }}
+            >
+              Explore cultures, stories, and traditions through immersive art
+              experiences.
+            </p>
 
-      {/* Floating Art Sticker 2 - Center Bottom */}
-      <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 md:bottom-24 lg:bottom-32 z-10 rotate-[10deg] hover:rotate-[18deg] transition-transform duration-300">
-        <Image
-          src="/sticker2.png"
-          alt="Art Sticker 2"
-          width={65}
-          height={65}
-          className="w-12 h-12 md:w-16 md:h-16 lg:w-18 lg:h-18 drop-shadow-lg"
-        />
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center md:justify-start">
+              <Button
+                asChild
+                size="lg"
+                className="h-12 rounded-md bg-[#FFD700] px-8 text-sm font-semibold text-black shadow-md hover:bg-[#FFC400] sm:text-base"
+              >
+                <Link href="/#book-now">Book an Art Experience</Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="h-12 rounded-md border-white/40 bg-white/10 px-8 text-sm font-semibold text-white backdrop-blur-sm hover:bg-white/20 hover:text-white sm:text-base"
+              >
+                <Link href="/#choose-experience">View Programs</Link>
+              </Button>
+            </div>
+
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 md:justify-start">
+              {HERO_TRUST_BADGES.map(({ icon: Icon, label }) => (
+                <span
+                  key={label}
+                  className="inline-flex items-center gap-2 text-xs font-medium text-white/75 sm:text-sm"
+                  style={{ fontFamily: "Raleway, sans-serif" }}
+                >
+                  <Icon
+                    className="h-4 w-4 shrink-0 stroke-[1.5] text-white/60"
+                    aria-hidden="true"
+                  />
+                  {label}
+                </span>
+              ))}
+            </div>
+
+            <p
+              className="mt-5 max-w-xl text-xs leading-relaxed text-white/60 sm:text-sm"
+              style={{ fontFamily: "Raleway, sans-serif" }}
+            >
+              Welcoming international families living in and visiting Korea
+              through creative art experiences.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );

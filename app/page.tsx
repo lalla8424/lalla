@@ -1,35 +1,35 @@
-"use client";
-
 import React from "react";
-import { PageLoadingSpinner } from "../components/ui/loading-spinner";
 import { HeroSection } from "../components/sections/hero-section";
 import { AboutSection } from "../components/sections/about-section";
+import { ExperiencePreviewSection } from "../components/sections/experience-preview-section";
+import { ChooseExperienceSection } from "../components/sections/choose-experience-section";
+import { LovedByFamiliesSection } from "../components/sections/loved-by-families-section";
+import { OurImpactSection } from "../components/sections/our-impact-section";
+import { WhyFamiliesSection } from "../components/sections/why-families-section";
+import { PhotobookSection } from "../components/sections/photobook-section";
 import { TeacherSection } from "../components/sections/teacher-section";
-import { ProgramsSection } from "../components/sections/programs-section";
-import { TripadvisorSection } from "../components/sections/tripadvisor-section";
-import { VisitSection } from "../components/sections/visit-section";
+import { GallerySection } from "../components/sections/gallery-section";
+import { FaqSection } from "../components/sections/faq-section";
+import { BookNowSection } from "../components/sections/book-now-section";
+import { StickyBookingCta } from "../components/sections/sticky-booking-cta";
 
 export default function Home() {
-  const [mounted, setMounted] = React.useState(false);
-
-  // Client-side rendering mount check
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Show loading screen during server-side rendering
-  if (!mounted) {
-    return <PageLoadingSpinner />;
-  }
-
   return (
     <>
       <HeroSection />
       <AboutSection />
+      <ExperiencePreviewSection />
+      <ChooseExperienceSection />
+      <LovedByFamiliesSection />
+      <OurImpactSection />
+      <WhyFamiliesSection />
+      <PhotobookSection />
+      <FaqSection />
       <TeacherSection />
-      <ProgramsSection />
-      <TripadvisorSection />
-      <VisitSection />
+      <GallerySection />
+      <BookNowSection />
+      <StickyBookingCta />
+      <div className="h-16 md:hidden" aria-hidden="true" />
     </>
   );
 }

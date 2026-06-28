@@ -47,28 +47,34 @@ export function Footer() {
             <h3 className="text-lg font-medium">Quick Links</h3>
             <nav className="flex flex-col gap-2">
               <Link
-                href="#about"
+                href="/#experience-preview"
                 className="text-sm text-gray-500 hover:text-[#FFD700]"
               >
-                About Us
+                Experiences
               </Link>
               <Link
-                href="#teacher"
+                href="/#choose-experience"
                 className="text-sm text-gray-500 hover:text-[#FFD700]"
               >
-                Meet Our Creative Team
+                Programs
               </Link>
               <Link
-                href="#programs"
+                href="/#why-families"
                 className="text-sm text-gray-500 hover:text-[#FFD700]"
               >
-                Join our program!
+                Why LALLA
               </Link>
               <Link
-                href="#visit"
+                href="/#teacher"
                 className="text-sm text-gray-500 hover:text-[#FFD700]"
               >
-                Visit Us
+                Our Team
+              </Link>
+              <Link
+                href="/#book-now"
+                className="text-sm text-gray-500 hover:text-[#FFD700]"
+              >
+                Book Now
               </Link>
             </nav>
           </div>
