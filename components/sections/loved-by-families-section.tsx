@@ -1,36 +1,33 @@
 /**
  * @file loved-by-families-section.tsx
- * @description Trust section — international families, photo gallery, and review slider.
+ * @description Trust section — international families, photo gallery, and family review slider.
  *
- * Image-focused layout using only existing website media. TripAdvisor link
- * provides the review source without fabricated testimonials.
+ * Uses only existing website media. Reviews are presented as authentic
+ * messages from families — not third-party platform branding.
  *
  * @dependencies
- * - @/constants/homepage: family photos and TripAdvisor URL
+ * - @/constants/homepage: family photos and review slider images
  */
 
 "use client";
 
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { Star } from "lucide-react";
 import {
   FAMILY_GALLERY_PHOTOS,
   FEATURED_FAMILY,
   REVIEW_SLIDER_PHOTOS,
-  TRIPADVISOR_URL,
 } from "@/constants/homepage";
 
-function StarRating() {
+function StarRating({ size = "md" }: { size?: "md" | "lg" }) {
+  const iconClass =
+    size === "lg" ? "h-7 w-7 fill-[#FFD700] text-[#FFD700]" : "h-4 w-4 fill-[#FFD700] text-[#FFD700]";
+
   return (
     <div className="flex items-center gap-0.5" aria-label="5 out of 5 stars">
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star
-          key={i}
-          className="h-5 w-5 fill-[#FFD700] text-[#FFD700]"
-          aria-hidden="true"
-        />
+        <Star key={i} className={iconClass} aria-hidden="true" />
       ))}
     </div>
   );
@@ -41,13 +38,13 @@ function ReviewMarquee() {
 
   return (
     <div className="relative mt-12 overflow-hidden">
+      <p className="mb-6 text-center text-sm font-semibold uppercase tracking-wide text-gray-400">
+        Family Reviews
+      </p>
       <div className="flex animate-marquee gap-4">
         {items.map((photo, index) => (
-          <Link
+          <div
             key={`${photo.src}-${index}`}
-            href={TRIPADVISOR_URL}
-            target="_blank"
-            rel="noopener noreferrer"
             className="group relative h-48 w-72 shrink-0 overflow-hidden rounded-2xl"
           >
             <Image
@@ -58,11 +55,10 @@ function ReviewMarquee() {
               sizes="288px"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-            <div className="absolute bottom-3 left-3 flex items-center gap-2">
+            <div className="absolute bottom-3 left-3">
               <StarRating />
-              <span className="text-xs font-medium text-white/90">TripAdvisor</span>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </div>
@@ -85,7 +81,6 @@ export function LovedByFamiliesSection() {
           </h2>
         </div>
 
-        {/* Featured family + TripAdvisor */}
         <div className="mx-auto mt-12 grid max-w-6xl gap-8 lg:grid-cols-2 lg:items-center">
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-lg">
             <Image
@@ -99,36 +94,17 @@ export function LovedByFamiliesSection() {
           </div>
 
           <div className="flex flex-col justify-center space-y-5 px-2 lg:px-6">
-            <div className="space-y-2">
-              <div className="flex items-center gap-1" aria-label="5 out of 5 stars">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star
-                    key={i}
-                    className="h-7 w-7 fill-[#FFD700] text-[#FFD700]"
-                    aria-hidden="true"
-                  />
-                ))}
-              </div>
-              <p className="text-xl font-bold text-gray-900 md:text-2xl">
-                Rated 5.0 on TripAdvisor
-              </p>
-            </div>
-            <p className="text-gray-500 md:text-lg leading-relaxed">
-              See what international families are saying about their creative
-              experiences at LALLA.
+            <StarRating size="lg" />
+            <p className="text-xl font-bold text-gray-900 md:text-2xl">
+              Messages from Our Families
             </p>
-            <Link
-              href={TRIPADVISOR_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex w-fit items-center gap-2 text-sm font-semibold text-[#C9A800] underline-offset-4 transition-colors hover:text-[#FFD700] hover:underline md:text-base"
-            >
-              Read Reviews
-            </Link>
+            <p className="text-gray-500 md:text-lg leading-relaxed">
+              Genuine feedback from parents and international families after
+              attending our programs — shared directly with LALLA.
+            </p>
           </div>
         </div>
 
-        {/* Family photo gallery */}
         <div className="mx-auto mt-12 grid max-w-6xl grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4 lg:grid-cols-4">
           {FAMILY_GALLERY_PHOTOS.map((photo) => (
             <div

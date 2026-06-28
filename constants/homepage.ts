@@ -257,7 +257,6 @@ export const FAMILY_GALLERY_PHOTOS = [
 export const REVIEW_SLIDER_PHOTOS = [
   { src: "/art6.JPG", alt: "Family review moment at Lalla" },
   { src: "/art11.JPG", alt: "International family at Lalla" },
-  { src: "/KakaoTalk_Photo_2025-02-20-17-40-28-2.jpeg", alt: "Family feedback" },
   { src: "/art13.jpg", alt: "Children creating at Lalla" },
   { src: "/art9.jpg", alt: "Art session in Seoul" },
   { src: "/art17.JPG", alt: "Creative family experience" },
@@ -328,9 +327,6 @@ export const WORKSHOP_PHOTOS = [
   { src: "/art14.JPG", alt: "Group creative session" },
   { src: "/art3.jpg", alt: "Workshop at Lalla studio" },
 ];
-
-export const TRIPADVISOR_URL =
-  "https://www.tripadvisor.co.kr/Attraction_Review-g294197-d28047381-Reviews-Lalla_Kids_Art-Seoul.html";
 
 export const CHOOSE_PROGRAMS = [
   {
