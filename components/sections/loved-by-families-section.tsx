@@ -1,12 +1,9 @@
 /**
  * @file loved-by-families-section.tsx
- * @description Trust section — international families, photo gallery, and family review slider.
- *
- * Uses only existing website media. Reviews are presented as authentic
- * messages from families — not third-party platform branding.
+ * @description Trust section — family messages, featured photos, and parent reviews.
  *
  * @dependencies
- * - @/constants/homepage: family photos and review slider images
+ * - @/constants/homepage: featured photos and family review quotes
  */
 
 "use client";
@@ -15,50 +12,62 @@ import React from "react";
 import Image from "next/image";
 import { Star } from "lucide-react";
 import {
-  FAMILY_GALLERY_PHOTOS,
-  FEATURED_FAMILY,
-  REVIEW_SLIDER_PHOTOS,
+  FAMILY_REVIEWS,
+  FEATURED_FAMILY_PHOTOS,
 } from "@/constants/homepage";
 
-function StarRating({ size = "md" }: { size?: "md" | "lg" }) {
+function StarRating({
+  rating = 5,
+  size = "md",
+}: {
+  rating?: number;
+  size?: "md" | "lg";
+}) {
   const iconClass =
-    size === "lg" ? "h-7 w-7 fill-[#FFD700] text-[#FFD700]" : "h-4 w-4 fill-[#FFD700] text-[#FFD700]";
+    size === "lg"
+      ? "h-7 w-7 fill-[#FFD700] text-[#FFD700]"
+      : "h-4 w-4 fill-[#FFD700] text-[#FFD700]";
 
   return (
-    <div className="flex items-center gap-0.5" aria-label="5 out of 5 stars">
-      {Array.from({ length: 5 }).map((_, i) => (
+    <div
+      className="flex items-center gap-0.5"
+      aria-label={`${rating} out of 5 stars`}
+    >
+      {Array.from({ length: rating }).map((_, i) => (
         <Star key={i} className={iconClass} aria-hidden="true" />
       ))}
     </div>
   );
 }
 
-function ReviewMarquee() {
-  const items = [...REVIEW_SLIDER_PHOTOS, ...REVIEW_SLIDER_PHOTOS];
-
+function FamilyReviews() {
   return (
-    <div className="relative mt-12 overflow-hidden">
-      <p className="mb-6 text-center text-sm font-semibold uppercase tracking-wide text-gray-400">
-        Family Reviews
-      </p>
-      <div className="flex animate-marquee gap-4">
-        {items.map((photo, index) => (
-          <div
-            key={`${photo.src}-${index}`}
-            className="group relative h-48 w-72 shrink-0 overflow-hidden rounded-2xl"
+    <div className="mx-auto mt-12 max-w-6xl rounded-3xl border border-[#FFD700]/20 bg-[#FFD700]/10 px-4 py-10 md:px-8 md:py-12">
+      <div className="text-center">
+        <span className="inline-block rounded-full bg-[#FFD700] px-3 py-1 text-sm font-medium text-black">
+          Family Reviews
+        </span>
+        <p className="mt-3 text-sm text-gray-600 md:text-base">
+          What parents say about their children&apos;s experience at LALLA
+        </p>
+      </div>
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {FAMILY_REVIEWS.map((review) => (
+          <article
+            key={review.id}
+            className="flex flex-col rounded-2xl border border-[#FFD700]/15 bg-white/90 p-6 shadow-sm backdrop-blur-sm"
           >
-            <Image
-              src={photo.src}
-              alt={photo.alt}
-              fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-              sizes="288px"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-            <div className="absolute bottom-3 left-3">
-              <StarRating />
-            </div>
-          </div>
+            <StarRating rating={review.rating} />
+            <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-gray-700 md:text-base">
+              &ldquo;{review.quote}&rdquo;
+            </blockquote>
+            <footer className="mt-5 border-t border-[#FFD700]/20 pt-4">
+              <p className="text-sm font-semibold text-gray-900">{review.name}</p>
+              <p className="mt-0.5 text-xs font-medium text-[#9A7B00]">
+                {review.context}
+              </p>
+            </footer>
+          </article>
         ))}
       </div>
     </div>
@@ -82,47 +91,52 @@ export function LovedByFamiliesSection() {
         </div>
 
         <div className="mx-auto mt-12 grid max-w-6xl gap-8 lg:grid-cols-2 lg:items-center">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-lg">
-            <Image
-              src={FEATURED_FAMILY.image}
-              alt={FEATURED_FAMILY.alt}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              priority
-            />
+          <div className="grid grid-cols-2 gap-3">
+            {FEATURED_FAMILY_PHOTOS.map((photo) => (
+              <div
+                key={photo.src}
+                className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-lg"
+              >
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 50vw, 25vw"
+                  priority
+                />
+              </div>
+            ))}
           </div>
 
-          <div className="flex flex-col justify-center space-y-5 px-2 lg:px-6">
+          <div className="flex flex-col justify-center space-y-4 px-2 lg:px-6">
             <StarRating size="lg" />
             <p className="text-xl font-bold text-gray-900 md:text-2xl">
               Messages from Our Families
             </p>
+            <p className="text-base font-bold leading-relaxed text-gray-900 md:text-lg">
+              More than just an art class — a memorable part of your
+              family&apos;s trip to Korea.
+            </p>
             <p className="text-gray-500 md:text-lg leading-relaxed">
-              Genuine feedback from parents and international families after
-              attending our programs — shared directly with LALLA.
+              Whether you&apos;re visiting Seoul for a few days or living here
+              for a while, LALLA offers children a creative experience
+              they&apos;ll remember long after they return home.
+            </p>
+            <p className="text-gray-500 md:text-lg leading-relaxed">
+              Instead of simply making crafts, children paint on walls, explore
+              unique materials, discover Korean and world cultures through art,
+              and create something truly their own.
+            </p>
+            <p className="text-gray-500 md:text-lg leading-relaxed">
+              Many parents tell us their children keep talking about LALLA long
+              after the visit—and proudly take home not only their artwork, but
+              unforgettable memories made in Korea.
             </p>
           </div>
         </div>
 
-        <div className="mx-auto mt-12 grid max-w-6xl grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4 lg:grid-cols-4">
-          {FAMILY_GALLERY_PHOTOS.map((photo) => (
-            <div
-              key={photo.src}
-              className="relative aspect-square overflow-hidden rounded-2xl"
-            >
-              <Image
-                src={photo.src}
-                alt={photo.alt}
-                fill
-                className="object-cover transition-transform duration-300 hover:scale-105"
-                sizes="(max-width: 768px) 50vw, 25vw"
-              />
-            </div>
-          ))}
-        </div>
-
-        <ReviewMarquee />
+        <FamilyReviews />
       </div>
     </section>
   );

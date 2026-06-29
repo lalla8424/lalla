@@ -92,7 +92,7 @@ export function TeacherSection() {
           </div>
         </div>
       </div>
-      <div className="absolute bottom-0 left-0 right-0">
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 80"

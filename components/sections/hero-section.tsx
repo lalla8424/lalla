@@ -31,8 +31,8 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-gray-900">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/mural.png"
-          alt="Children creating projection mural art at Lalla Kids Art"
+          src="/playground.JPG"
+          alt="Children playing and creating at Lalla Kids Art studio in Seoul"
           className="h-full w-full object-cover object-center"
           fetchPriority="high"
           decoding="async"

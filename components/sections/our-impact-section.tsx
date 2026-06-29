@@ -9,14 +9,15 @@
 
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { Globe, Heart, Layers, Monitor, Users, LucideIcon } from "lucide-react";
 import {
+  ALSO_SERVING,
   COUNTRY_CHIPS,
   IMPACT_STATS,
   PARTNER_ORGANIZATIONS,
-  WORKSHOP_PHOTOS,
+  WORKSHOP_PHOTO,
 } from "@/constants/homepage";
 
 const STAT_ICONS: Record<string, LucideIcon> = {
@@ -27,7 +28,43 @@ const STAT_ICONS: Record<string, LucideIcon> = {
   globe: Globe,
 };
 
-function AnimatedStat({
+function PartnerLogo({ src }: { src: string }) {
+  const [hidden, setHidden] = React.useState(false);
+  if (hidden) return null;
+
+  return (
+    <Image
+      src={src}
+      alt=""
+      width={96}
+      height={40}
+      className="max-h-8 w-auto max-w-[6rem] shrink-0 object-contain opacity-90"
+      onError={() => setHidden(true)}
+    />
+  );
+}
+
+function PartnerCard({
+  name,
+  description,
+  logo,
+}: {
+  name: string;
+  description: string;
+  logo?: string;
+}) {
+  return (
+    <div className="flex h-full items-center justify-between gap-3 rounded-lg bg-[#F2F1E8] px-3.5 py-3">
+      <div className="min-w-0 flex-1">
+        <p className="text-sm font-bold leading-tight text-gray-900">{name}</p>
+        <p className="mt-1 text-[11px] leading-snug text-gray-600">{description}</p>
+      </div>
+      {logo ? <PartnerLogo src={logo} /> : null}
+    </div>
+  );
+}
+
+function StatCard({
   value,
   suffix,
   label,
@@ -38,48 +75,13 @@ function AnimatedStat({
   label: string;
   icon: keyof typeof STAT_ICONS;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [displayValue, setDisplayValue] = useState(0);
-  const [hasAnimated, setHasAnimated] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
-          const duration = 1500;
-          const start = performance.now();
-
-          const tick = (now: number) => {
-            const progress = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            setDisplayValue(Math.round(value * eased));
-            if (progress < 1) requestAnimationFrame(tick);
-          };
-
-          requestAnimationFrame(tick);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [value, hasAnimated]);
-
   const Icon = STAT_ICONS[icon] ?? Globe;
 
   return (
-    <div
-      ref={ref}
-      className="flex flex-col items-center rounded-2xl border border-gray-100 bg-white p-8 text-center shadow-sm"
-    >
+    <div className="flex flex-col items-center rounded-2xl border border-gray-100 bg-white p-8 text-center shadow-sm">
       <Icon className="mb-4 h-8 w-8 text-[#C9A800]" aria-hidden="true" />
       <p className="text-4xl font-bold tracking-tight text-gray-900 md:text-5xl">
-        {displayValue}
+        {value}
         {suffix}
       </p>
       <p className="mt-3 max-w-[14rem] text-sm font-medium leading-snug text-gray-500">
@@ -104,7 +106,7 @@ export function OurImpactSection() {
 
         <div className="mx-auto mt-12 grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {IMPACT_STATS.map((stat) => (
-            <AnimatedStat
+            <StatCard
               key={stat.label}
               value={stat.value}
               suffix={stat.suffix}
@@ -115,12 +117,14 @@ export function OurImpactSection() {
         </div>
 
         {/* Families We've Welcomed */}
-        <div className="mx-auto mt-20 max-w-5xl text-center">
+        <div className="mx-auto mt-14 max-w-5xl text-center">
           <h3 className="text-2xl font-bold text-gray-900 sm:text-3xl">
-            Families We&apos;ve Welcomed
+            Families We&apos;ve Welcomed So Far
           </h3>
           <p className="mt-4 text-gray-500 md:text-lg">
-            Welcoming international families living in and visiting Korea.
+            International families living in and visiting Korea — and we&apos;re
+            excited to welcome even more cultures and communities in the years
+            ahead.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             {COUNTRY_CHIPS.map((country) => (
@@ -136,36 +140,56 @@ export function OurImpactSection() {
         </div>
 
         {/* Trusted by Schools & Organizations */}
-        <div className="mx-auto mt-20 max-w-5xl text-center">
-          <h3 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+        <div className="mx-auto mt-14 max-w-6xl">
+          <h3 className="text-center text-xl font-bold text-gray-900 sm:text-2xl">
             Trusted by Schools &amp; Organizations
           </h3>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
+          <div className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
             {PARTNER_ORGANIZATIONS.map((org) => (
-              <span
-                key={org}
-                className="rounded-2xl border border-gray-100 bg-white px-6 py-4 text-sm font-semibold text-gray-700 shadow-sm md:text-base"
-              >
-                {org}
-              </span>
+              <PartnerCard
+                key={org.name}
+                name={org.name}
+                description={org.description}
+                logo={org.logo}
+              />
             ))}
           </div>
 
-          <div className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
-            {WORKSHOP_PHOTOS.map((photo) => (
-              <div
-                key={photo.src}
-                className="relative aspect-[4/3] overflow-hidden rounded-2xl"
-              >
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                />
-              </div>
-            ))}
+          <div className="mt-4 rounded-lg bg-[#F2F1E8] px-4 py-3">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5">
+              <span className="text-xs font-bold italic text-gray-900">
+                {ALSO_SERVING.label}:
+              </span>
+              {ALSO_SERVING.communities.map((community, index) => (
+                <React.Fragment key={community}>
+                  {index > 0 ? (
+                    <span className="text-[10px] text-gray-400" aria-hidden="true">
+                      ·
+                    </span>
+                  ) : null}
+                  <span className="text-[11px] leading-snug text-gray-600">
+                    {community}
+                  </span>
+                </React.Fragment>
+              ))}
+              <span className="text-[10px] text-gray-400" aria-hidden="true">
+                ·
+              </span>
+              <span className="text-[11px] italic leading-snug text-gray-500">
+                {ALSO_SERVING.note}
+              </span>
+            </div>
+          </div>
+
+          <div className="mt-6 overflow-hidden rounded-2xl">
+            <Image
+              src={WORKSHOP_PHOTO.src}
+              alt={WORKSHOP_PHOTO.alt}
+              width={1900}
+              height={1396}
+              className="h-auto w-full object-contain"
+              sizes="(max-width: 768px) 100vw, 80vw"
+            />
           </div>
         </div>
       </div>

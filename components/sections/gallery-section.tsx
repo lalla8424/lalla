@@ -27,8 +27,8 @@ export function GallerySection() {
           </p>
         </div>
 
-        <div className="mx-auto mt-12 max-w-5xl">
-          <ImageSlider slides={STUDIO_SLIDES} autoAdvanceInterval={3000} />
+        <div className="relative z-10 mx-auto mt-12 max-w-5xl">
+          <ImageSlider slides={STUDIO_SLIDES} autoAdvanceInterval={4000} />
         </div>
 
         <div className="mx-auto mt-14 max-w-5xl">

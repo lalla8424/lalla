@@ -66,7 +66,9 @@ export function ChooseExperienceSection() {
                     </span>
                   )}
                 </div>
-                <p className="mt-3 text-xs text-gray-500">{program.includes}</p>
+                <p className="mt-3 whitespace-pre-line text-xs text-gray-500">
+                  {program.includes}
+                </p>
                 <Button
                   asChild
                   className="mt-5 w-full bg-[#FFD700] font-semibold text-black hover:bg-[#FFC400]"

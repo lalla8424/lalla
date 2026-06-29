@@ -22,17 +22,15 @@ export const PROGRAM_SLIDES = [
 
 export const STUDIO_SLIDES = [
   { image: "/l_a.JPG" },
-  { image: "/l_b.JPG" },
   { image: "/l_c.jpeg" },
   { image: "/l_d.jpeg" },
-  { image: "/l_e.jpeg" },
   { image: "/l_f.png" },
   { image: "/l_g.jpg" },
-  { image: "/l_h.JPG" },
-  { image: "/l_i.JPG" },
 ];
 
 export const PHOTOBOOK_COVER = "/photobook_cover.png";
+
+export const PHOTOBOOK_INSIDE = "/inside_book.jpg";
 
 export const PHOTOBOOK_PRICE = "45,000 KRW";
 
@@ -238,28 +236,57 @@ export const EXPERIENCE_PAGES: Record<
   },
 };
 
-export const FEATURED_FAMILY = {
-  image: "/art11.JPG",
-  alt: "International family creating art at Lalla Kids Art",
-};
-
-export const FAMILY_GALLERY_PHOTOS = [
-  { src: "/art6.JPG", alt: "Children at Lalla Kids Art studio" },
-  { src: "/art5.jpg", alt: "Family art experience in Seoul" },
-  { src: "/art10.JPG", alt: "Creative session at Lalla" },
-  { src: "/art12.JPG", alt: "International children making art" },
-  { src: "/art15.JPG", alt: "Hands-on art at Lalla Kids Art" },
-  { src: "/art16.JPG", alt: "Family visiting Lalla studio" },
-  { src: "/cultural.jpg", alt: "Cultural art experience" },
-  { src: "/art7.JPG", alt: "Children exploring materials" },
+export const FEATURED_FAMILY_PHOTOS = [
+  {
+    src: "/reviews.jpg",
+    alt: "Family review message at Lalla Kids Art",
+  },
+  {
+    src: "/reviews1.jpg",
+    alt: "Children's heartfelt artwork for their Lalla teacher",
+  },
 ];
 
-export const REVIEW_SLIDER_PHOTOS = [
-  { src: "/art6.JPG", alt: "Family review moment at Lalla" },
-  { src: "/art11.JPG", alt: "International family at Lalla" },
-  { src: "/art13.jpg", alt: "Children creating at Lalla" },
-  { src: "/art9.jpg", alt: "Art session in Seoul" },
-  { src: "/art17.JPG", alt: "Creative family experience" },
+export const FAMILY_REVIEWS = [
+  {
+    id: "korean-traditions",
+    name: "International Parent",
+    context: "Weekly program family",
+    rating: 5,
+    quote:
+      "We love that she is learning Korean traditions through art. Thank you.",
+  },
+  {
+    id: "missed-you",
+    name: "International Parent",
+    context: "Weekly program family",
+    rating: 5,
+    quote:
+      "She had said she's missed you so much. I can believe that she didn't want to leave!",
+  },
+  {
+    id: "joanna",
+    name: "Joanna O.",
+    context: "International family in Seoul",
+    rating: 5,
+    quote:
+      "Thank you so much. We will certainly recommend you to our friends.",
+  },
+  {
+    id: "sally",
+    name: "Sally M.",
+    context: "International family in Seoul",
+    rating: 5,
+    quote: "Wow, I love how you make it so educational and fun!",
+  },
+  {
+    id: "joon",
+    name: "Joon B.",
+    context: "Google Review",
+    rating: 5,
+    quote:
+      "Kids had a great time. They really enjoyed the class and came home excited about what they had made. The teacher was friendly, passionate and made the activities fun and easy to follow. It was a positive experience overall, and we would definitely come back again.",
+  },
 ];
 
 export const IMPACT_STATS = [
@@ -293,12 +320,6 @@ export const IMPACT_STATS = [
     label: "International Family Programs",
     icon: "globe" as const,
   },
-  {
-    value: 10,
-    suffix: "+",
-    label: "Countries Welcomed",
-    icon: "globe" as const,
-  },
 ];
 
 export const COUNTRY_CHIPS = [
@@ -312,21 +333,56 @@ export const COUNTRY_CHIPS = [
   { flag: "🇭🇰", name: "Hong Kong" },
   { flag: "🇦🇪", name: "United Arab Emirates" },
   { flag: "🇹🇷", name: "Türkiye" },
+  { flag: "🇮🇩", name: "Indonesia" },
+  { flag: "🇮🇹", name: "Italy" },
+  { flag: "🇲🇾", name: "Malaysia" },
+  { flag: "🇹🇼", name: "Taiwan" },
 ];
 
-export const PARTNER_ORGANIZATIONS = [
-  "Samsung Foundation Childcare Centres",
-  "Cheil Worldwide Childcare Centres",
-  "Korea International School",
-  "Shinsegae Cultural Centre",
+export const PARTNER_ORGANIZATIONS: {
+  name: string;
+  description: string;
+  logo?: string;
+}[] = [
+  {
+    name: "Samsung Foundation",
+    description: "3 Childcare centres · Itaewon · Seolleung · Sindang",
+    logo: "/plogo4.png",
+  },
+  {
+    name: "Cheil Worldwide",
+    description: "Affiliated childcare program supply",
+    logo: "/plogo3.png",
+  },
+  {
+    name: "Korea International School",
+    description: "Student workshops",
+    logo: "/plogo5.png",
+  },
+  {
+    name: "Shinsegae",
+    description: "Cultural Centre public workshops",
+    logo: "/plogo.png",
+  },
 ];
 
-export const WORKSHOP_PHOTOS = [
-  { src: "/cultural.jpg", alt: "School workshop at Lalla" },
-  { src: "/art4.JPG", alt: "Organization art workshop" },
-  { src: "/art14.JPG", alt: "Group creative session" },
-  { src: "/art3.jpg", alt: "Workshop at Lalla studio" },
-];
+export const ALSO_SERVING = {
+  label: "Providing Experiences To",
+  communities: [
+    "Camp Humphreys US army base",
+    "U.S. Embassy in Korea",
+    "Seoul Foreign School",
+    "Dulwich",
+    "Australian homeschooling communities",
+    "International families via travel agencies",
+  ],
+  note: "So far — and we're excited to welcome even more communities in the years ahead.",
+};
+
+export const WORKSHOP_PHOTO = {
+  src: "/groups.JPG",
+  alt: "Children creating art together at Lalla workshops",
+};
 
 export const CHOOSE_PROGRAMS = [
   {
@@ -340,7 +396,7 @@ export const CHOOSE_PROGRAMS = [
     includes:
       "Projection mural art, eco painting, eco clay, or creative making",
     image: "/art.jpg",
-    cta: "Select",
+    cta: "View Details",
     href: "/art-experience",
   },
   {
@@ -352,21 +408,23 @@ export const CHOOSE_PROGRAMS = [
     price: "190,000 KRW",
     bestFor: "Families living in Seoul",
     includes: "Materials included",
-    image: "/art6.JPG",
-    cta: "Select",
+    image: "/art12.JPG",
+    cta: "View Details",
     href: "/weekly-program",
   },
   {
     id: "private-family",
-    title: "Private Family Experience",
-    description: "For families who want a private creative experience.",
-    duration: "Custom",
-    price: "Custom pricing",
-    bestFor: "Families, siblings, travelers, small groups",
-    includes: "Tailored creative session",
-    image: "/l_d.jpeg",
-    cta: "Book",
-    href: "/#book-now",
+    title: "Private Family & Events",
+    description:
+      "Perfect for families, birthdays, friends, and private groups looking for a personalised creative art experience in Seoul.",
+    duration: "2 Hours",
+    price: "From 220,000 KRW",
+    bestFor: "Families · Birthday Parties · Friends · Private Groups",
+    includes:
+      "Choose from:\n\n• Projection Mural Art\n• Eco Clay & Eco Paint\n• Drawing & Painting\n• Space Installation Art\n• Korean & World Cultures Through Art\n\nEvery experience is tailored to your group's age, interests, and occasion.",
+    image: "/events.jpg",
+    cta: "Book Private Experience",
+    href: "/private-family-events",
   },
   {
     id: "summer-camp",
@@ -376,7 +434,7 @@ export const CHOOSE_PROGRAMS = [
     price: "Contact us",
     bestFor: "International families and visiting children",
     includes: "Holiday art experiences",
-    image: "/art11.JPG",
+    image: "/summer.jpg",
     cta: "Learn More",
     href: "/summer-camp",
   },
@@ -396,9 +454,21 @@ export const CHOOSE_PROGRAMS = [
 ];
 
 export const PHILOSOPHY_PHOTOS = [
-  { src: "/art6.JPG", alt: "Children creating art at Lalla Kids Art" },
-  { src: "/art11.JPG", alt: "International family at Lalla studio" },
-  { src: "/art16.JPG", alt: "Family sharing a creative moment in Seoul" },
+  {
+    src: "/IMG_6606_.jpg",
+    alt: "Child creating a personal story of Korea through art at Lalla",
+    width: 3024,
+    height: 3392,
+    zoom: 1.4,
+    objectPosition: "38% 28%",
+    offsetY: -10,
+  },
+  {
+    src: "/IMG_5387_.JPG",
+    alt: "Children creating art together at Lalla",
+    width: 600,
+    height: 750,
+  },
 ];
 
 export const FAQ_ITEMS = [

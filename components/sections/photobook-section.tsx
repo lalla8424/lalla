@@ -11,6 +11,7 @@ import Image from "next/image";
 import { BookMarked, Clock, FileImage, Sparkles } from "lucide-react";
 import {
   PHOTOBOOK_COVER,
+  PHOTOBOOK_INSIDE,
   PHOTOBOOK_FEATURES,
   PHOTOBOOK_PRICE,
 } from "@/constants/homepage";
@@ -51,15 +52,28 @@ export function PhotobookSection() {
               </p>
             </div>
 
-            <div className="mx-auto w-40 flex-shrink-0 sm:w-44 md:mx-0 md:justify-self-end">
+            <div className="mx-auto flex items-stretch gap-3 md:mx-0 md:justify-self-end">
               <div className="overflow-hidden rounded-xl bg-white p-2 shadow-lg ring-1 ring-black/5">
-                <Image
-                  src={PHOTOBOOK_COVER}
-                  alt="LALLA Art Lab Photo Journal Book cover"
-                  width={176}
-                  height={235}
-                  className="w-full rounded-lg object-cover"
-                />
+                <div className="relative h-56 w-36 sm:h-64 sm:w-40">
+                  <Image
+                    src={PHOTOBOOK_COVER}
+                    alt="LALLA Art Lab Photo Journal Book cover"
+                    fill
+                    className="rounded-lg object-contain"
+                    sizes="160px"
+                  />
+                </div>
+              </div>
+              <div className="overflow-hidden rounded-xl bg-white p-2 shadow-lg ring-1 ring-black/5">
+                <div className="relative h-56 w-64 sm:h-64 sm:w-80">
+                  <Image
+                    src={PHOTOBOOK_INSIDE}
+                    alt="Inside pages of LALLA Art Photobook"
+                    fill
+                    className="rounded-lg object-contain"
+                    sizes="320px"
+                  />
+                </div>
               </div>
             </div>
           </div>

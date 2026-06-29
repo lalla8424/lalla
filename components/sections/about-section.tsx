@@ -112,8 +112,7 @@ export function AboutSection() {
             </p>
             <p className="text-gray-500 md:text-lg lg:text-xl leading-relaxed">
               Designed for international families, every session is
-              English-friendly, intentionally small, and built around immersive
-              experiences—not traditional classroom instruction.
+              English-friendly.
             </p>
           </div>
         </div>

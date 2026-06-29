@@ -36,19 +36,39 @@ export function WhyFamiliesSection() {
           </div>
         </div>
 
-        <div className="mx-auto mt-12 grid max-w-5xl gap-4 md:mt-16 md:grid-cols-3 md:gap-5">
+        <div className="mx-auto mt-12 grid max-w-5xl grid-cols-2 gap-3 md:mt-16 md:gap-5">
           {PHILOSOPHY_PHOTOS.map((photo) => (
             <div
               key={photo.src}
-              className="relative aspect-[4/5] overflow-hidden rounded-2xl sm:aspect-[3/4]"
+              className="relative aspect-[4/5] overflow-hidden rounded-2xl"
             >
-              <Image
-                src={photo.src}
-                alt={photo.alt}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 33vw"
-              />
+              <div
+                className="absolute inset-0"
+                style={
+                  photo.zoom
+                    ? {
+                        transform: `scale(${photo.zoom})${
+                          photo.offsetX ? ` translateX(${photo.offsetX}%)` : ""
+                        }${photo.offsetY ? ` translateY(${photo.offsetY}%)` : ""}`,
+                        transformOrigin: "center center",
+                      }
+                    : undefined
+                }
+              >
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  className="object-cover"
+                  style={{
+                    objectPosition:
+                      typeof photo.objectPosition === "string"
+                        ? photo.objectPosition
+                        : "center",
+                  }}
+                  sizes="(max-width: 768px) 50vw, 40vw"
+                />
+              </div>
             </div>
           ))}
         </div>
