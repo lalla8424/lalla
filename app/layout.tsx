@@ -11,6 +11,11 @@ export const metadata = {
   generator: "v0.dev",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: {

@@ -37,9 +37,9 @@ export function PhotobookSection() {
             </h2>
           </div>
 
-          <div className="grid items-center gap-10 md:grid-cols-[1fr_auto] md:gap-12">
-            <div className="space-y-5">
-              <p className="max-w-xl text-sm leading-relaxed text-gray-500 sm:text-base">
+          <div className="flex flex-col items-center gap-8 md:grid md:grid-cols-[1fr_auto] md:items-center md:gap-12">
+            <div className="w-full space-y-5 text-center md:text-left">
+              <p className="mx-auto max-w-xl text-sm leading-relaxed text-gray-500 sm:text-base md:mx-0">
                 Every child&apos;s creative journey is thoughtfully documented in
                 our signature Art Photobook—capturing the moments, discoveries,
                 smiles, and artwork that make each experience unforgettable.
@@ -52,26 +52,26 @@ export function PhotobookSection() {
               </p>
             </div>
 
-            <div className="mx-auto flex items-stretch gap-3 md:mx-0 md:justify-self-end">
-              <div className="overflow-hidden rounded-xl bg-white p-2 shadow-lg ring-1 ring-black/5">
-                <div className="relative h-56 w-36 sm:h-64 sm:w-40">
+            <div className="flex w-full max-w-[20rem] justify-center gap-2 sm:max-w-none sm:gap-3 md:max-w-none md:justify-self-end">
+              <div className="shrink-0 overflow-hidden rounded-xl bg-white p-1.5 shadow-lg ring-1 ring-black/5 sm:p-2">
+                <div className="relative h-40 w-[6.75rem] sm:h-56 sm:w-36">
                   <Image
                     src={PHOTOBOOK_COVER}
                     alt="LALLA Art Lab Photo Journal Book cover"
                     fill
                     className="rounded-lg object-contain"
-                    sizes="160px"
+                    sizes="(max-width: 640px) 108px, 144px"
                   />
                 </div>
               </div>
-              <div className="overflow-hidden rounded-xl bg-white p-2 shadow-lg ring-1 ring-black/5">
-                <div className="relative h-56 w-64 sm:h-64 sm:w-80">
+              <div className="shrink-0 overflow-hidden rounded-xl bg-white p-1.5 shadow-lg ring-1 ring-black/5 sm:p-2">
+                <div className="relative h-40 w-[11rem] sm:h-64 sm:w-80">
                   <Image
                     src={PHOTOBOOK_INSIDE}
                     alt="Inside pages of LALLA Art Photobook"
                     fill
                     className="rounded-lg object-contain"
-                    sizes="320px"
+                    sizes="(max-width: 640px) 176px, 320px"
                   />
                 </div>
               </div>
