@@ -3,11 +3,33 @@
  * @description Private Family & Events — dedicated program landing page.
  */
 
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Cake, Clock, Coins, Package, Users } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import {
+  PHOTOBOOK_COVER,
+  PHOTOBOOK_INSIDE,
+  PHOTOBOOK_PRICE,
+} from "@/constants/homepage";
+import {
+  ArrowLeft,
+  ChevronDown,
+  ChevronRight,
+  Clock,
+  Coins,
+  Package,
+  UserPlus,
+  Users,
+} from "lucide-react";
 
 const ACTIVITIES = [
   "Projection Mural Art",
@@ -18,18 +40,99 @@ const ACTIVITIES = [
 ];
 
 const PERFECT_FOR = [
-  "International families visiting Seoul",
-  "Birthday parties and celebrations",
-  "Friends and small private groups",
-  "Siblings and multi-age gatherings",
+  "International Families Visiting Seoul",
+  "Birthday Parties & Celebrations",
+  "Friends & Private Groups",
+  "Siblings & Multi-age Families",
 ];
 
 const INCLUDED = [
-  "2-hour private studio session",
-  "All art materials included",
-  "English-friendly facilitation",
-  "Tailored activities for your group",
-  "A creative experience designed around your occasion",
+  "Exclusive use of the studio",
+  "2-hour private creative experience",
+  "Personalised activity planning",
+  "English-friendly instruction",
+  "All art materials provided",
+  "Aprons and equipment",
+  "Studio setup and cleanup",
+];
+
+const PHOTOBOOK_POINTS = [
+  "We capture every creative moment, so your child can look back on the experience for years to come.",
+  "A meaningful gift for family abroad who couldn't join",
+  "6 × 8 · ~20 pages · ready in about one week",
+];
+
+const PRICING_ITEMS = [
+  { label: "Duration", value: "2 Hours", icon: Clock },
+  { label: "Starting From", value: "290,000 KRW", icon: Coins },
+  { label: "Includes", value: "Up to 3 Children", icon: Package },
+  { label: "Maximum Capacity", value: "Up to 10 Children", icon: Users },
+  {
+    label: "Additional Child",
+    value: "+43,000 KRW per child",
+    icon: UserPlus,
+  },
+];
+
+const PRICING_NOTES = [
+  "Every private experience is personalised for your group.",
+  "Additional hours are available upon request.",
+  "Sunday bookings are available with an additional fee.",
+  "Decorations, catering, special event setups, or customised requests may require additional charges.",
+  "Final pricing depends on selected activities and event requirements.",
+];
+
+const CREATIVE_KEEPSAKES = [
+  "T-shirt Printing",
+  "Custom Sneaker Art",
+  "Tote Bag Printing",
+  "Bucket Hat Design",
+  "LALLA Art Photobook",
+];
+
+const HOW_IT_WORKS = [
+  "Tell us about your group",
+  "Choose your activities",
+  "Receive your personalised quote",
+  "Confirm your booking",
+];
+
+const FAQ_ITEMS = [
+  {
+    question: "How many children can join?",
+    answer:
+      "Up to 10 children can join a private session. We recommend groups of up to 4 children for the most personalised experience. Additional children beyond your confirmed group size are quoted individually.",
+  },
+  {
+    question: "Can adults participate?",
+    answer:
+      "Yes. Parents and caregivers are welcome to stay and observe. We may invite an adult to join briefly when helpful for younger children.",
+  },
+  {
+    question: "Can we combine multiple activities?",
+    answer:
+      "Yes. You can mix and match from our activity menu to create a personalised 2-hour experience for your group.",
+  },
+  {
+    question: "Can siblings of different ages join together?",
+    answer:
+      "Yes. We tailor activities so siblings and multi-age families can create together in the same session.",
+  },
+  {
+    question: "Can we celebrate birthdays?",
+    answer:
+      "Yes. Private Family & Events is perfect for birthday parties and celebrations. Share your plans when you enquire and we will personalise the session for your occasion.",
+  },
+  {
+    question: "Can we extend the session?",
+    answer:
+      "Extra hours are available upon request. Let us know when booking and we will provide a quote.",
+  },
+  {
+    question: "How far in advance should we book?",
+    answer:
+      "We recommend booking at least 1–2 weeks in advance. For weekends, holidays, or special event setups, earlier booking is encouraged.",
+  },
 ];
 
 export function PrivateFamilyEventsPage() {
@@ -88,6 +191,13 @@ export function PrivateFamilyEventsPage() {
                   projection mural art to eco clay, drawing, installation, and
                   cultural art experiences.
                 </p>
+                <p>
+                  Every private experience is personalised for your group.
+                  Whether you&apos;re celebrating a birthday, travelling in
+                  Korea, or gathering with friends and family, we&apos;ll design
+                  an art experience based on your children&apos;s ages,
+                  interests, and preferred activities.
+                </p>
               </div>
             </div>
 
@@ -100,7 +210,10 @@ export function PrivateFamilyEventsPage() {
                     key={item}
                     className="flex items-start gap-3 rounded-xl border border-gray-100 bg-gray-50/60 p-4 text-sm text-gray-700"
                   >
-                    <Users className="mt-0.5 h-4 w-4 shrink-0 text-[#C9A800]" aria-hidden="true" />
+                    <Users
+                      className="mt-0.5 h-4 w-4 shrink-0 text-[#C9A800]"
+                      aria-hidden="true"
+                    />
                     {item}
                   </li>
                 ))}
@@ -126,8 +239,8 @@ export function PrivateFamilyEventsPage() {
                 ))}
               </ul>
               <p className="text-gray-500 md:text-lg leading-relaxed">
-                Every experience is tailored to your group&apos;s age, interests,
-                and occasion.
+                Mix and match activities to create your own personalised
+                experience.
               </p>
             </div>
 
@@ -136,39 +249,40 @@ export function PrivateFamilyEventsPage() {
               <h2 className="text-2xl font-bold text-gray-900">Pricing</h2>
               <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
                 <div className="flex flex-wrap gap-4">
-                  <div className="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50/80 px-4 py-3">
-                    <Clock className="h-5 w-5 text-[#C9A800]" aria-hidden="true" />
-                    <div>
-                      <p className="text-xs font-medium uppercase tracking-wide text-gray-400">
-                        Duration
-                      </p>
-                      <p className="text-sm font-semibold text-gray-900">2 Hours</p>
+                  {PRICING_ITEMS.map(({ label, value, icon: Icon }) => (
+                    <div
+                      key={label}
+                      className="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50/80 px-4 py-3"
+                    >
+                      <Icon
+                        className="h-5 w-5 text-[#C9A800]"
+                        aria-hidden="true"
+                      />
+                      <div>
+                        <p className="text-xs font-medium uppercase tracking-wide text-gray-400">
+                          {label}
+                        </p>
+                        <p className="text-sm font-semibold text-gray-900">
+                          {value}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50/80 px-4 py-3">
-                    <Coins className="h-5 w-5 text-[#C9A800]" aria-hidden="true" />
-                    <div>
-                      <p className="text-xs font-medium uppercase tracking-wide text-gray-400">
-                        Starting from
-                      </p>
-                      <p className="text-sm font-semibold text-gray-900">
-                        220,000 KRW
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50/80 px-4 py-3">
-                    <Cake className="h-5 w-5 text-[#C9A800]" aria-hidden="true" />
-                    <div>
-                      <p className="text-xs font-medium uppercase tracking-wide text-gray-400">
-                        Occasions
-                      </p>
-                      <p className="text-sm font-semibold text-gray-900">
-                        Birthdays &amp; private groups
-                      </p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
+              <p className="text-sm font-semibold text-gray-700 md:text-base">
+                Please Note
+              </p>
+              <ul className="space-y-2 text-sm text-gray-500 md:text-base leading-relaxed">
+                {PRICING_NOTES.map((note) => (
+                  <li key={note} className="flex items-start gap-2">
+                    <span className="text-[#C9A800]" aria-hidden="true">
+                      •
+                    </span>
+                    {note}
+                  </li>
+                ))}
+              </ul>
             </div>
 
             {/* What's Included */}
@@ -176,31 +290,186 @@ export function PrivateFamilyEventsPage() {
               <h2 className="text-2xl font-bold text-gray-900">
                 What&apos;s Included
               </h2>
-              <ul className="space-y-3">
+              <ul className="space-y-2 rounded-2xl border border-gray-100 bg-gray-50/60 p-6">
                 {INCLUDED.map((item) => (
                   <li
                     key={item}
-                    className="flex items-start gap-3 text-gray-600 md:text-lg"
+                    className="flex items-center gap-2 text-gray-700 md:text-lg"
                   >
-                    <Package className="mt-1 h-5 w-5 shrink-0 text-[#C9A800]" aria-hidden="true" />
+                    <span className="text-[#C9A800]" aria-hidden="true">
+                      •
+                    </span>
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Booking CTA */}
-            <div className="flex flex-col gap-3 border-t border-gray-100 pt-8 sm:flex-row">
-              <Button
-                asChild
-                size="lg"
-                className="bg-[#FFD700] font-semibold text-black hover:bg-[#FFC400]"
+            {/* Creative Keepsakes */}
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <h2 className="text-2xl font-bold text-gray-900">
+                  Creative Keepsakes
+                </h2>
+                <p className="text-base font-semibold text-gray-800 md:text-lg">
+                  Take home something truly personal.
+                </p>
+                <p className="text-gray-600 md:text-lg leading-relaxed">
+                  Enhance your creative experience with personalised keepsakes
+                  created from your child&apos;s own artwork.
+                </p>
+              </div>
+              <ul className="grid gap-3 sm:grid-cols-2">
+                {CREATIVE_KEEPSAKES.map((item) => (
+                  <li
+                    key={item}
+                    className="rounded-xl border border-gray-100 bg-gray-50/60 p-4 text-sm font-medium text-gray-700 md:text-base"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className="text-sm text-gray-500 md:text-base">
+                Available as optional add-ons. Additional fees apply depending on
+                the selected item.
+              </p>
+            </div>
+
+            {/* LALLA Art Photobook Add-on */}
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <span className="inline-block rounded-full bg-[#FFD700]/20 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-gray-800">
+                  Optional Add-On
+                </span>
+                <h2 className="text-2xl font-bold text-gray-900">
+                  LALLA Art Photobook
+                </h2>
+                <p className="text-gray-600 md:text-lg leading-relaxed">
+                  Turn your private session into a keepsake your family will
+                  treasure.
+                </p>
+              </div>
+
+              <div className="overflow-hidden rounded-2xl border border-[#FFD700]/30 bg-[#FFD700]/5 p-6">
+                <div className="flex flex-col gap-6 md:flex-row md:items-center">
+                  <div className="flex shrink-0 justify-center gap-3 md:justify-start">
+                    <div className="overflow-hidden rounded-xl bg-white p-2 shadow-md ring-1 ring-black/5">
+                      <div className="relative h-44 w-28 sm:h-52 sm:w-32">
+                        <Image
+                          src={PHOTOBOOK_COVER}
+                          alt="LALLA Art Photobook cover"
+                          fill
+                          className="rounded-lg object-contain"
+                          sizes="128px"
+                        />
+                      </div>
+                    </div>
+                    <div className="overflow-hidden rounded-xl bg-white p-2 shadow-md ring-1 ring-black/5">
+                      <div className="relative h-44 w-48 sm:h-52 sm:w-64">
+                        <Image
+                          src={PHOTOBOOK_INSIDE}
+                          alt="Inside pages of LALLA Art Photobook"
+                          fill
+                          className="rounded-lg object-contain"
+                          sizes="256px"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <ul className="space-y-2 text-sm text-gray-600 md:text-base">
+                      {PHOTOBOOK_POINTS.map((item) => (
+                        <li key={item} className="flex items-start gap-2">
+                          <span className="text-[#C9A800]" aria-hidden="true">
+                            •
+                          </span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="text-sm text-gray-700">
+                      <span className="font-semibold text-gray-900">
+                        {PHOTOBOOK_PRICE}
+                      </span>{" "}
+                      — add when you book.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* How It Works */}
+            <div className="space-y-4">
+              <h2 className="text-2xl font-bold text-gray-900">How It Works</h2>
+              <div className="flex flex-col items-stretch gap-3 md:flex-row md:items-center">
+                {HOW_IT_WORKS.map((step, index) => (
+                  <React.Fragment key={step}>
+                    <div className="flex flex-1 items-start gap-3 rounded-xl border border-gray-100 bg-gray-50/60 p-4">
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#FFD700]/20 text-sm font-bold text-gray-900">
+                        {index + 1}
+                      </span>
+                      <p className="text-sm font-medium text-gray-700 md:text-base">
+                        {step}
+                      </p>
+                    </div>
+                    {index < HOW_IT_WORKS.length - 1 ? (
+                      <div
+                        className="flex shrink-0 items-center justify-center text-gray-400"
+                        aria-hidden="true"
+                      >
+                        <ChevronDown className="h-5 w-5 md:hidden" />
+                        <ChevronRight className="hidden h-5 w-5 md:block" />
+                      </div>
+                    ) : null}
+                  </React.Fragment>
+                ))}
+              </div>
+            </div>
+
+            {/* FAQ */}
+            <div className="space-y-4">
+              <h2 className="text-2xl font-bold text-gray-900">FAQ</h2>
+              <Accordion
+                type="single"
+                collapsible
+                className="rounded-2xl border border-gray-100 bg-white px-4 shadow-sm md:px-6"
               >
-                <Link href="/#book-now">Book Private Experience</Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="font-semibold">
-                <Link href="/#choose-experience">View All Programs</Link>
-              </Button>
+                {FAQ_ITEMS.map((item, index) => (
+                  <AccordionItem key={item.question} value={`item-${index}`}>
+                    <AccordionTrigger className="text-left text-base font-semibold">
+                      {item.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-gray-500">
+                      {item.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+
+            {/* Booking CTA */}
+            <div className="space-y-4 border-t border-gray-100 pt-8">
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-[#FFD700] font-semibold text-black hover:bg-[#FFC400]"
+                >
+                  <Link href="/#book-now">Book Private Experience</Link>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="font-semibold"
+                >
+                  <Link href="/#choose-experience">View All Programs</Link>
+                </Button>
+              </div>
+              <p className="text-gray-500 md:text-lg leading-relaxed">
+                Have something special in mind? We&apos;re happy to create a
+                personalised art experience just for your family or group.
+              </p>
             </div>
           </div>
         </div>

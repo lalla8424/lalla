@@ -367,16 +367,16 @@ export const PARTNER_ORGANIZATIONS: {
 ];
 
 export const ALSO_SERVING = {
-  label: "Providing Experiences To",
+  label: "Providing Experiences To Families From",
   communities: [
     "Camp Humphreys US army base",
     "U.S. Embassy in Korea",
     "Seoul Foreign School",
     "Dulwich",
     "Australian homeschooling communities",
-    "International families via travel agencies",
+    "international families via travel agencies",
   ],
-  note: "So far — and we're excited to welcome even more communities in the years ahead.",
+  note: "So far — and we're excited to welcome even more families and communities in the years ahead.",
 };
 
 export const WORKSHOP_PHOTO = {
@@ -418,10 +418,9 @@ export const CHOOSE_PROGRAMS = [
     description:
       "Perfect for families, birthdays, friends, and private groups looking for a personalised creative art experience in Seoul.",
     duration: "2 Hours",
-    price: "From 220,000 KRW",
     bestFor: "Families · Birthday Parties · Friends · Private Groups",
     includes:
-      "Choose from:\n\n• Projection Mural Art\n• Eco Clay & Eco Paint\n• Drawing & Painting\n• Space Installation Art\n• Korean & World Cultures Through Art\n\nEvery experience is tailored to your group's age, interests, and occasion.",
+      "Every experience is tailored to your group's age, interests, and occasion.",
     image: "/events.jpg",
     cta: "Book Private Experience",
     href: "/private-family-events",
