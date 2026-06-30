@@ -10,6 +10,7 @@ import {
   KEEPSAKE_PRICING,
   SHOE_SIZE_GUIDE,
 } from "@/constants/homepage";
+import { formatMenuPrice } from "@/lib/utils";
 
 export function CreativeKeepsakesSection() {
   return (
@@ -50,14 +51,21 @@ export function CreativeKeepsakesSection() {
         </p>
       </div>
 
-      <ul className="space-y-2 rounded-2xl border border-gray-100 bg-gray-50/60 p-6">
+      <ul className="space-y-3 rounded-2xl border border-gray-100 bg-gray-50/60 p-6">
+        <li className="text-right text-xs text-gray-400">Prices in ₩</li>
         {KEEPSAKE_PRICING.map(({ item, price }) => (
           <li
             key={item}
-            className="flex items-start justify-between gap-4 text-sm text-gray-700 md:text-base"
+            className="flex items-baseline gap-2 text-sm text-gray-700 md:text-base"
           >
-            <span>{item}</span>
-            <span className="shrink-0 font-semibold text-gray-900">{price}</span>
+            <span className="min-w-0">{item}</span>
+            <span
+              className="mx-1 mb-1 min-w-[1rem] flex-1 border-b border-dotted border-gray-300"
+              aria-hidden="true"
+            />
+            <span className="shrink-0 tabular-nums font-semibold text-gray-900">
+              {formatMenuPrice(price)}
+            </span>
           </li>
         ))}
       </ul>

@@ -5,6 +5,11 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+/** Cafe-menu style price: 35000 → "35,000" */
+export function formatMenuPrice(amount: number): string {
+  return amount.toLocaleString("en-US");
+}
+
 /**
  * 스케줄을 요일별, 시간별로 정렬하는 함수
  * 예: "Thursday 2:00–3:10 PM" 형태의 스케줄을 정렬

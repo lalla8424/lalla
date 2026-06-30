@@ -24,6 +24,7 @@ import {
   PHOTOBOOK_PRICE,
   WEEKLY_PROGRAM_SCHEDULE,
 } from "@/constants/homepage";
+import { formatMenuPrice } from "@/lib/utils";
 
 const WEEKLY_EXPERIENCES = [
   { label: "Projection Mural Art", icon: Monitor },
@@ -183,9 +184,10 @@ export function WeeklyProgramDetail() {
             <p className="text-xs font-medium text-gray-500">Optional add-on</p>
             <p>
               Art Photobook{" "}
-              <span className="font-semibold text-gray-900">
-                {PHOTOBOOK_PRICE}
-              </span>
+              <span className="tabular-nums font-semibold text-gray-900">
+                {formatMenuPrice(PHOTOBOOK_PRICE)}
+              </span>{" "}
+              <span className="text-gray-500">₩</span>
             </p>
             <p className="text-xs text-gray-500">
               Curated photos from your child&apos;s sessions

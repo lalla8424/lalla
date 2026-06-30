@@ -15,6 +15,7 @@ import {
   PHOTOBOOK_FEATURES,
   PHOTOBOOK_PRICE,
 } from "@/constants/homepage";
+import { formatMenuPrice } from "@/lib/utils";
 
 const FEATURE_ICONS = [BookMarked, FileImage, Sparkles, Clock];
 
@@ -46,9 +47,10 @@ export function PhotobookSection() {
               </p>
               <p className="text-sm text-gray-600">
                 Art Photobook{" "}
-                <span className="font-semibold text-gray-900">
-                  {PHOTOBOOK_PRICE}
-                </span>
+                <span className="tabular-nums font-semibold text-gray-900">
+                  {formatMenuPrice(PHOTOBOOK_PRICE)}
+                </span>{" "}
+                <span className="text-gray-500">₩</span>
               </p>
             </div>
 

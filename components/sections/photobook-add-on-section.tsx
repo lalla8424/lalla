@@ -11,6 +11,7 @@ import {
   PHOTOBOOK_INSIDE,
   PHOTOBOOK_PRICE,
 } from "@/constants/homepage";
+import { formatMenuPrice } from "@/lib/utils";
 
 interface PhotobookAddOnSectionProps {
   intro?: string;
@@ -67,7 +68,10 @@ export function PhotobookAddOnSection({
               ))}
             </ul>
             <p className="text-sm text-gray-700">
-              <span className="font-semibold text-gray-900">{PHOTOBOOK_PRICE}</span>{" "}
+              <span className="text-gray-500">₩</span>{" "}
+              <span className="tabular-nums font-semibold text-gray-900">
+                {formatMenuPrice(PHOTOBOOK_PRICE)}
+              </span>{" "}
               — add when you book.
             </p>
           </div>

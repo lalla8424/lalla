@@ -32,7 +32,7 @@ export const PHOTOBOOK_COVER = "/photobook_cover.png";
 
 export const PHOTOBOOK_INSIDE = "/inside_book.jpg";
 
-export const PHOTOBOOK_PRICE = "45,000 KRW";
+export const PHOTOBOOK_PRICE = 45000;
 
 export const PHOTOBOOK_ADDON_POINTS = [
   "We capture every creative moment, so your child can look back on the experience for years to come.",
@@ -41,15 +41,15 @@ export const PHOTOBOOK_ADDON_POINTS = [
 ] as const;
 
 export const KEEPSAKE_PRICING = [
-  { item: "T-shirt Printing", price: "₩35,000" },
+  { item: "T-shirt Printing", price: 35000 },
   {
     item: "Bring your own plain white or ivory T-shirt",
-    price: "₩10,000",
+    price: 10000,
   },
-  { item: "Tote Bag Printing", price: "₩35,000" },
-  { item: "Custom Tumbler Inner Cover", price: "₩23,000" },
-  { item: "Bucket Hat Design", price: "₩42,000" },
-  { item: "Custom Sneaker Art", price: "₩55,000" },
+  { item: "Tote Bag Printing", price: 35000 },
+  { item: "Custom Tumbler Inner Cover", price: 23000 },
+  { item: "Bucket Hat Design", price: 42000 },
+  { item: "Custom Sneaker Art", price: 55000 },
 ] as const;
 
 export const KEEPSAKE_BOOKING_DETAILS = [
