@@ -22,8 +22,6 @@ import {
 } from "@/constants/homepage";
 import {
   ArrowLeft,
-  ChevronDown,
-  ChevronRight,
   Clock,
   Coins,
   Package,
@@ -82,18 +80,40 @@ const PRICING_NOTES = [
   "Final pricing depends on selected activities and event requirements.",
 ];
 
-const CREATIVE_KEEPSAKES = [
-  "T-shirt Printing",
-  "Custom Sneaker Art",
-  "Tote Bag Printing",
-  "Bucket Hat Design",
-  "LALLA Art Photobook",
+const KEEPSAKE_PRICING = [
+  { item: "T-shirt Printing", price: "₩35,000" },
+  {
+    item: "Bring your own plain white or ivory T-shirt",
+    price: "₩10,000",
+  },
+  { item: "Tote Bag Printing", price: "₩35,000" },
+  { item: "Custom Tumbler Inner Cover", price: "₩23,000" },
+  { item: "Bucket Hat Design", price: "₩42,000" },
+  { item: "Custom Sneaker Art", price: "₩55,000" },
+];
+
+const KEEPSAKE_BOOKING_DETAILS = [
+  "Number of participants",
+  "Preferred keepsake(s)",
+  "T-shirt size (if applicable)",
+  "Shoe size (US / EU / KR)",
+];
+
+const SHOE_SIZE_GUIDE = [
+  "US 11 = KR 170 = EU 28",
+  "US 12 = KR 180 = EU 29",
+  "US 13 = KR 190 = EU 30",
+  "US 1 = KR 200 = EU 31–32",
+  "US 2 = KR 210 = EU 33",
+  "US 3 = KR 220 = EU 34",
+  "US 4 = KR 230 = EU 36",
+  "US 5 = KR 240 = EU 37",
 ];
 
 const HOW_IT_WORKS = [
-  "Tell us about your group",
-  "Choose your activities",
-  "Receive your personalised quote",
+  "Fill in details & choose activities",
+  "Send your booking email",
+  "Receive your quote",
   "Confirm your booking",
 ];
 
@@ -308,31 +328,101 @@ export function PrivateFamilyEventsPage() {
             {/* Creative Keepsakes */}
             <div className="space-y-4">
               <div className="space-y-2">
+                <span className="inline-block rounded-full bg-[#FFD700]/20 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-gray-800">
+                  Optional Add-On
+                </span>
                 <h2 className="text-2xl font-bold text-gray-900">
                   Creative Keepsakes
                 </h2>
                 <p className="text-base font-semibold text-gray-800 md:text-lg">
-                  Take home something truly personal.
+                  Take home your child&apos;s artwork in a unique way.
                 </p>
                 <p className="text-gray-600 md:text-lg leading-relaxed">
-                  Enhance your creative experience with personalised keepsakes
-                  created from your child&apos;s own artwork.
+                  Your child will create an original artwork during the session,
+                  then transform it into a personalised keepsake as part of the
+                  workshop.
+                </p>
+                <p className="font-semibold text-gray-700 md:text-lg leading-relaxed">
+                  The keepsake-making process is included in the activity,
+                  allowing children to enjoy the full creative journey and take
+                  home their finished creation on the same day.
                 </p>
               </div>
-              <ul className="grid gap-3 sm:grid-cols-2">
-                {CREATIVE_KEEPSAKES.map((item) => (
+
+              <div className="space-y-2">
+                <div className="overflow-hidden rounded-2xl border border-gray-100 bg-gray-50/60">
+                  <div className="relative aspect-[16/10] w-full">
+                    <Image
+                      src="/keepsake.jpg"
+                      alt="Your child's artwork transformed into personalised keepsakes"
+                      fill
+                      className="object-contain"
+                      sizes="(max-width: 768px) 100vw, 768px"
+                    />
+                  </div>
+                </div>
+                <p className="text-center text-sm font-medium text-gray-700 md:text-base">
+                  Your Child&apos;s Artwork → Personalised Keepsakes
+                </p>
+              </div>
+
+              <ul className="space-y-2 rounded-2xl border border-gray-100 bg-gray-50/60 p-6">
+                {KEEPSAKE_PRICING.map(({ item, price }) => (
                   <li
                     key={item}
-                    className="rounded-xl border border-gray-100 bg-gray-50/60 p-4 text-sm font-medium text-gray-700 md:text-base"
+                    className="flex items-start justify-between gap-4 text-sm text-gray-700 md:text-base"
                   >
-                    {item}
+                    <span>{item}</span>
+                    <span className="shrink-0 font-semibold text-gray-900">
+                      {price}
+                    </span>
                   </li>
                 ))}
               </ul>
-              <p className="text-sm text-gray-500 md:text-base">
-                Available as optional add-ons. Additional fees apply depending on
-                the selected item.
-              </p>
+
+              <div className="space-y-3">
+                <h3 className="text-xl font-bold text-gray-900">
+                  Booking Information
+                </h3>
+                <p className="text-gray-600 md:text-lg leading-relaxed">
+                  If you would like to create a personalised keepsake during
+                  your workshop, please let us know{" "}
+                  <span className="font-semibold text-gray-900">
+                    3–5 days before your session
+                  </span>{" "}
+                  whenever possible.
+                </p>
+                <p className="text-gray-600 md:text-lg">Please include:</p>
+                <ul className="space-y-2 text-gray-600 md:text-lg">
+                  {KEEPSAKE_BOOKING_DETAILS.map((item) => (
+                    <li key={item} className="flex items-start gap-2">
+                      <span className="text-[#C9A800]" aria-hidden="true">
+                        •
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-gray-600 md:text-lg leading-relaxed">
+                  This allows us to prepare the correct materials and have
+                  everything ready for your workshop.
+                </p>
+              </div>
+
+              <div className="relative max-w-xs rotate-[-0.5deg] rounded-sm border border-amber-200/70 bg-[#FFF9E6] p-4 pt-5 shadow-[1px_2px_6px_rgba(0,0,0,0.07)]">
+                <div
+                  className="absolute -top-2 left-1/2 h-3.5 w-10 -translate-x-1/2 rounded-sm border border-amber-200/50 bg-amber-100/90 shadow-sm"
+                  aria-hidden="true"
+                />
+                <p className="text-xs font-semibold tracking-wide text-amber-900/80">
+                  Shoe Size Guide
+                </p>
+                <ul className="mt-2 space-y-0.5 text-[11px] leading-relaxed text-amber-950/70">
+                  {SHOE_SIZE_GUIDE.map((size) => (
+                    <li key={size}>{size}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
             {/* LALLA Art Photobook Add-on */}
@@ -401,27 +491,19 @@ export function PrivateFamilyEventsPage() {
             {/* How It Works */}
             <div className="space-y-4">
               <h2 className="text-2xl font-bold text-gray-900">How It Works</h2>
-              <div className="flex flex-col items-stretch gap-3 md:flex-row md:items-center">
+              <div className="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-3">
                 {HOW_IT_WORKS.map((step, index) => (
-                  <React.Fragment key={step}>
-                    <div className="flex flex-1 items-start gap-3 rounded-xl border border-gray-100 bg-gray-50/60 p-4">
-                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#FFD700]/20 text-sm font-bold text-gray-900">
-                        {index + 1}
-                      </span>
-                      <p className="text-sm font-medium text-gray-700 md:text-base">
-                        {step}
-                      </p>
-                    </div>
-                    {index < HOW_IT_WORKS.length - 1 ? (
-                      <div
-                        className="flex shrink-0 items-center justify-center text-gray-400"
-                        aria-hidden="true"
-                      >
-                        <ChevronDown className="h-5 w-5 md:hidden" />
-                        <ChevronRight className="hidden h-5 w-5 md:block" />
-                      </div>
-                    ) : null}
-                  </React.Fragment>
+                  <div
+                    key={step}
+                    className="flex items-center gap-2 rounded-xl border border-gray-100 bg-gray-50/60 px-3 py-3"
+                  >
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FFD700]/20 text-xs font-bold text-gray-900">
+                      {index + 1}
+                    </span>
+                    <p className="text-xs font-medium leading-snug text-gray-700 sm:text-sm">
+                      {step}
+                    </p>
+                  </div>
                 ))}
               </div>
             </div>
