@@ -7,7 +7,9 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, LucideIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { CreativeKeepsakesSection } from "@/components/sections/creative-keepsakes-section";
+import { PhotobookAddOnSection } from "@/components/sections/photobook-add-on-section";
+import { ProgramBookingCta } from "@/components/sections/program-booking-cta";
 
 export interface ProgramHighlight {
   icon: LucideIcon;
@@ -98,19 +100,15 @@ export function ProgramLanding({
             ))}
           </div>
 
-          <div className="mx-auto mt-12 flex max-w-lg flex-col gap-3 sm:flex-row sm:justify-center">
-            <Button
-              asChild
-              size="lg"
-              className="bg-[#FFD700] font-semibold text-black hover:bg-[#FFC400]"
-            >
-              <Link href={ctaHref}>{ctaLabel}</Link>
-            </Button>
-            {secondaryCtaLabel && secondaryCtaHref ? (
-              <Button asChild variant="outline" size="lg" className="font-semibold">
-                <Link href={secondaryCtaHref}>{secondaryCtaLabel}</Link>
-              </Button>
-            ) : null}
+          <div className="mx-auto mt-12 max-w-3xl space-y-12">
+            <CreativeKeepsakesSection />
+            <PhotobookAddOnSection />
+            <ProgramBookingCta
+              primaryLabel={ctaLabel}
+              primaryHref={ctaHref}
+              secondaryLabel={secondaryCtaLabel}
+              secondaryHref={secondaryCtaHref}
+            />
           </div>
         </div>
       </section>

@@ -34,6 +34,42 @@ export const PHOTOBOOK_INSIDE = "/inside_book.jpg";
 
 export const PHOTOBOOK_PRICE = "45,000 KRW";
 
+export const PHOTOBOOK_ADDON_POINTS = [
+  "We capture every creative moment, so your child can look back on the experience for years to come.",
+  "A meaningful gift for family abroad who couldn't join",
+  "6 × 8 · ~20 pages · ready in about one week",
+] as const;
+
+export const KEEPSAKE_PRICING = [
+  { item: "T-shirt Printing", price: "₩35,000" },
+  {
+    item: "Bring your own plain white or ivory T-shirt",
+    price: "₩10,000",
+  },
+  { item: "Tote Bag Printing", price: "₩35,000" },
+  { item: "Custom Tumbler Inner Cover", price: "₩23,000" },
+  { item: "Bucket Hat Design", price: "₩42,000" },
+  { item: "Custom Sneaker Art", price: "₩55,000" },
+] as const;
+
+export const KEEPSAKE_BOOKING_DETAILS = [
+  "Number of participants",
+  "Preferred keepsake(s)",
+  "T-shirt size (if applicable)",
+  "Shoe size (US / EU / KR)",
+] as const;
+
+export const SHOE_SIZE_GUIDE = [
+  "US 11 = KR 170 = EU 28",
+  "US 12 = KR 180 = EU 29",
+  "US 13 = KR 190 = EU 30",
+  "US 1 = KR 200 = EU 31–32",
+  "US 2 = KR 210 = EU 33",
+  "US 3 = KR 220 = EU 34",
+  "US 4 = KR 230 = EU 36",
+  "US 5 = KR 240 = EU 37",
+] as const;
+
 export const PHOTOBOOK_FEATURES = [
   {
     title: "6 × 8 Keepsake",

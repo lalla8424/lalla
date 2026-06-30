@@ -7,6 +7,8 @@ import React from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { WeeklyProgramDetail } from "@/components/programs/program-details";
+import { PhotobookAddOnSection } from "@/components/sections/photobook-add-on-section";
+import { ProgramBookingCta } from "@/components/sections/program-booking-cta";
 
 export function WeeklyProgramPage() {
   return (
@@ -36,8 +38,10 @@ export function WeeklyProgramPage() {
             </p>
           </div>
 
-          <div className="mx-auto mt-10 max-w-3xl">
+          <div className="mx-auto mt-10 max-w-3xl space-y-12">
             <WeeklyProgramDetail />
+            <PhotobookAddOnSection />
+            <ProgramBookingCta primaryLabel="Book This Program" />
           </div>
         </div>
       </section>

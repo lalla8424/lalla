@@ -7,6 +7,9 @@ import React from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { ArtExperienceDetail } from "@/components/programs/program-details";
+import { CreativeKeepsakesSection } from "@/components/sections/creative-keepsakes-section";
+import { PhotobookAddOnSection } from "@/components/sections/photobook-add-on-section";
+import { ProgramBookingCta } from "@/components/sections/program-booking-cta";
 
 export function ArtExperiencePage() {
   return (
@@ -36,8 +39,11 @@ export function ArtExperiencePage() {
             </p>
           </div>
 
-          <div className="mx-auto mt-10 max-w-3xl">
+          <div className="mx-auto mt-10 max-w-3xl space-y-12">
             <ArtExperienceDetail />
+            <CreativeKeepsakesSection />
+            <PhotobookAddOnSection />
+            <ProgramBookingCta primaryLabel="Book This Experience" />
           </div>
         </div>
       </section>

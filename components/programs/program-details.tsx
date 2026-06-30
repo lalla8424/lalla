@@ -4,7 +4,6 @@
  */
 
 import React from "react";
-import Link from "next/link";
 import {
   BookOpen,
   Clock,
@@ -19,7 +18,6 @@ import {
   Sparkles,
   Users,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
   ART_EXPERIENCE_OPTIONS,
   ART_EXPERIENCE_SCHEDULE,
@@ -136,12 +134,6 @@ export function ArtExperienceDetail() {
           </p>
           <ScheduleChips schedule={ART_EXPERIENCE_SCHEDULE} />
         </div>
-        <Button
-          asChild
-          className="h-11 w-full bg-[#FFD700] font-semibold text-black hover:bg-[#FFC400] sm:w-auto sm:px-8"
-        >
-          <Link href="/#book-now">Book This Experience</Link>
-        </Button>
       </div>
     </ProgramCard>
   );
@@ -206,12 +198,6 @@ export function WeeklyProgramDetail() {
           </p>
           <ScheduleChips schedule={WEEKLY_PROGRAM_SCHEDULE} />
         </div>
-        <Button
-          asChild
-          className="h-11 w-full bg-[#FFD700] font-semibold text-black hover:bg-[#FFC400] sm:w-auto sm:px-8"
-        >
-          <Link href="/#book-now">Book This Program</Link>
-        </Button>
       </div>
     </ProgramCard>
   );

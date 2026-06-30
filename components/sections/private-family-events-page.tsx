@@ -15,11 +15,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import {
-  PHOTOBOOK_COVER,
-  PHOTOBOOK_INSIDE,
-  PHOTOBOOK_PRICE,
-} from "@/constants/homepage";
+import { CreativeKeepsakesSection } from "@/components/sections/creative-keepsakes-section";
+import { PhotobookAddOnSection } from "@/components/sections/photobook-add-on-section";
 import {
   ArrowLeft,
   Clock,
@@ -54,12 +51,6 @@ const INCLUDED = [
   "Studio setup and cleanup",
 ];
 
-const PHOTOBOOK_POINTS = [
-  "We capture every creative moment, so your child can look back on the experience for years to come.",
-  "A meaningful gift for family abroad who couldn't join",
-  "6 × 8 · ~20 pages · ready in about one week",
-];
-
 const PRICING_ITEMS = [
   { label: "Duration", value: "2 Hours", icon: Clock },
   { label: "Starting From", value: "290,000 KRW", icon: Coins },
@@ -78,36 +69,6 @@ const PRICING_NOTES = [
   "Sunday bookings are available with an additional fee.",
   "Decorations, catering, special event setups, or customised requests may require additional charges.",
   "Final pricing depends on selected activities and event requirements.",
-];
-
-const KEEPSAKE_PRICING = [
-  { item: "T-shirt Printing", price: "₩35,000" },
-  {
-    item: "Bring your own plain white or ivory T-shirt",
-    price: "₩10,000",
-  },
-  { item: "Tote Bag Printing", price: "₩35,000" },
-  { item: "Custom Tumbler Inner Cover", price: "₩23,000" },
-  { item: "Bucket Hat Design", price: "₩42,000" },
-  { item: "Custom Sneaker Art", price: "₩55,000" },
-];
-
-const KEEPSAKE_BOOKING_DETAILS = [
-  "Number of participants",
-  "Preferred keepsake(s)",
-  "T-shirt size (if applicable)",
-  "Shoe size (US / EU / KR)",
-];
-
-const SHOE_SIZE_GUIDE = [
-  "US 11 = KR 170 = EU 28",
-  "US 12 = KR 180 = EU 29",
-  "US 13 = KR 190 = EU 30",
-  "US 1 = KR 200 = EU 31–32",
-  "US 2 = KR 210 = EU 33",
-  "US 3 = KR 220 = EU 34",
-  "US 4 = KR 230 = EU 36",
-  "US 5 = KR 240 = EU 37",
 ];
 
 const HOW_IT_WORKS = [
@@ -325,168 +286,9 @@ export function PrivateFamilyEventsPage() {
               </ul>
             </div>
 
-            {/* Creative Keepsakes */}
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <span className="inline-block rounded-full bg-[#FFD700]/20 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-gray-800">
-                  Optional Add-On
-                </span>
-                <h2 className="text-2xl font-bold text-gray-900">
-                  Creative Keepsakes
-                </h2>
-                <p className="text-base font-semibold text-gray-800 md:text-lg">
-                  Take home your child&apos;s artwork in a unique way.
-                </p>
-                <p className="text-gray-600 md:text-lg leading-relaxed">
-                  Your child will create an original artwork during the session,
-                  then transform it into a personalised keepsake as part of the
-                  workshop.
-                </p>
-                <p className="font-semibold text-gray-700 md:text-lg leading-relaxed">
-                  The keepsake-making process is included in the activity,
-                  allowing children to enjoy the full creative journey and take
-                  home their finished creation on the same day.
-                </p>
-              </div>
+            <CreativeKeepsakesSection />
 
-              <div className="space-y-2">
-                <div className="overflow-hidden rounded-2xl border border-gray-100 bg-gray-50/60">
-                  <div className="relative aspect-[16/10] w-full">
-                    <Image
-                      src="/keepsake.jpg"
-                      alt="Your child's artwork transformed into personalised keepsakes"
-                      fill
-                      className="object-contain"
-                      sizes="(max-width: 768px) 100vw, 768px"
-                    />
-                  </div>
-                </div>
-                <p className="text-center text-sm font-medium text-gray-700 md:text-base">
-                  Your Child&apos;s Artwork → Personalised Keepsakes
-                </p>
-              </div>
-
-              <ul className="space-y-2 rounded-2xl border border-gray-100 bg-gray-50/60 p-6">
-                {KEEPSAKE_PRICING.map(({ item, price }) => (
-                  <li
-                    key={item}
-                    className="flex items-start justify-between gap-4 text-sm text-gray-700 md:text-base"
-                  >
-                    <span>{item}</span>
-                    <span className="shrink-0 font-semibold text-gray-900">
-                      {price}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="space-y-3">
-                <h3 className="text-xl font-bold text-gray-900">
-                  Booking Information
-                </h3>
-                <p className="text-gray-600 md:text-lg leading-relaxed">
-                  If you would like to create a personalised keepsake during
-                  your workshop, please let us know{" "}
-                  <span className="font-semibold text-gray-900">
-                    3–5 days before your session
-                  </span>{" "}
-                  whenever possible.
-                </p>
-                <p className="text-gray-600 md:text-lg">Please include:</p>
-                <ul className="space-y-2 text-gray-600 md:text-lg">
-                  {KEEPSAKE_BOOKING_DETAILS.map((item) => (
-                    <li key={item} className="flex items-start gap-2">
-                      <span className="text-[#C9A800]" aria-hidden="true">
-                        •
-                      </span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-gray-600 md:text-lg leading-relaxed">
-                  This allows us to prepare the correct materials and have
-                  everything ready for your workshop.
-                </p>
-              </div>
-
-              <div className="relative max-w-xs rotate-[-0.5deg] rounded-sm border border-amber-200/70 bg-[#FFF9E6] p-4 pt-5 shadow-[1px_2px_6px_rgba(0,0,0,0.07)]">
-                <div
-                  className="absolute -top-2 left-1/2 h-3.5 w-10 -translate-x-1/2 rounded-sm border border-amber-200/50 bg-amber-100/90 shadow-sm"
-                  aria-hidden="true"
-                />
-                <p className="text-xs font-semibold tracking-wide text-amber-900/80">
-                  Shoe Size Guide
-                </p>
-                <ul className="mt-2 space-y-0.5 text-[11px] leading-relaxed text-amber-950/70">
-                  {SHOE_SIZE_GUIDE.map((size) => (
-                    <li key={size}>{size}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            {/* LALLA Art Photobook Add-on */}
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <span className="inline-block rounded-full bg-[#FFD700]/20 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-gray-800">
-                  Optional Add-On
-                </span>
-                <h2 className="text-2xl font-bold text-gray-900">
-                  LALLA Art Photobook
-                </h2>
-                <p className="text-gray-600 md:text-lg leading-relaxed">
-                  Turn your private session into a keepsake your family will
-                  treasure.
-                </p>
-              </div>
-
-              <div className="overflow-hidden rounded-2xl border border-[#FFD700]/30 bg-[#FFD700]/5 p-6">
-                <div className="flex flex-col gap-6 md:flex-row md:items-center">
-                  <div className="flex shrink-0 justify-center gap-3 md:justify-start">
-                    <div className="overflow-hidden rounded-xl bg-white p-2 shadow-md ring-1 ring-black/5">
-                      <div className="relative h-44 w-28 sm:h-52 sm:w-32">
-                        <Image
-                          src={PHOTOBOOK_COVER}
-                          alt="LALLA Art Photobook cover"
-                          fill
-                          className="rounded-lg object-contain"
-                          sizes="128px"
-                        />
-                      </div>
-                    </div>
-                    <div className="overflow-hidden rounded-xl bg-white p-2 shadow-md ring-1 ring-black/5">
-                      <div className="relative h-44 w-48 sm:h-52 sm:w-64">
-                        <Image
-                          src={PHOTOBOOK_INSIDE}
-                          alt="Inside pages of LALLA Art Photobook"
-                          fill
-                          className="rounded-lg object-contain"
-                          sizes="256px"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    <ul className="space-y-2 text-sm text-gray-600 md:text-base">
-                      {PHOTOBOOK_POINTS.map((item) => (
-                        <li key={item} className="flex items-start gap-2">
-                          <span className="text-[#C9A800]" aria-hidden="true">
-                            •
-                          </span>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                    <p className="text-sm text-gray-700">
-                      <span className="font-semibold text-gray-900">
-                        {PHOTOBOOK_PRICE}
-                      </span>{" "}
-                      — add when you book.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <PhotobookAddOnSection intro="Turn your private session into a keepsake your family will treasure." />
 
             {/* How It Works */}
             <div className="space-y-4">
