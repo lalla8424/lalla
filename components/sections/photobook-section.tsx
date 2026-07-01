@@ -7,7 +7,6 @@
  */
 
 import React from "react";
-import Image from "next/image";
 import { BookMarked, Clock, FileImage, Sparkles } from "lucide-react";
 import {
   PHOTOBOOK_COVER,
@@ -15,6 +14,7 @@ import {
   PHOTOBOOK_FEATURES,
   PHOTOBOOK_PRICE,
 } from "@/constants/homepage";
+import { ExpandableImage } from "@/components/ui/expandable-image";
 import { formatMenuPrice } from "@/lib/utils";
 
 const FEATURE_ICONS = [BookMarked, FileImage, Sparkles, Clock];
@@ -56,26 +56,22 @@ export function PhotobookSection() {
 
             <div className="flex w-full max-w-[20rem] justify-center gap-2 sm:max-w-none sm:gap-3 md:max-w-none md:justify-self-end">
               <div className="shrink-0 overflow-hidden rounded-xl bg-white p-1.5 shadow-lg ring-1 ring-black/5 sm:p-2">
-                <div className="relative h-40 w-[6.75rem] sm:h-56 sm:w-36">
-                  <Image
-                    src={PHOTOBOOK_COVER}
-                    alt="LALLA Art Lab Photo Journal Book cover"
-                    fill
-                    className="rounded-lg object-contain"
-                    sizes="(max-width: 640px) 108px, 144px"
-                  />
-                </div>
+                <ExpandableImage
+                  src={PHOTOBOOK_COVER}
+                  alt="LALLA Art Lab Photo Journal Book cover"
+                  containerClassName="h-40 w-[6.75rem] sm:h-56 sm:w-36"
+                  imageClassName="rounded-lg object-contain"
+                  sizes="(max-width: 640px) 108px, 144px"
+                />
               </div>
               <div className="shrink-0 overflow-hidden rounded-xl bg-white p-1.5 shadow-lg ring-1 ring-black/5 sm:p-2">
-                <div className="relative h-40 w-[11rem] sm:h-64 sm:w-80">
-                  <Image
-                    src={PHOTOBOOK_INSIDE}
-                    alt="Inside pages of LALLA Art Photobook"
-                    fill
-                    className="rounded-lg object-contain"
-                    sizes="(max-width: 640px) 176px, 320px"
-                  />
-                </div>
+                <ExpandableImage
+                  src={PHOTOBOOK_INSIDE}
+                  alt="Inside pages of LALLA Art Photobook"
+                  containerClassName="h-40 w-[11rem] sm:h-64 sm:w-80"
+                  imageClassName="rounded-lg object-contain"
+                  sizes="(max-width: 640px) 176px, 320px"
+                />
               </div>
             </div>
           </div>

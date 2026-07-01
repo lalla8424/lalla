@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { SummerCampPage } from "@/components/sections/summer-camp-page";
 
 export const metadata: Metadata = {
-  title: "Summer Art Camp | Lalla Kids Art",
+  title: "Creative Summer Camp | Lalla Kids Art",
   description:
-    "Seasonal creative art camp in Seoul for international families and visiting children. Projection mural art, eco materials, and cultural experiences.",
+    "Creative Summer Camp in Seoul — weekly art sessions July to August. Projection mural, Joomchi, oil pastels, traditional ink painting, and personalised keepsakes for children.",
 };
 
 export default function SummerCampRoute() {

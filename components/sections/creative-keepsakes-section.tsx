@@ -4,12 +4,12 @@
  */
 
 import React from "react";
-import Image from "next/image";
 import {
   KEEPSAKE_BOOKING_DETAILS,
   KEEPSAKE_PRICING,
   SHOE_SIZE_GUIDE,
 } from "@/constants/homepage";
+import { ExpandableImage } from "@/components/ui/expandable-image";
 import { formatMenuPrice } from "@/lib/utils";
 
 export function CreativeKeepsakesSection() {
@@ -36,15 +36,12 @@ export function CreativeKeepsakesSection() {
 
       <div className="space-y-2">
         <div className="overflow-hidden rounded-2xl border border-gray-100 bg-gray-50/60">
-          <div className="relative aspect-[16/10] w-full">
-            <Image
-              src="/keepsake.jpg"
-              alt="Your child's artwork transformed into personalised keepsakes"
-              fill
-              className="object-contain"
-              sizes="(max-width: 768px) 100vw, 768px"
-            />
-          </div>
+          <ExpandableImage
+            src="/keepsake.jpg"
+            alt="Your child's artwork transformed into personalised keepsakes"
+            containerClassName="aspect-[4/3] w-full sm:aspect-[3/2]"
+            sizes="(max-width: 768px) 100vw, 768px"
+          />
         </div>
         <p className="text-center text-sm font-medium text-gray-700 md:text-base">
           Your Child&apos;s Artwork → Personalised Keepsakes
