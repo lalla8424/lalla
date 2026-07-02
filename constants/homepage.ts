@@ -470,7 +470,7 @@ export const CHOOSE_PROGRAMS = [
     bestFor: "International families and visiting children",
     includes: "Holiday art experiences",
     image: "/summer.jpg",
-    cta: "Learn More",
+    cta: "Book Your Summer Camp Spot",
     href: "/summer-camp",
   },
   {
