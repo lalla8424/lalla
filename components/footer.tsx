@@ -12,13 +12,13 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-3">
               <Image
                 src="/logo_png.png"
-                alt="Lalla Kids Art"
+                alt="Lalla Art Lab"
                 width={160}
                 height={53}
                 className="h-12 w-auto"
               />
               <span className="text-2xl font-bold text-[#FFD700] uppercase tracking-wide" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
-                Lalla Kids Art
+                Lalla Art Lab
               </span>
             </Link>
             <p className="text-sm text-gray-500">
@@ -91,7 +91,7 @@ export function Footer() {
         </div>
         <div className="mt-8 border-t pt-8 text-center">
           <p className="text-xs text-gray-500">
-            &copy; {new Date().getFullYear()} Lalla Kids Art. All rights
+            &copy; {new Date().getFullYear()} Lalla Art Lab. All rights
             reserved.
           </p>
         </div>

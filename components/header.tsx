@@ -11,14 +11,14 @@ export function Header() {
         <Link href="/" className="flex items-center gap-0 md:ml-[-50px]">
           <Image
             src="/logo_png.png"
-            alt="Lalla Kids Art"
+            alt="Lalla Art Lab"
             width={160}
             height={53}
             className="h-12 w-auto -mr-2"
             priority
           />
           <span className="text-lg font-bold text-black uppercase tracking-wide" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
-            Lalla Kids Art
+            Lalla Art Lab
           </span>
         </Link>
         <MobileNav />

@@ -25,14 +25,14 @@ export function HeroSection() {
     <section
       id="hero"
       className="relative flex min-h-[calc(100svh-4rem)] w-full items-end md:items-center"
-      aria-label="Lalla Kids Art hero"
+      aria-label="Lalla Art Lab hero"
     >
       {/* Background image */}
       <div className="absolute inset-0 bg-gray-900">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/bg_lalla_.png"
-          alt="Children creating art at Lalla Kids Art studio in Seoul"
+          alt="Children creating art at Lalla Art Lab studio in Seoul"
           className="h-full w-full object-cover object-center"
           fetchPriority="high"
           decoding="async"

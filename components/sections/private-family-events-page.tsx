@@ -132,7 +132,7 @@ export function PrivateFamilyEventsPage() {
       <section className="relative min-h-[40vh] md:min-h-[50vh]">
         <Image
           src="/l_d.jpeg"
-          alt="Private family art experience at Lalla Kids Art"
+          alt="Private family art experience at Lalla Art Lab"
           fill
           priority
           className="object-cover"

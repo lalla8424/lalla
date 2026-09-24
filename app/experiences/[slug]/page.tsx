@@ -14,10 +14,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const experience = EXPERIENCE_PAGES[slug];
-  if (!experience) return { title: "Experience | Lalla Kids Art" };
+  if (!experience) return { title: "Experience | Lalla Art Lab" };
 
   return {
-    title: `${experience.title} | Lalla Kids Art`,
+    title: `${experience.title} | Lalla Art Lab`,
     description: experience.subtitle,
   };
 }

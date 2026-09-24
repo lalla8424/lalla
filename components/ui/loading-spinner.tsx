@@ -57,7 +57,7 @@ export function PageLoadingSpinner() {
   return (
     <LoadingSpinner
       size="lg"
-      text="Welcome to Lalla Kids Art..."
+      text="Welcome to Lalla Art Lab..."
       fullScreen={true}
     />
   );

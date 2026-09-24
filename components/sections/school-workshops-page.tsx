@@ -14,7 +14,7 @@ export function SchoolWorkshopsPage() {
       title="School Workshops"
       subtitle="Partner with LALLA for custom creative art programs at our studio or yours."
       heroImage="/cultural.jpg"
-      heroAlt="School workshop at Lalla Kids Art"
+      heroAlt="School workshop at Lalla Art Lab"
       intro={[
         "We collaborate with international schools, embassies, homeschool groups, and organizations to deliver engaging art workshops for children.",
         "Programs can be held at our studio in Yaksu, Seoul — or we can bring materials and facilitators to your school or venue.",

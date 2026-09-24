@@ -5,7 +5,7 @@ import { Header } from "../components/header";
 import { Footer } from "../components/footer";
 
 export const metadata = {
-  title: "Lalla Kids Art - Creative Art Programs for Kids in Seoul",
+  title: "Lalla Art Lab - Creative Art Programs for Kids in Seoul",
   description:
     "Creative art programs for young explorers living in Korea. Join our classes and unleash your child's creativity.",
   generator: "v0.dev",

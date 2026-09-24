@@ -211,7 +211,7 @@ export const EXPERIENCE_PAGES: Record<
     subtitle:
       "Paint large-scale murals with light projection technology.",
     heroImage: "/sea.png",
-    heroAlt: "Children creating projection mural art at Lalla Kids Art",
+    heroAlt: "Children creating projection mural art at Lalla Art Lab",
     intro: [
       "Lytart is Lalla's original, trademark-registered program that fuses media art with children's art education.",
       "Using beam projection, children explore stencil, collage, drawing, and sensory art in a large-scale, interactive environment.",
@@ -224,7 +224,7 @@ export const EXPERIENCE_PAGES: Record<
     subtitle:
       "Explore colour and texture with eco clay and eco paints made from natural ingredients.",
     heroImage: "/paint.jpg",
-    heroAlt: "Eco art painting session at Lalla Kids Art",
+    heroAlt: "Eco art painting session at Lalla Art Lab",
     intro: [
       "We minimise waste and rethink materials—using our own safe, natural clay recipes and eco paints from Natural Earth Paint.",
       "Children explore colour, texture, and form through hands-on making with eco-friendly pigments and natural ingredients.",
@@ -237,7 +237,7 @@ export const EXPERIENCE_PAGES: Record<
     subtitle:
       "From observation drawing to expressive painting, children develop technique and discover their own creative style.",
     heroImage: "/IMG_0365.jpg",
-    heroAlt: "Drawing and painting session at Lalla Kids Art",
+    heroAlt: "Drawing and painting session at Lalla Art Lab",
     intro: [
       "Children build confidence through observation drawing, expressive painting, and creative exploration.",
       "Sessions blend technique with imagination—helping each child discover their own visual language.",
@@ -250,7 +250,7 @@ export const EXPERIENCE_PAGES: Record<
     subtitle:
       "Create large collaborative installations while exploring space, scale, structure, and creativity.",
     heroImage: "/space_art.jpg",
-    heroAlt: "Space installation art at Lalla Kids Art",
+    heroAlt: "Space installation art at Lalla Art Lab",
     intro: [
       "Children work together to build large-scale installations that explore space, scale, and structure.",
       "Through sculpture, mixed media, and collaborative making, they learn to think spatially and creatively.",
@@ -263,7 +263,7 @@ export const EXPERIENCE_PAGES: Record<
     subtitle:
       "Explore cultures through art, stories, and hands-on creative experiences.",
     heroImage: "/joomchi.jpg",
-    heroAlt: "World cultures through art at Lalla Kids Art",
+    heroAlt: "World cultures through art at Lalla Art Lab",
     intro: [
       "Through shared art experiences, kids from diverse backgrounds connect beyond language.",
       "They engage hands-on with Korean heritage and global cultures—building empathy, curiosity, and respect.",
@@ -275,7 +275,7 @@ export const EXPERIENCE_PAGES: Record<
 export const FEATURED_FAMILY_PHOTOS = [
   {
     src: "/reviews.jpg",
-    alt: "Family review message at Lalla Kids Art",
+    alt: "Family review message at Lalla Art Lab",
   },
   {
     src: "/reviews1.jpg",

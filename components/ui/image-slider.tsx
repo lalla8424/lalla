@@ -47,7 +47,7 @@ export function ImageSlider({
         <img
           key={slide.image}
           src={slide.image}
-          alt={slide.caption ?? "Lalla Kids Art studio"}
+          alt={slide.caption ?? "Lalla Art Lab studio"}
           className="h-full w-full object-cover object-center transition-opacity duration-500"
           draggable={false}
         />
