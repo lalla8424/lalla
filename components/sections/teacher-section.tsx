@@ -26,13 +26,13 @@ export function TeacherSection() {
             <div className="flex flex-col md:flex-row gap-8">
               <div className="flex items-center gap-10 w-full md:w-1/2">
                 <div className="w-36 h-36 rounded-full bg-white p-2 shadow-lg flex-shrink-0">
-                  <div className="w-full h-full rounded-full overflow-hidden bg-gray-100">
+                  <div className="w-full h-full rounded-full overflow-hidden">
                     <Image
                       src="/sono.JPG"
                       alt="Sono Kim - Director"
                       width={144}
                       height={144}
-                      className="h-full w-full scale-90 object-contain object-center rounded-full"
+                      className="h-full w-full scale-[1.05] object-cover object-[center_15%] rounded-full"
                     />
                   </div>
                 </div>
