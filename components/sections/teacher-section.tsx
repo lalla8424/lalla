@@ -29,7 +29,7 @@ export function TeacherSection() {
                   <div className="w-full h-full rounded-full overflow-hidden">
                     <Image
                       src="/sono.JPG"
-                      alt="Ms. Sarah - Art Director"
+                      alt="Sono Kim - Director"
                       width={144}
                       height={144}
                       className="w-full h-full object-cover rounded-full"
