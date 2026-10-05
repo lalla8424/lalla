@@ -25,22 +25,24 @@ export function Footer() {
               Creative art programs for young explorers living in Korea.
             </p>
             <div className="flex items-center gap-4">
-              <Link
+              <a
                 href="https://www.instagram.com/lalla_art_lab/"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="inline-flex"
+                aria-label="Instagram"
               >
                 <Instagram className="h-5 w-5 text-gray-600 hover:text-[#FFD700]" />
-                <span className="sr-only">Instagram</span>
-              </Link>
-              <Link
+              </a>
+              <a
                 href="https://blog.naver.com/lallakidsart"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="inline-flex"
+                aria-label="Blog"
               >
                 <BookOpen className="h-5 w-5 text-gray-600 hover:text-[#FFD700]" />
-                <span className="sr-only">Blog</span>
-              </Link>
+              </a>
             </div>
           </div>
           <div className="space-y-4">

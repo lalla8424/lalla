@@ -60,30 +60,33 @@ export function Header() {
           </Link>
         </nav>
         <div className="hidden md:flex items-center gap-4 ml-6">
-          <Link
+          <a
             href="https://www.instagram.com/lalla_art_lab/"
             target="_blank"
             rel="noopener noreferrer"
+            className="inline-flex"
+            aria-label="Instagram"
           >
             <Instagram className="h-5 w-5 text-gray-600 hover:text-black transition-colors" />
-            <span className="sr-only">Instagram</span>
-          </Link>
-          <Link
+          </a>
+          <a
             href="https://blog.naver.com/lallakidsart"
             target="_blank"
             rel="noopener noreferrer"
+            className="inline-flex"
+            aria-label="Blog"
           >
             <BookOpen className="h-5 w-5 text-gray-600 hover:text-black transition-colors" />
-            <span className="sr-only">Blog</span>
-          </Link>
-          <Link
+          </a>
+          <a
             href="https://wa.me/821023978424"
             target="_blank"
             rel="noopener noreferrer"
+            className="inline-flex"
+            aria-label="WhatsApp"
           >
             <MessageCircle className="h-5 w-5 text-gray-600 hover:text-green-500 transition-colors" />
-            <span className="sr-only">WhatsApp</span>
-          </Link>
+          </a>
         </div>
       </div>
     </header>

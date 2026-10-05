@@ -64,33 +64,36 @@ export function MobileNav() {
             </nav>
             
             <div className="flex items-center justify-center gap-6 mt-8 pb-6">
-              <Link
+              <a
                 href="https://www.instagram.com/lalla_art_lab/"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="inline-flex"
+                aria-label="Instagram"
                 onClick={() => setOpen(false)}
               >
                 <Instagram className="h-6 w-6 text-gray-600 hover:text-black transition-colors" />
-                <span className="sr-only">Instagram</span>
-              </Link>
-              <Link
+              </a>
+              <a
                 href="https://blog.naver.com/lallakidsart"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="inline-flex"
+                aria-label="Blog"
                 onClick={() => setOpen(false)}
               >
                 <BookOpen className="h-6 w-6 text-gray-600 hover:text-black transition-colors" />
-                <span className="sr-only">Blog</span>
-              </Link>
-              <Link
+              </a>
+              <a
                 href="https://wa.me/821023978424"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="inline-flex"
+                aria-label="WhatsApp"
                 onClick={() => setOpen(false)}
               >
                 <MessageCircle className="h-6 w-6 text-gray-600 hover:text-green-500 transition-colors" />
-                <span className="sr-only">WhatsApp</span>
-              </Link>
+              </a>
             </div>
           </div>
         </SheetContent>
