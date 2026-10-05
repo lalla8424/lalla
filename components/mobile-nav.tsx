@@ -65,7 +65,7 @@ export function MobileNav() {
             
             <div className="flex items-center justify-center gap-6 mt-8 pb-6">
               <Link
-                href="https://www.instagram.com/lalla_kids_art/"
+                href="https://www.instagram.com/lalla_art_lab/"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
@@ -74,7 +74,7 @@ export function MobileNav() {
                 <span className="sr-only">Instagram</span>
               </Link>
               <Link
-                href="https://blog.com"
+                href="https://blog.naver.com/lallakidsart"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}

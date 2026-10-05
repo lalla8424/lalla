@@ -26,7 +26,7 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-4">
               <Link
-                href="https://www.instagram.com/lalla_kids_art/"
+                href="https://www.instagram.com/lalla_art_lab/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -34,7 +34,7 @@ export function Footer() {
                 <span className="sr-only">Instagram</span>
               </Link>
               <Link
-                href="https://blog.com"
+                href="https://blog.naver.com/lallakidsart"
                 target="_blank"
                 rel="noopener noreferrer"
               >

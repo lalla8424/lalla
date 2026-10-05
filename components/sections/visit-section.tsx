@@ -103,7 +103,7 @@ export function VisitSection() {
                       WhatsApp
                     </a>
                     <a
-                      href="https://www.instagram.com/lalla_kids_art/"
+                      href="https://www.instagram.com/lalla_art_lab/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-1 px-2 py-1 rounded bg-[#FFD700] text-white text-xs font-medium shadow hover:bg-[#FFD700]/90 transition-colors min-w-[80px] justify-center"

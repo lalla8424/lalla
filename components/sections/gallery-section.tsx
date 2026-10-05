@@ -52,7 +52,7 @@ export function GallerySection() {
               WhatsApp
             </a>
             <a
-              href="https://www.instagram.com/lalla_kids_art/"
+              href="https://www.instagram.com/lalla_art_lab/"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-md bg-[#FFD700] px-4 py-2 text-sm font-semibold text-black hover:bg-[#FFC400]"

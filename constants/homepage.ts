@@ -405,8 +405,8 @@ export const PARTNER_ORGANIZATIONS: {
 export const ALSO_SERVING = {
   label: "Providing Experiences To Families From",
   communities: [
+    "2026 Summer Camp at the U.S. Embassy in Korea",
     "Camp Humphreys US army base",
-    "U.S. Embassy in Korea",
     "Seoul Foreign School",
     "Dulwich",
     "Australian homeschooling communities",
